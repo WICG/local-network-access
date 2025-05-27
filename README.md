@@ -157,7 +157,7 @@ In the WebRTC spec, algorithms that add candidates to the ICE Agent already have
 
 Note that these checks are done asynchronously and don’t block resolving the methods where they are used i.e. setRemoteDescription() and addIceCandidate().
 
-We should perform the same checks when connecting to STUN/TURN servers with loopback or local addresses.
+The same checks should also be performed when connecting to STUN/TURN servers with loopback or local addresses.
 
 ### Integration with Permissions Policy
 
