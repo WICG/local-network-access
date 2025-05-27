@@ -146,6 +146,19 @@ A new parameter `targetAddressSpace` will be added as a `fetch()` API option, al
 
 `Document`s and `WorkerGlobalScope`s store an additional **address space** value. This is initialized from the IP address the document or worker was sourced from.
 
+### Integration with WebRTC
+
+Local connection attempts that use WebRTC should also be gated behind the Local Network Access permission prompt.
+
+In the WebRTC spec, algorithms that add candidates to the ICE Agent already have steps that ensure [“administratively prohibited”](https://www.w3.org/TR/webrtc/#dfn-administratively-prohibited) addresses are not used. We can modify these algorithms to perform the following steps if the candidate has a loopback or local address:
+ * Check if the origin has previously been granted the local network access permission; if not, prompt the user.
+ * If the user grants permission, the algorithm will continue.
+ * If the user denies the permission, we won’t add the candidate to the ICE Agent and it won’t be used when establishing a connection.
+
+Note that these checks are done asynchronously and don’t block resolving the methods where they are used i.e. setRemoteDescription() and addIceCandidate().
+
+We should perform the same checks when connecting to STUN/TURN servers with loopback or local addresses.
+
 ### Integration with Permissions Policy
 
 By default the ability to make local network requests will be limited to top-level documents that are secure contexts. There are use cases where a site needs to be able to delegate this permission into a subframe. To support these use cases, a new policy-controlled feature ("local-network-access") will be added that will allow top-level documents to delegate access to this feature to subframes.
