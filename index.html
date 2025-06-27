@@ -5,10 +5,10 @@
   <title>Local Network Access</title>
   <meta content="UD" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD" rel="stylesheet">
-  <meta content="Bikeshed version 275834c42, updated Wed Jun 11 14:18:15 2025 -0700" name="generator">
-  <link href="https://explainers-by-googlers.github.io/local-network-access" rel="canonical">
+  <meta content="Bikeshed version 618007319, updated Thu Jun 26 17:23:55 2025 -0700" name="generator">
+  <link href="https://wicg.github.io/local-network-access/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="c3e1f4436ad5573bde5a94b220cfd0933d87f726" name="revision">
+  <meta content="71fc2f51641f629122dcc9229ccd900aeea5d9e6" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -554,17 +554,18 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
 </p>
    <h1 class="p-name no-ref" id="title">Local Network Access</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#UD">Unofficial Proposal Draft</a>,
-    <time class="dt-updated" datetime="2025-06-20">20 June 2025</time></p>
+    <time class="dt-updated" datetime="2025-06-27">27 June 2025</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
      <dl>
       <dt>This version:
-      <dd><a class="u-url" href="https://explainers-by-googlers.github.io/local-network-access">https://explainers-by-googlers.github.io/local-network-access</a>
+      <dd><a class="u-url" href="https://wicg.github.io/local-network-access/">https://wicg.github.io/local-network-access/</a>
       <dt>Issue Tracking:
-      <dd><a href="https://github.com/explainers-by-googlers/local-network-access/issues/">GitHub</a>
-      <dt class="editor">Editor:
+      <dd><a href="https://github.com/WICG/local-network-access/issues/">GitHub</a>
+      <dt class="editor">Editors:
       <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:cthomp@google.com">Chris Thompson</a> (<a class="p-org org" href="https://google.com">Google</a>)
+      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:hchao@google.com">Hubert Chao</a> (<a class="p-org org" href="https://google.com">Google</a>)
      </dl>
     </div>
    </details>
@@ -585,7 +586,7 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li><a href="#intro"><span class="secno">1</span> <span class="content">Introduction</span></a>
+    <li><a href="#intro"><span class="secno">1</span> <span class="content">Introduction {#intro}</span></a>
     <li>
      <a href="#w3c-conformance"><span class="secno"></span> <span class="content">Conformance</span></a>
      <ol class="toc">
@@ -595,12 +596,27 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
+      <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
      </ol>
    </ol>
   </nav>
   <main>
-   <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
-   <p>For now, see the <a href="https://github.com/explainers-by-googlers/local-network-access">explainer</a>.</p>
+   <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction {#intro}</span><a class="self-link" href="#intro"></a></h2>
+   <p><em>This section is not normative.</em></p>
+   <p>Although <a data-link-type="biblio" href="#biblio-rfc1918" title="Address Allocation for Private Internets">[RFC1918]</a> has specified a distinction between "private" and "public"
+internet addresses for over two decades, user agents haven’t made much progress
+at segregating the one from the other. Websites on the public internet can make
+requests to local devices and servers, which enable a number of malicious
+behaviors, including attacks on users' routers like those documented in
+<a data-link-type="biblio" href="#biblio-drive-by-pharming" title="Drive-By Pharming">[DRIVE-BY-PHARMING]</a>, <a data-link-type="biblio" href="#biblio-soho-pharming" title="SOHO Pharming">[SOHO-PHARMING]</a> and <a data-link-type="biblio" href="#biblio-csrf-exploit-kit" title="An Exploit Kit dedicated to CSRF Pharming">[CSRF-EXPLOIT-KIT]</a>.</p>
+   <p>Local Network Access aims to prevent these undesired requests to insecure
+devices on the local network. This is achieved by deprecating direct access to
+local IP addresses from public websites, and instead requiring that the user
+grants permission to the initiating website to make connections to their local
+network.</p>
+   <p><em>Note:</em> This proposal builds on top of Chrome’s previously paused
+<a data-link-type="biblio" href="#biblio-private-network-access" title="Private Network Access">[PRIVATE-NETWORK-ACCESS]</a> work but differs by gating access on a permission
+rather than via preflight requests.</p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="w3c-conformance"><span class="content">Conformance</span><a class="self-link" href="#w3c-conformance"></a></h2>
@@ -653,4 +669,17 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
   <dl>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
+  </dl>
+  <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
+  <dl>
+   <dt id="biblio-csrf-exploit-kit">[CSRF-EXPLOIT-KIT]
+   <dd>Kafeine. <a href="http://malware.dontneedcoffee.com/2015/05/an-exploit-kit-dedicated-to-csrf.html"><cite>An Exploit Kit dedicated to CSRF Pharming</cite></a>. URL: <a href="http://malware.dontneedcoffee.com/2015/05/an-exploit-kit-dedicated-to-csrf.html">http://malware.dontneedcoffee.com/2015/05/an-exploit-kit-dedicated-to-csrf.html</a>
+   <dt id="biblio-drive-by-pharming">[DRIVE-BY-PHARMING]
+   <dd>Sid Stamm; Zulfikar Ramzan; Markus Jakobsson. <a href="https://link.springer.com/chapter/10.1007/978-3-540-77048-0_38"><cite>Drive-By Pharming</cite></a>. URL: <a href="https://link.springer.com/chapter/10.1007/978-3-540-77048-0_38">https://link.springer.com/chapter/10.1007/978-3-540-77048-0_38</a>
+   <dt id="biblio-private-network-access">[PRIVATE-NETWORK-ACCESS]
+   <dd><a href="https://wicg.github.io/private-network-access/"><cite>Private Network Access</cite></a>. Draft Community Group Report. URL: <a href="https://wicg.github.io/private-network-access/">https://wicg.github.io/private-network-access/</a>
+   <dt id="biblio-rfc1918">[RFC1918]
+   <dd>Y. Rekhter; et al. <a href="https://www.rfc-editor.org/rfc/rfc1918"><cite>Address Allocation for Private Internets</cite></a>. February 1996. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc1918">https://www.rfc-editor.org/rfc/rfc1918</a>
+   <dt id="biblio-soho-pharming">[SOHO-PHARMING]
+   <dd>Team Cymru. <a href="https://331.cybersec.fun/TeamCymruSOHOPharming.pdf"><cite>SOHO Pharming</cite></a>. URL: <a href="https://331.cybersec.fun/TeamCymruSOHOPharming.pdf">https://331.cybersec.fun/TeamCymruSOHOPharming.pdf</a>
   </dl>
