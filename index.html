@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 618007319, updated Thu Jun 26 17:23:55 2025 -0700" name="generator">
   <link href="https://wicg.github.io/local-network-access/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="e4d83b5e5dec62fac7b3152a1fdc37649673fdd2" name="revision">
+  <meta content="220dbce32667358288e2acc115cb6c25cf2834cf" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -455,6 +455,11 @@ figcaption:not(.no-marker)::before {
     }
 }
 </style>
+<style>/* Boilerplate: style-idl-highlighting */
+pre.idl.highlight {
+    background: var(--borderedblock-bg, var(--def-bg));
+}
+</style>
 <style>/* Boilerplate: style-issues */
 a[href].issue-return {
     float: right;
@@ -565,6 +570,127 @@ dfn > a.self-link:hover {
 a.self-link::before            { content: "¶"; }
 .heading > a.self-link::before { content: "§"; }
 dfn > a.self-link::before      { content: "#"; }
+</style>
+<style>/* Boilerplate: style-syntax-highlighting */
+code.highlight { padding: .1em; border-radius: .3em; }
+pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+
+.highlight:not(.idl) { background: rgba(0, 0, 0, .03); }
+c-[a] { color: #990055 } /* Keyword.Declaration */
+c-[b] { color: #990055 } /* Keyword.Type */
+c-[c] { color: #708090 } /* Comment */
+c-[d] { color: #708090 } /* Comment.Multiline */
+c-[e] { color: #0077aa } /* Name.Attribute */
+c-[f] { color: #669900 } /* Name.Tag */
+c-[g] { color: #222222 } /* Name.Variable */
+c-[k] { color: #990055 } /* Keyword */
+c-[l] { color: #000000 } /* Literal */
+c-[m] { color: #000000 } /* Literal.Number */
+c-[n] { color: #0077aa } /* Name */
+c-[o] { color: #999999 } /* Operator */
+c-[p] { color: #999999 } /* Punctuation */
+c-[s] { color: #a67f59 } /* Literal.String */
+c-[t] { color: #a67f59 } /* Literal.String.Single */
+c-[u] { color: #a67f59 } /* Literal.String.Double */
+c-[cp] { color: #708090 } /* Comment.Preproc */
+c-[c1] { color: #708090 } /* Comment.Single */
+c-[cs] { color: #708090 } /* Comment.Special */
+c-[kc] { color: #990055 } /* Keyword.Constant */
+c-[kn] { color: #990055 } /* Keyword.Namespace */
+c-[kp] { color: #990055 } /* Keyword.Pseudo */
+c-[kr] { color: #990055 } /* Keyword.Reserved */
+c-[ld] { color: #000000 } /* Literal.Date */
+c-[nc] { color: #0077aa } /* Name.Class */
+c-[no] { color: #0077aa } /* Name.Constant */
+c-[nd] { color: #0077aa } /* Name.Decorator */
+c-[ni] { color: #0077aa } /* Name.Entity */
+c-[ne] { color: #0077aa } /* Name.Exception */
+c-[nf] { color: #0077aa } /* Name.Function */
+c-[nl] { color: #0077aa } /* Name.Label */
+c-[nn] { color: #0077aa } /* Name.Namespace */
+c-[py] { color: #0077aa } /* Name.Property */
+c-[ow] { color: #999999 } /* Operator.Word */
+c-[mb] { color: #000000 } /* Literal.Number.Bin */
+c-[mf] { color: #000000 } /* Literal.Number.Float */
+c-[mh] { color: #000000 } /* Literal.Number.Hex */
+c-[mi] { color: #000000 } /* Literal.Number.Integer */
+c-[mo] { color: #000000 } /* Literal.Number.Oct */
+c-[sb] { color: #a67f59 } /* Literal.String.Backtick */
+c-[sc] { color: #a67f59 } /* Literal.String.Char */
+c-[sd] { color: #a67f59 } /* Literal.String.Doc */
+c-[se] { color: #a67f59 } /* Literal.String.Escape */
+c-[sh] { color: #a67f59 } /* Literal.String.Heredoc */
+c-[si] { color: #a67f59 } /* Literal.String.Interpol */
+c-[sx] { color: #a67f59 } /* Literal.String.Other */
+c-[sr] { color: #a67f59 } /* Literal.String.Regex */
+c-[ss] { color: #a67f59 } /* Literal.String.Symbol */
+c-[vc] { color: #0077aa } /* Name.Variable.Class */
+c-[vg] { color: #0077aa } /* Name.Variable.Global */
+c-[vi] { color: #0077aa } /* Name.Variable.Instance */
+c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
+
+@media (prefers-color-scheme: dark) {
+    .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
+
+    c-[a] { color: #d33682 } /* Keyword.Declaration */
+    c-[b] { color: #d33682 } /* Keyword.Type */
+    c-[c] { color: #2aa198 } /* Comment */
+    c-[d] { color: #2aa198 } /* Comment.Multiline */
+    c-[e] { color: #268bd2 } /* Name.Attribute */
+    c-[f] { color: #b58900 } /* Name.Tag */
+    c-[g] { color: #cb4b16 } /* Name.Variable */
+    c-[k] { color: #d33682 } /* Keyword */
+    c-[l] { color: #657b83 } /* Literal */
+    c-[m] { color: #657b83 } /* Literal.Number */
+    c-[n] { color: #268bd2 } /* Name */
+    c-[o] { color: #657b83 } /* Operator */
+    c-[p] { color: #657b83 } /* Punctuation */
+    c-[s] { color: #6c71c4 } /* Literal.String */
+    c-[t] { color: #6c71c4 } /* Literal.String.Single */
+    c-[u] { color: #6c71c4 } /* Literal.String.Double */
+    c-[ch] { color: #2aa198 } /* Comment.Hashbang */
+    c-[cp] { color: #2aa198 } /* Comment.Preproc */
+    c-[cpf] { color: #2aa198 } /* Comment.PreprocFile */
+    c-[c1] { color: #2aa198 } /* Comment.Single */
+    c-[cs] { color: #2aa198 } /* Comment.Special */
+    c-[kc] { color: #d33682 } /* Keyword.Constant */
+    c-[kn] { color: #d33682 } /* Keyword.Namespace */
+    c-[kp] { color: #d33682 } /* Keyword.Pseudo */
+    c-[kr] { color: #d33682 } /* Keyword.Reserved */
+    c-[ld] { color: #657b83 } /* Literal.Date */
+    c-[nc] { color: #268bd2 } /* Name.Class */
+    c-[no] { color: #268bd2 } /* Name.Constant */
+    c-[nd] { color: #268bd2 } /* Name.Decorator */
+    c-[ni] { color: #268bd2 } /* Name.Entity */
+    c-[ne] { color: #268bd2 } /* Name.Exception */
+    c-[nf] { color: #268bd2 } /* Name.Function */
+    c-[nl] { color: #268bd2 } /* Name.Label */
+    c-[nn] { color: #268bd2 } /* Name.Namespace */
+    c-[py] { color: #268bd2 } /* Name.Property */
+    c-[ow] { color: #657b83 } /* Operator.Word */
+    c-[mb] { color: #657b83 } /* Literal.Number.Bin */
+    c-[mf] { color: #657b83 } /* Literal.Number.Float */
+    c-[mh] { color: #657b83 } /* Literal.Number.Hex */
+    c-[mi] { color: #657b83 } /* Literal.Number.Integer */
+    c-[mo] { color: #657b83 } /* Literal.Number.Oct */
+    c-[sa] { color: #6c71c4 } /* Literal.String.Affix */
+    c-[sb] { color: #6c71c4 } /* Literal.String.Backtick */
+    c-[sc] { color: #6c71c4 } /* Literal.String.Char */
+    c-[dl] { color: #6c71c4 } /* Literal.String.Delimiter */
+    c-[sd] { color: #6c71c4 } /* Literal.String.Doc */
+    c-[se] { color: #6c71c4 } /* Literal.String.Escape */
+    c-[sh] { color: #6c71c4 } /* Literal.String.Heredoc */
+    c-[si] { color: #6c71c4 } /* Literal.String.Interpol */
+    c-[sx] { color: #6c71c4 } /* Literal.String.Other */
+    c-[sr] { color: #6c71c4 } /* Literal.String.Regex */
+    c-[ss] { color: #6c71c4 } /* Literal.String.Symbol */
+    c-[fm] { color: #268bd2 } /* Name.Function.Magic */
+    c-[vc] { color: #cb4b16 } /* Name.Variable.Class */
+    c-[vg] { color: #cb4b16 } /* Name.Variable.Global */
+    c-[vi] { color: #cb4b16 } /* Name.Variable.Instance */
+    c-[vm] { color: #cb4b16 } /* Name.Variable.Magic */
+    c-[il] { color: #657b83 } /* Literal.Number.Integer.Long */
+}
 </style>
 <style>/* Boilerplate: style-wpt */
 :root {
@@ -711,7 +837,7 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
 </p>
    <h1 class="p-name no-ref" id="title">Local Network Access</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#UD">Unofficial Proposal Draft</a>,
-    <time class="dt-updated" datetime="2025-06-27">27 June 2025</time></p>
+    <time class="dt-updated" datetime="2025-06-30">30 June 2025</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -720,6 +846,7 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
       <dd><a class="u-url" href="https://wicg.github.io/local-network-access/">https://wicg.github.io/local-network-access/</a>
       <dt>Issue Tracking:
       <dd><a href="https://github.com/WICG/local-network-access/issues/">GitHub</a>
+      <dd><a href="#issues-index">Inline In Spec</a>
       <dt class="editor">Editors:
       <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:cthomp@google.com">Chris Thompson</a> (<a class="p-org org" href="https://google.com">Google</a>)
       <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:hchao@google.com">Hubert Chao</a> (<a class="p-org org" href="https://google.com">Google</a>)
@@ -744,17 +871,26 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
     <li>
-     <a href="#intro"><span class="secno">1</span> <span class="content">Introduction {#intro}</span></a>
+     <a href="#intro"><span class="secno">1</span> <span class="content">Introduction</span></a>
      <ol class="toc">
-      <li><a href="#goals"><span class="secno">1.1</span> <span class="content">Goals {#goals}</span></a>
-      <li><a href="#non-goals"><span class="secno">1.2</span> <span class="content">Non-goals {#non-goals}</span></a>
+      <li><a href="#goals"><span class="secno">1.1</span> <span class="content">Goals</span></a>
+      <li><a href="#non-goals"><span class="secno">1.2</span> <span class="content">Non-goals</span></a>
       <li>
-       <a href="#examples"><span class="secno">1.3</span> <span class="content">Examples {#examples}</span></a>
+       <a href="#examples"><span class="secno">1.3</span> <span class="content">Examples</span></a>
        <ol class="toc">
-        <li><a href="#example-user-granting-permission"><span class="secno">1.3.1</span> <span class="content">User granting permission {#example-user-granting-permission}</span></a>
-        <li><a href="#example-user-denying-permission"><span class="secno">1.3.2</span> <span class="content">User denying permission {#example-user-denying-permission}</span></a>
-        <li><a href="#example-new-device-configuration"><span class="secno">1.3.3</span> <span class="content">New device configuration {#example-new-device-configuration}</span></a>
+        <li><a href="#example-user-granting-permission"><span class="secno">1.3.1</span> <span class="content">User granting permission</span></a>
+        <li><a href="#example-user-denying-permission"><span class="secno">1.3.2</span> <span class="content">User denying permission</span></a>
+        <li><a href="#example-new-device-configuration"><span class="secno">1.3.3</span> <span class="content">New device configuration</span></a>
        </ol>
+     </ol>
+    <li>
+     <a href="#framework"><span class="secno">2</span> <span class="content">Framework</span></a>
+     <ol class="toc">
+      <li><a href="#ip-address-space-section"><span class="secno">2.1</span> <span class="content">IP Address Space</span></a>
+      <li><a href="#local-network-request-section"><span class="secno">2.2</span> <span class="content">Local Network Request</span></a>
+      <li><a href="#permission-prompt"><span class="secno">2.3</span> <span class="content">Local Network Request Permission Prompt</span></a>
+      <li><a href="#secure-context-restriction"><span class="secno">2.4</span> <span class="content">Secure Context Restriction</span></a>
+      <li><a href="#mixed-content-lna"><span class="secno">2.5</span> <span class="content">Mixed Content</span></a>
      </ol>
     <li>
      <a href="#w3c-conformance"><span class="secno"></span> <span class="content">Conformance</span></a>
@@ -764,6 +900,7 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ol class="toc">
+      <li><a href="#index-defined-here"><span class="secno"></span> <span class="content">Terms defined by this specification</span></a>
       <li><a href="#index-defined-elsewhere"><span class="secno"></span> <span class="content">Terms defined by reference</span></a>
      </ol>
     <li>
@@ -772,10 +909,12 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
       <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
      </ol>
+    <li><a href="#idl-index"><span class="secno"></span> <span class="content">IDL Index</span></a>
+    <li><a href="#issues-index"><span class="secno"></span> <span class="content">Issues Index</span></a>
    </ol>
   </nav>
   <main>
-   <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction {#intro}</span><a class="self-link" href="#intro"></a></h2>
+   <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
    <p><em>This section is not normative.</em></p>
    <p>Although <a data-link-type="biblio" href="#biblio-rfc1918" title="Address Allocation for Private Internets">[RFC1918]</a> has specified a distinction between "private" and "public"
 internet addresses for over two decades, user agents haven’t made much progress
@@ -788,10 +927,10 @@ devices on the local network. This is achieved by deprecating direct access to
 local IP addresses from public websites, and instead requiring that the user
 grants permission to the initiating website to make connections to their local
 network.</p>
-   <p><em>Note:</em> This proposal builds on top of Chrome’s previously paused
+   <p class="note" role="note"><span class="marker">Note:</span> This proposal builds on top of Chrome’s previously paused
 <a data-link-type="biblio" href="#biblio-private-network-access" title="Private Network Access">[PRIVATE-NETWORK-ACCESS]</a> work but differs by gating access on a permission
 rather than via preflight requests.</p>
-   <h3 class="heading settled" data-level="1.1" id="goals"><span class="secno">1.1. </span><span class="content">Goals {#goals}</span><a class="self-link" href="#goals"></a></h3>
+   <h3 class="heading settled" data-level="1.1" id="goals"><span class="secno">1.1. </span><span class="content">Goals</span><a class="self-link" href="#goals"></a></h3>
    <p>The overarching goal is to prevent the user agent from inadvertently enabling
 attacks on devices running on a user’s local intranet, or services running on
 the user’s machine directly. For example, we wish to mitigate attacks on:</p>
@@ -813,12 +952,12 @@ For example, a user logged in to <a href="https://plex.tv">plex.tv</a> may want 
 the site to connect to their local media server to directly load media content
 over the local network instead of routing through remote servers. See S1.2
 below for more examples.</p>
-   <h3 class="heading settled" data-level="1.2" id="non-goals"><span class="secno">1.2. </span><span class="content">Non-goals {#non-goals}</span><a class="self-link" href="#non-goals"></a></h3>
+   <h3 class="heading settled" data-level="1.2" id="non-goals"><span class="secno">1.2. </span><span class="content">Non-goals</span><a class="self-link" href="#non-goals"></a></h3>
    <p>This spec does not attempt to make it easier to use HTTPS connections on local
 network devices. While this would be a useful goal, solving this problem is out
 of scope for this specification</p>
-   <h3 class="heading settled" data-level="1.3" id="examples"><span class="secno">1.3. </span><span class="content">Examples {#examples}</span><a class="self-link" href="#examples"></a></h3>
-   <h4 class="heading settled" data-level="1.3.1" id="example-user-granting-permission"><span class="secno">1.3.1. </span><span class="content">User granting permission {#example-user-granting-permission}</span><a class="self-link" href="#example-user-granting-permission"></a></h4>
+   <h3 class="heading settled" data-level="1.3" id="examples"><span class="secno">1.3. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h3>
+   <h4 class="heading settled" data-level="1.3.1" id="example-user-granting-permission"><span class="secno">1.3.1. </span><span class="content">User granting permission</span><a class="self-link" href="#example-user-granting-permission"></a></h4>
    <p>Alice is at home on her laptop browsing the internet. She has a printer on her
 local network built by Acme Printing Company that is running a simple HTTP
 server. Alice is having a problem with the printer not properly functioning.</p>
@@ -831,14 +970,14 @@ https://support.acmeprintingcompany.com to connect to local devices on her
 network, and https://support.acmeprintingcompany.com connects to her local
 printer’s diagnostic output, and tells Alice that a part is malfunctioning on
 the printer and needs to be replaced.</p>
-   <h4 class="heading settled" data-level="1.3.2" id="example-user-denying-permission"><span class="secno">1.3.2. </span><span class="content">User denying permission {#example-user-denying-permission}</span><a class="self-link" href="#example-user-denying-permission"></a></h4>
+   <h4 class="heading settled" data-level="1.3.2" id="example-user-denying-permission"><span class="secno">1.3.2. </span><span class="content">User denying permission</span><a class="self-link" href="#example-user-denying-permission"></a></h4>
    <p>Alice continues browsing online to find the best price for the replacement part
 on her printer. While looking at a general tech support forum, she suddenly
 gets a permission request in her browser for https://printersupport.evil.com to
 connect to local devices on her local network. Being suspicious of why
 https://printersupport.evil.com would need to connect to local devices, she
 denies the permission request.</p>
-   <h4 class="heading settled" data-level="1.3.3" id="example-new-device-configuration"><span class="secno">1.3.3. </span><span class="content">New device configuration {#example-new-device-configuration}</span><a class="self-link" href="#example-new-device-configuration"></a></h4>
+   <h4 class="heading settled" data-level="1.3.3" id="example-new-device-configuration"><span class="secno">1.3.3. </span><span class="content">New device configuration</span><a class="self-link" href="#example-new-device-configuration"></a></h4>
    <p>Instead of replacing the part on the printer, Alice decides instead to buy a
 new printer from Beta Manufacturing. Upon plugging in the printer and
 connecting it to her local network, Alice follows the instructions and goes to
@@ -847,6 +986,243 @@ button that will help her set up the printer defaults. Hitting the button, she
 gets a permission prompt asking for permission for
 https://setup.betaprinters.com to connect to her local devices, which she
 accepts.</p>
+   <h2 class="heading settled" data-level="2" id="framework"><span class="secno">2. </span><span class="content">Framework</span><a class="self-link" href="#framework"></a></h2>
+   <h3 class="heading settled" data-level="2.1" id="ip-address-space-section"><span class="secno">2.1. </span><span class="content">IP Address Space</span><a class="self-link" href="#ip-address-space-section"></a></h3>
+   <p>Define <code class="idl"><a data-link-type="idl" href="#enumdef-ipaddressspace" id="ref-for-enumdef-ipaddressspace">IPAddressSpace</a></code> as follows:</p>
+<pre class="idl highlight def"><c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-ipaddressspace"><code><c- g>IPAddressSpace</c-></code></dfn> { <dfn class="dfn-paneled idl-code" data-dfn-for="IPAddressSpace" data-dfn-type="enum-value" data-export id="dom-ipaddressspace-public"><code><c- s>"public"</c-></code></dfn>, <dfn class="dfn-paneled idl-code" data-dfn-for="IPAddressSpace" data-dfn-type="enum-value" data-export id="dom-ipaddressspace-local"><code><c- s>"local"</c-></code></dfn> };
+</pre>
+   <p>Every IP address belongs to an <dfn class="dfn-paneled" data-dfn-type="dfn" data-export data-local-lt="address space" data-lt="IP address space" id="ip-address-space">IP address
+space</dfn>, which can be one of two different values:</p>
+   <ol>
+    <li data-md>
+     <p><dfn class="dfn-paneled" data-dfn-for="IP address space" data-dfn-type="dfn" data-export id="ip-address-space-local">local</dfn>: contains addresses that have
+meaning only within the current network. In other words, addresses whose target
+differs based on network position. This includes loopback addresses, which are
+only accessible on the local host (and thus differ for every device).</p>
+    <li data-md>
+     <p><dfn class="dfn-paneled" data-dfn-for="IP address space" data-dfn-type="dfn" data-export id="ip-address-space-public">public</dfn>: contains all other
+addresses. In other words, addresses whose target is the same for all devices
+globally on the IP network.</p>
+   </ol>
+   <p>For convenience, we additionally define the following terms:</p>
+   <ol>
+    <li data-md>
+     <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="local-address">local address</dfn> is an IP address whose <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space">IP address space</a> is
+<a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local">local</a>.</p>
+    <li data-md>
+     <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="public-address">public address</dfn> is an IP address whose <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space①">IP address space</a>
+is <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public">public</a>.</p>
+   </ol>
+   <p>An <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space②">IP address space</a> <var>lhs</var> is
+<dfn class="dfn-paneled" data-dfn-for="IP address space" data-dfn-type="dfn" data-export id="ip-address-space-less-public">less public</dfn> than an
+<a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space③">IP address space</a> <var>rhs</var> if any of the following conditions holds true:</p>
+   <ol>
+    <li data-md>
+     <p><var>lhs</var> is <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①">local</a> and <var>rhs</var> is
+<a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public①">public</a>.</p>
+   </ol>
+   <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="determine-the-ip-address-space">determine the IP address space</dfn> of an IP address
+  <var>address</var>, run the following steps:</p>
+   <ol>
+    <li data-md>
+     <p>If <var>address</var> belongs to the <code>::ffff:0:0/96</code> "IPv4-mapped Address"
+  address block, then replace <var>address</var> with its embedded IPv4 address.</p>
+    <li data-md>
+     <p>For each <var>row</var> in the
+  <a href="#non-public-ip-address-blocks">Non-public IP address blocks"</a>
+  table:</p>
+     <ol>
+      <li data-md>
+       <p>If <var>address</var> belongs to <var>row</var>’s address block, return <var>row</var>’s
+   address space.</p>
+     </ol>
+    <li data-md>
+     <p>Return <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public②">public</a>.</p>
+   </ol>
+   <table id="non-public-ip-address-blocks">
+    <caption>Non-public IP address blocks</caption>
+    <thead>
+     <tr>
+      <th>Address block
+      <th>Name
+      <th>Reference
+      <th>Address space
+    <tbody>
+     <tr>
+      <td><code>127.0.0.0/8</code>
+      <td>IPv4 Loopback
+      <td><a data-link-type="biblio" href="#biblio-rfc1122" title="Requirements for Internet Hosts - Communication Layers">[RFC1122]</a>
+      <td><a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②">local</a>
+     <tr>
+      <td><code>10.0.0.0/8</code>
+      <td>Private Use
+      <td><a data-link-type="biblio" href="#biblio-rfc1918" title="Address Allocation for Private Internets">[RFC1918]</a>
+      <td><a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local③">local</a>
+     <tr>
+      <td><code>100.64.0.0/10</code>
+      <td>Carrier-Grade NAT
+      <td><a data-link-type="biblio" href="#biblio-rfc6598" title="IANA-Reserved IPv4 Prefix for Shared Address Space">[RFC6598]</a>
+      <td><a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local④">local</a>
+     <tr>
+      <td><code>172.16.0.0/12</code>
+      <td>Private Use
+      <td><a data-link-type="biblio" href="#biblio-rfc1918" title="Address Allocation for Private Internets">[RFC1918]</a>
+      <td><a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local⑤">local</a>
+     <tr>
+      <td><code>192.168.0.0/16</code>
+      <td>Private Use
+      <td><a data-link-type="biblio" href="#biblio-rfc1918" title="Address Allocation for Private Internets">[RFC1918]</a>
+      <td><a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local⑥">local</a>
+     <tr>
+      <td><code>198.18.0.0/15</code>
+      <td>Benchmarking
+      <td><a data-link-type="biblio" href="#biblio-rfc2544" title="Benchmarking Methodology for Network Interconnect Devices">[RFC2544]</a>
+      <td><a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local⑦">local</a>
+     <tr>
+      <td><code>169.254.0.0/16</code>
+      <td>Link Local
+      <td><a data-link-type="biblio" href="#biblio-rfc3927" title="Dynamic Configuration of IPv4 Link-Local Addresses">[RFC3927]</a>
+      <td><a data-link-type="dfn" href="https://wicg.github.io/private-network-access/#ip-address-space-private" id="ref-for-ip-address-space-private">private</a>
+     <tr>
+      <td><code>::1/128</code>
+      <td>IPv6 Loopback
+      <td><a data-link-type="biblio" href="#biblio-rfc4291" title="IP Version 6 Addressing Architecture">[RFC4291]</a>
+      <td><a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local⑧">local</a>
+     <tr>
+      <td><code>fc00::/7</code>
+      <td>Unique Local
+      <td><a data-link-type="biblio" href="#biblio-rfc4193" title="Unique Local IPv6 Unicast Addresses">[RFC4193]</a>
+      <td><a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local⑨">local</a>
+     <tr>
+      <td><code>fe80::/10</code>
+      <td>Link-Local Unicast
+      <td><a data-link-type="biblio" href="#biblio-rfc4291" title="IP Version 6 Addressing Architecture">[RFC4291]</a>
+      <td><a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⓪">local</a>
+     <tr>
+      <td><code>::ffff:0:0/96</code>
+      <td>IPv4-mapped
+      <td><a data-link-type="biblio" href="#biblio-rfc4291" title="IP Version 6 Addressing Architecture">[RFC4291]</a>
+      <td>see mapped IPv4 address
+   </table>
+   <p>User Agents MAY allow certain IP address blocks' <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space④">address space</a> to be
+overridden through administrator or user configuration. This could prove
+useful to protect e.g. IPv6 intranets where most IP addresses are considered
+<a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public③">public</a> per the algorithm above, by instead configuring
+user agents to treat the intranet as <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①①">local</a>.</p>
+   <p class="note" role="note"><span class="marker">Note:</span> Link-local IP addresses such as <code>169.254.0.0/16</code> are considered
+<a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①②">local</a>, since such addresses can identify the same
+target for all devices on a network link. A previous version of this
+specification considered them to be <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①③">local</a> instead.</p>
+   <p class="note" role="note"><span class="marker">Note:</span> The contents of each <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space⑤">IP address space</a> were at one point determined
+in accordance with the IANA Special-Purpose Address Registries
+(<a data-link-type="biblio" href="#biblio-ipv4-registry" title="IANA IPv4 Special-Purpose Address Registry">[IPV4-REGISTRY]</a> and <a data-link-type="biblio" href="#biblio-ipv6-registry" title="IANA IPv6 Special-Purpose Address Registry">[IPV6-REGISTRY]</a>) and the <code>Globally Reachable</code> bit
+defined therein. This turned out to be an inaccurate signal for our uses, as
+described in
+PNA’s spec issue #50](https://github.com/WICG/private-network-access/issues/50).</p>
+   <p class="note" role="note"><span class="marker">Note:</span> <a data-link-type="biblio" href="#biblio-private-network-access" title="Private Network Access">[PRIVATE-NETWORK-ACCESS]</a> used the address spaces public, private, and
+local. This specification simplifies the address spaces by combining
+<a data-link-type="biblio" href="#biblio-private-network-access" title="Private Network Access">[PRIVATE-NETWORK-ACCESS]</a>’s private and local together into <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①④">local</a>.</p>
+   <h3 class="heading settled" data-level="2.2" id="local-network-request-section"><span class="secno">2.2. </span><span class="content">Local Network Request</span><a class="self-link" href="#local-network-request-section"></a></h3>
+   <p>A <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request" id="ref-for-concept-request">request</a> (<var>request</var>) is a <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="local-network-request">local network request</dfn>
+if <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url" id="ref-for-concept-request-current-url">current url</a>’s <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host" id="ref-for-dom-url-host">host</a></code> maps to an IP address
+whose <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space⑥">IP address space</a> is <a data-link-type="dfn" href="#ip-address-space-less-public" id="ref-for-ip-address-space-less-public">less public</a> than
+<var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-policy-container" id="ref-for-concept-request-policy-container">policy container</a>’s
+<a data-link-type="dfn" href="https://wicg.github.io/private-network-access/#policy-container-ip-address-space" id="ref-for-policy-container-ip-address-space">IP address space</a>.</p>
+   <p>The classification of IP addresses into two broad <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space⑦">address spaces</a> is an
+imperfect and theoretically-unsound approach. It is a proxy used to determine
+whether two network endpoints should be allowed to communicate freely or not,
+in other words whether endpoint A is reachable from endpoint B without
+pivoting through the user agent on endpoint C.</p>
+   <p>This approach has some flaws:</p>
+   <ul>
+    <li data-md>
+     <p>false positives: an intranet server with a <a data-link-type="dfn" href="#public-address" id="ref-for-public-address">public address</a> might not be
+able to directy issue requests to another server on the same intranet with
+a <a data-link-type="dfn" href="#local-address" id="ref-for-local-address">local address</a>.</p>
+    <li data-md>
+     <p>false negatives: a client connected to two different
+<a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑤">local</a> networks, say a home network and a VPN, might
+allow a website served from the VPN to access devices on the home network.
+See also the issue below.</p>
+   </ul>
+   <p>Even so, this specification aims to offer a pragmatic solution to a security
+issue that broadly affects most users of the Web whose network configurations
+are not so complex.</p>
+   <p class="issue" id="issue-cd6e97c8"><a class="self-link" href="#issue-cd6e97c8"></a> The definition of <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request">local network requests</a> could be expanded to
+cover all cross-origin requests for which the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url" id="ref-for-concept-request-current-url①">current url</a>’s
+<code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host" id="ref-for-dom-url-host①">host</a></code> maps to an IP address whose <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space⑧">IP address space</a> is not
+<a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public④">public</a>. This would prevent a malicious server on the
+local network from attacking other servers, including servers on <code>localhost</code>.
+Currently, Chromium only implements Local Network Access restrictions for
+<a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑤">public</a> to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑥">local</a> requests, and does
+not enforce the permission for cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑦">local</a>
+requests. This can be shipped as an incremental improvement later on. <a href="https://github.com/wicg/private-network-access/issues/39">PNA
+Issue #39</a> We note
+that, because local names and addresses are not meaningful outside the bounds
+of the network, implementers may want to use a different permission prompt for
+the cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑧">local</a> case than for the <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑥">public</a> to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑨">local</a> case, and may want to scope these
+permission grants to the specific network or to the current browsing session
+only.</p>
+   <p class="note" role="note"><span class="marker">NOTE:</span> Requests originating from the loopback address should not be considered
+<a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request①">local network requests</a>, and should not be subject to local network access
+checks, since any software running on the user’s device is already in the most
+privileged vantage point on the user’s network.</p>
+   <p class="note" role="note"><span class="marker">NOTE:</span> Some <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request②">local network requests</a> are more challenging to secure than others.
+See § 4.4 Rollout difficulties for more details.</p>
+   <h3 class="heading settled" data-level="2.3" id="permission-prompt"><span class="secno">2.3. </span><span class="content">Local Network Request Permission Prompt</span><a class="self-link" href="#permission-prompt"></a></h3>
+   <p>A local network access permission prompt is introduced to allow for users to
+approve of <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request③">local network requests</a> from public websites to local network servers.</p>
+   <p>When a <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request④">local network request</a> is detected, a prompt is shown to the user asking
+for permission to access the local network. If the user decides to grant the
+permission, then the fetch continues. If not, it fails.</p>
+   <p>The exact scope of the permission is implementation-defined. The permission may
+be as coarse-grained as allowing a specific origin to send <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request⑤">local network requests</a> to any endpoint on the local network, or may be more fine-grained to
+only allow specific origins to communicate with specific endpoints on the local
+network. A user agent may persist this decision to reduce permission fatigue.</p>
+   <h3 class="heading settled" data-level="2.4" id="secure-context-restriction"><span class="secno">2.4. </span><span class="content">Secure Context Restriction</span><a class="self-link" href="#secure-context-restriction"></a></h3>
+   <p>The capability to make local network requests is a <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-powerful-feature" id="ref-for-dfn-powerful-feature">powerful feature</a>
+and must only be allowed from <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#secure-context" id="ref-for-secure-context">secure contexts</a>.</p>
+   <p class="issue" id="issue-c0c23f93"><a class="self-link" href="#issue-c0c23f93"></a> To be able to apply LNA checks to all cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②⓪">local</a> requests (see Issue above), Chromium plans to exempt local
+servers that likely cannot currently get publicly trusted HTTPS certificates
+from this requirement (e.g., servers on <code>.local</code> and private IP literals). See
+Section 4.4 (Rollout Difficulties) below for more discussion, and also see
+<a href="https://github.com/WICG/private-network-access/issues/96">https://github.com/WICG/private-network-access/issues/96</a>.</p>
+   <h3 class="heading settled" data-level="2.5" id="mixed-content-lna"><span class="secno">2.5. </span><span class="content">Mixed Content</span><a class="self-link" href="#mixed-content-lna"></a></h3>
+   <p>Many local network servers do not run HTTPS, as it has proven difficult (and
+sometimes even impossible) to migrate local network servers away from HTTP.
+This is problematic as the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#secure-context" id="ref-for-secure-context①">secure context</a> restriction, combined with mixed
+content checks, would block many <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request⑥">local network requests</a> even if the user would
+give permission for the request to occur.</p>
+   <p>One solution to this problem is to bypass mixed content checks in situations
+where the request is known to be a <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request⑦">local network request</a>. This is known in a
+few situations:</p>
+   <ul>
+    <li data-md>
+     <p>When the hostname of the request target is an IP literal identified as <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②①">local</a> in the <a href="#non-public-ip-address-blocks">Non-public IP address blocks"
+table</a> (e.g., an <a data-link-type="biblio" href="#biblio-rfc1918" title="Address Allocation for Private Internets">[RFC1918]</a> IP literal)</p>
+    <li data-md>
+     <p>When the hostname of the request is a .local domain (RFC 6762)</p>
+   </ul>
+   <p>There may be situations in which neither of the above situations is true, and
+yet the site wants to identify a request as being a <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request⑧">local network request</a>. This
+can be mitigated by adding a new parameter to the <code>fetch()</code> options bag:</p>
+<pre class="highlight">fetch<c- p>(</c-><c- u>"http://router.local/ping"</c-><c- p>,</c-> <c- p>{</c->
+  targetAddressSpace<c- o>:</c-> <c- u>"local"</c-><c- p>,</c->
+<c- p>});</c->
+</pre>
+   <p>This instructs the browser to allow the fetch to bypass mixed-content checks
+even though the scheme is non-secure and potentially obtain a connection to the
+target server. The new <code>fetch()</code> API is backward-compatible.</p>
+   <p>Note that this feature cannot be abused to bypass mixed content in general. If
+the resolved remote IP address does not belong to the IP address space
+specified as the targetAddressSpace option value, then the request will fail.
+If it does belong, then the permission can be checked to allow or fail the
+request.</p>
+   <p>TODO: Decide if we want to keep the CSP directive <code>treat-as-public-address</code>
+around, see
+<a href="https://wicg.github.io/private-network-access/#csp">https://wicg.github.io/private-network-access/#csp</a>.
+This directive would be obviated if we implemented
+<a href="https://github.com/wicg/private-network-access/issues/39">https://github.com/wicg/private-network-access/issues/39</a>.\]</p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="w3c-conformance"><span class="content">Conformance</span><a class="self-link" href="#w3c-conformance"></a></h2>
@@ -895,6 +1271,21 @@ accepts.</p>
   </div>
   <script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <ul class="index">
+   <li><a href="#ip-address-space">address space</a><span>, in § 2.1</span>
+   <li><a href="#determine-the-ip-address-space">determine the IP address space</a><span>, in § 2.1</span>
+   <li><a href="#ip-address-space">IP address space</a><span>, in § 2.1</span>
+   <li><a href="#enumdef-ipaddressspace">IPAddressSpace</a><span>, in § 2.1</span>
+   <li><a href="#ip-address-space-less-public">less public</a><span>, in § 2.1</span>
+   <li><a href="#dom-ipaddressspace-local">"local"</a><span>, in § 2.1</span>
+   <li><a href="#ip-address-space-local">local</a><span>, in § 2.1</span>
+   <li><a href="#local-address">local address</a><span>, in § 2.1</span>
+   <li><a href="#local-network-request">local network request</a><span>, in § 2.2</span>
+   <li><a href="#dom-ipaddressspace-public">"public"</a><span>, in § 2.1</span>
+   <li><a href="#ip-address-space-public">public</a><span>, in § 2.1</span>
+   <li><a href="#public-address">public address</a><span>, in § 2.1</span>
+  </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
@@ -902,6 +1293,30 @@ accepts.</p>
     <ul>
      <li><span class="dfn-paneled" id="98f9d698">CORS-safelisted method</span>
      <li><span class="dfn-paneled" id="99f492fd">CORS-safelisted request-header</span>
+     <li><span class="dfn-paneled" id="3f2ca4de">current URL</span>
+     <li><span class="dfn-paneled" id="86efadaf">policy container</span>
+     <li><span class="dfn-paneled" id="55213b5b">request</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[HTML]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="65181da8">secure context</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[PERMISSIONS]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="6c2d7879">powerful feature</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[PRIVATE-NETWORK-ACCESS]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="f346684b">IP address space</span>
+     <li><span class="dfn-paneled" id="da8eee20">private</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[URL]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="5718c334">host</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -909,8 +1324,16 @@ accepts.</p>
   <dl>
    <dt id="biblio-fetch">[FETCH]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/"><cite>Fetch Standard</cite></a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
+   <dt id="biblio-html">[HTML]
+   <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+   <dt id="biblio-permissions">[PERMISSIONS]
+   <dd>Marcos Caceres; Mike Taylor. <a href="https://w3c.github.io/permissions/"><cite>Permissions</cite></a>. URL: <a href="https://w3c.github.io/permissions/">https://w3c.github.io/permissions/</a>
+   <dt id="biblio-private-network-access">[PRIVATE-NETWORK-ACCESS]
+   <dd><a href="https://wicg.github.io/private-network-access/"><cite>Private Network Access</cite></a>. Draft Community Group Report. URL: <a href="https://wicg.github.io/private-network-access/">https://wicg.github.io/private-network-access/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
+   <dt id="biblio-url">[URL]
+   <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
@@ -920,15 +1343,56 @@ accepts.</p>
    <dd>Kafeine. <a href="http://malware.dontneedcoffee.com/2015/05/an-exploit-kit-dedicated-to-csrf.html"><cite>An Exploit Kit dedicated to CSRF Pharming</cite></a>. URL: <a href="http://malware.dontneedcoffee.com/2015/05/an-exploit-kit-dedicated-to-csrf.html">http://malware.dontneedcoffee.com/2015/05/an-exploit-kit-dedicated-to-csrf.html</a>
    <dt id="biblio-drive-by-pharming">[DRIVE-BY-PHARMING]
    <dd>Sid Stamm; Zulfikar Ramzan; Markus Jakobsson. <a href="https://link.springer.com/chapter/10.1007/978-3-540-77048-0_38"><cite>Drive-By Pharming</cite></a>. URL: <a href="https://link.springer.com/chapter/10.1007/978-3-540-77048-0_38">https://link.springer.com/chapter/10.1007/978-3-540-77048-0_38</a>
-   <dt id="biblio-private-network-access">[PRIVATE-NETWORK-ACCESS]
-   <dd><a href="https://wicg.github.io/private-network-access/"><cite>Private Network Access</cite></a>. Draft Community Group Report. URL: <a href="https://wicg.github.io/private-network-access/">https://wicg.github.io/private-network-access/</a>
+   <dt id="biblio-ipv4-registry">[IPV4-REGISTRY]
+   <dd><a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml"><cite>IANA IPv4 Special-Purpose Address Registry</cite></a>. URL: <a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml">https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml</a>
+   <dt id="biblio-ipv6-registry">[IPV6-REGISTRY]
+   <dd><a href="https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml"><cite>IANA IPv6 Special-Purpose Address Registry</cite></a>. URL: <a href="https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml">https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml</a>
+   <dt id="biblio-rfc1122">[RFC1122]
+   <dd>R. Braden, Ed.. <a href="https://www.rfc-editor.org/rfc/rfc1122"><cite>Requirements for Internet Hosts - Communication Layers</cite></a>. October 1989. Internet Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc1122">https://www.rfc-editor.org/rfc/rfc1122</a>
    <dt id="biblio-rfc1918">[RFC1918]
    <dd>Y. Rekhter; et al. <a href="https://www.rfc-editor.org/rfc/rfc1918"><cite>Address Allocation for Private Internets</cite></a>. February 1996. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc1918">https://www.rfc-editor.org/rfc/rfc1918</a>
+   <dt id="biblio-rfc2544">[RFC2544]
+   <dd>S. Bradner; J. McQuaid. <a href="https://www.rfc-editor.org/rfc/rfc2544"><cite>Benchmarking Methodology for Network Interconnect Devices</cite></a>. March 1999. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc2544">https://www.rfc-editor.org/rfc/rfc2544</a>
+   <dt id="biblio-rfc3927">[RFC3927]
+   <dd>S. Cheshire; B. Aboba; E. Guttman. <a href="https://www.rfc-editor.org/rfc/rfc3927"><cite>Dynamic Configuration of IPv4 Link-Local Addresses</cite></a>. May 2005. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc3927">https://www.rfc-editor.org/rfc/rfc3927</a>
+   <dt id="biblio-rfc4193">[RFC4193]
+   <dd>R. Hinden; B. Haberman. <a href="https://www.rfc-editor.org/rfc/rfc4193"><cite>Unique Local IPv6 Unicast Addresses</cite></a>. October 2005. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc4193">https://www.rfc-editor.org/rfc/rfc4193</a>
+   <dt id="biblio-rfc4291">[RFC4291]
+   <dd>R. Hinden; S. Deering. <a href="https://www.rfc-editor.org/rfc/rfc4291"><cite>IP Version 6 Addressing Architecture</cite></a>. February 2006. Draft Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc4291">https://www.rfc-editor.org/rfc/rfc4291</a>
+   <dt id="biblio-rfc6598">[RFC6598]
+   <dd>J. Weil; et al. <a href="https://www.rfc-editor.org/rfc/rfc6598"><cite>IANA-Reserved IPv4 Prefix for Shared Address Space</cite></a>. April 2012. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc6598">https://www.rfc-editor.org/rfc/rfc6598</a>
    <dt id="biblio-soho-pharming">[SOHO-PHARMING]
    <dd>Team Cymru. <a href="https://331.cybersec.fun/TeamCymruSOHOPharming.pdf"><cite>SOHO Pharming</cite></a>. URL: <a href="https://331.cybersec.fun/TeamCymruSOHOPharming.pdf">https://331.cybersec.fun/TeamCymruSOHOPharming.pdf</a>
    <dt id="biblio-trend-micro">[TREND-MICRO]
    <dd><a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=693"><cite>TrendMicro node.js HTTP server listening on localhost can execute commands</cite></a>. URL: <a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=693">https://bugs.chromium.org/p/project-zero/issues/detail?id=693</a>
   </dl>
+  <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
+<pre class="idl highlight def"><c- b>enum</c-> <a href="#enumdef-ipaddressspace"><code><c- g>IPAddressSpace</c-></code></a> { <a href="#dom-ipaddressspace-public"><code><c- s>"public"</c-></code></a>, <a href="#dom-ipaddressspace-local"><code><c- s>"local"</c-></code></a> };
+
+</pre>
+  <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
+  <div style="counter-reset:issue">
+   <div class="issue"> The definition of <a data-link-type="dfn" href="#local-network-request">local network requests</a> could be expanded to
+cover all cross-origin requests for which the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url">current url</a>’s
+<code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host">host</a></code> maps to an IP address whose <a data-link-type="dfn" href="#ip-address-space">IP address space</a> is not
+<a data-link-type="dfn" href="#ip-address-space-public">public</a>. This would prevent a malicious server on the
+local network from attacking other servers, including servers on <code>localhost</code>.
+Currently, Chromium only implements Local Network Access restrictions for
+<a data-link-type="dfn" href="#ip-address-space-public">public</a> to <a data-link-type="dfn" href="#ip-address-space-local">local</a> requests, and does
+not enforce the permission for cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a>
+requests. This can be shipped as an incremental improvement later on. <a href="https://github.com/wicg/private-network-access/issues/39">PNA
+Issue #39</a> We note
+that, because local names and addresses are not meaningful outside the bounds
+of the network, implementers may want to use a different permission prompt for
+the cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a> case than for the <a data-link-type="dfn" href="#ip-address-space-public">public</a> to <a data-link-type="dfn" href="#ip-address-space-local">local</a> case, and may want to scope these
+permission grants to the specific network or to the current browsing session
+only. <a class="issue-return" href="#issue-cd6e97c8" title="Jump to section">↵</a></div>
+   <div class="issue"> To be able to apply LNA checks to all cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a> requests (see Issue above), Chromium plans to exempt local
+servers that likely cannot currently get publicly trusted HTTPS certificates
+from this requirement (e.g., servers on <code>.local</code> and private IP literals). See
+Section 4.4 (Rollout Difficulties) below for more discussion, and also see
+<a href="https://github.com/WICG/private-network-access/issues/96">https://github.com/WICG/private-network-access/issues/96</a>. <a class="issue-return" href="#issue-c0c23f93" title="Jump to section">↵</a></div>
+  </div>
 <script>/* Boilerplate: script-dom-helper */
 "use strict";
 function query(sel) { return document.querySelector(sel); }
@@ -1129,8 +1593,27 @@ function parseHTML(markup) {
 "use strict";
 {
 let dfnPanelData = {
-"98f9d698": {"dfnID":"98f9d698","dfnText":"CORS-safelisted method","external":true,"refSections":[{"refs":[{"id":"ref-for-cors-safelisted-method"}],"title":"1.1. Goals {#goals}"}],"url":"https://fetch.spec.whatwg.org/#cors-safelisted-method"},
-"99f492fd": {"dfnID":"99f492fd","dfnText":"CORS-safelisted request-header","external":true,"refSections":[{"refs":[{"id":"ref-for-cors-safelisted-request-header"}],"title":"1.1. Goals {#goals}"}],"url":"https://fetch.spec.whatwg.org/#cors-safelisted-request-header"},
+"3f2ca4de": {"dfnID":"3f2ca4de","dfnText":"current URL","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-request-current-url"},{"id":"ref-for-concept-request-current-url\u2460"}],"title":"2.2. Local Network Request"}],"url":"https://fetch.spec.whatwg.org/#concept-request-current-url"},
+"55213b5b": {"dfnID":"55213b5b","dfnText":"request","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-request"}],"title":"2.2. Local Network Request"}],"url":"https://fetch.spec.whatwg.org/#concept-request"},
+"5718c334": {"dfnID":"5718c334","dfnText":"host","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-url-host"},{"id":"ref-for-dom-url-host\u2460"}],"title":"2.2. Local Network Request"}],"url":"https://url.spec.whatwg.org/#dom-url-host"},
+"65181da8": {"dfnID":"65181da8","dfnText":"secure context","external":true,"refSections":[{"refs":[{"id":"ref-for-secure-context"}],"title":"2.4. Secure Context Restriction"},{"refs":[{"id":"ref-for-secure-context\u2460"}],"title":"2.5. Mixed Content"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#secure-context"},
+"6c2d7879": {"dfnID":"6c2d7879","dfnText":"powerful feature","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-powerful-feature"}],"title":"2.4. Secure Context Restriction"}],"url":"https://w3c.github.io/permissions/#dfn-powerful-feature"},
+"86efadaf": {"dfnID":"86efadaf","dfnText":"policy container","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-request-policy-container"}],"title":"2.2. Local Network Request"}],"url":"https://fetch.spec.whatwg.org/#concept-request-policy-container"},
+"98f9d698": {"dfnID":"98f9d698","dfnText":"CORS-safelisted method","external":true,"refSections":[{"refs":[{"id":"ref-for-cors-safelisted-method"}],"title":"1.1. Goals"}],"url":"https://fetch.spec.whatwg.org/#cors-safelisted-method"},
+"99f492fd": {"dfnID":"99f492fd","dfnText":"CORS-safelisted request-header","external":true,"refSections":[{"refs":[{"id":"ref-for-cors-safelisted-request-header"}],"title":"1.1. Goals"}],"url":"https://fetch.spec.whatwg.org/#cors-safelisted-request-header"},
+"da8eee20": {"dfnID":"da8eee20","dfnText":"private","external":true,"refSections":[{"refs":[{"id":"ref-for-ip-address-space-private"}],"title":"2.1. IP Address Space"}],"url":"https://wicg.github.io/private-network-access/#ip-address-space-private"},
+"determine-the-ip-address-space": {"dfnID":"determine-the-ip-address-space","dfnText":"determine the IP address space","external":false,"refSections":[],"url":"#determine-the-ip-address-space"},
+"dom-ipaddressspace-local": {"dfnID":"dom-ipaddressspace-local","dfnText":"\"local\"","external":false,"refSections":[],"url":"#dom-ipaddressspace-local"},
+"dom-ipaddressspace-public": {"dfnID":"dom-ipaddressspace-public","dfnText":"\"public\"","external":false,"refSections":[],"url":"#dom-ipaddressspace-public"},
+"enumdef-ipaddressspace": {"dfnID":"enumdef-ipaddressspace","dfnText":"IPAddressSpace","external":false,"refSections":[{"refs":[{"id":"ref-for-enumdef-ipaddressspace"}],"title":"2.1. IP Address Space"}],"url":"#enumdef-ipaddressspace"},
+"f346684b": {"dfnID":"f346684b","dfnText":"IP address space","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-container-ip-address-space"}],"title":"2.2. Local Network Request"}],"url":"https://wicg.github.io/private-network-access/#policy-container-ip-address-space"},
+"ip-address-space": {"dfnID":"ip-address-space","dfnText":"IP address\nspace","external":false,"refSections":[{"refs":[{"id":"ref-for-ip-address-space"},{"id":"ref-for-ip-address-space\u2460"},{"id":"ref-for-ip-address-space\u2461"},{"id":"ref-for-ip-address-space\u2462"},{"id":"ref-for-ip-address-space\u2463"},{"id":"ref-for-ip-address-space\u2464"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-ip-address-space\u2465"},{"id":"ref-for-ip-address-space\u2466"},{"id":"ref-for-ip-address-space\u2467"}],"title":"2.2. Local Network Request"}],"url":"#ip-address-space"},
+"ip-address-space-less-public": {"dfnID":"ip-address-space-less-public","dfnText":"less public","external":false,"refSections":[{"refs":[{"id":"ref-for-ip-address-space-less-public"}],"title":"2.2. Local Network Request"}],"url":"#ip-address-space-less-public"},
+"ip-address-space-local": {"dfnID":"ip-address-space-local","dfnText":"local","external":false,"refSections":[{"refs":[{"id":"ref-for-ip-address-space-local"},{"id":"ref-for-ip-address-space-local\u2460"},{"id":"ref-for-ip-address-space-local\u2461"},{"id":"ref-for-ip-address-space-local\u2462"},{"id":"ref-for-ip-address-space-local\u2463"},{"id":"ref-for-ip-address-space-local\u2464"},{"id":"ref-for-ip-address-space-local\u2465"},{"id":"ref-for-ip-address-space-local\u2466"},{"id":"ref-for-ip-address-space-local\u2467"},{"id":"ref-for-ip-address-space-local\u2468"},{"id":"ref-for-ip-address-space-local\u2460\u24ea"},{"id":"ref-for-ip-address-space-local\u2460\u2460"},{"id":"ref-for-ip-address-space-local\u2460\u2461"},{"id":"ref-for-ip-address-space-local\u2460\u2462"},{"id":"ref-for-ip-address-space-local\u2460\u2463"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-ip-address-space-local\u2460\u2464"},{"id":"ref-for-ip-address-space-local\u2460\u2465"},{"id":"ref-for-ip-address-space-local\u2460\u2466"},{"id":"ref-for-ip-address-space-local\u2460\u2467"},{"id":"ref-for-ip-address-space-local\u2460\u2468"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-ip-address-space-local\u2461\u24ea"}],"title":"2.4. Secure Context Restriction"},{"refs":[{"id":"ref-for-ip-address-space-local\u2461\u2460"}],"title":"2.5. Mixed Content"}],"url":"#ip-address-space-local"},
+"ip-address-space-public": {"dfnID":"ip-address-space-public","dfnText":"public","external":false,"refSections":[{"refs":[{"id":"ref-for-ip-address-space-public"},{"id":"ref-for-ip-address-space-public\u2460"},{"id":"ref-for-ip-address-space-public\u2461"},{"id":"ref-for-ip-address-space-public\u2462"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-ip-address-space-public\u2463"},{"id":"ref-for-ip-address-space-public\u2464"},{"id":"ref-for-ip-address-space-public\u2465"}],"title":"2.2. Local Network Request"}],"url":"#ip-address-space-public"},
+"local-address": {"dfnID":"local-address","dfnText":"local address","external":false,"refSections":[{"refs":[{"id":"ref-for-local-address"}],"title":"2.2. Local Network Request"}],"url":"#local-address"},
+"local-network-request": {"dfnID":"local-network-request","dfnText":"local network request","external":false,"refSections":[{"refs":[{"id":"ref-for-local-network-request"},{"id":"ref-for-local-network-request\u2460"},{"id":"ref-for-local-network-request\u2461"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-local-network-request\u2462"},{"id":"ref-for-local-network-request\u2463"},{"id":"ref-for-local-network-request\u2464"}],"title":"2.3. Local Network Request Permission Prompt"},{"refs":[{"id":"ref-for-local-network-request\u2465"},{"id":"ref-for-local-network-request\u2466"},{"id":"ref-for-local-network-request\u2467"}],"title":"2.5. Mixed Content"}],"url":"#local-network-request"},
+"public-address": {"dfnID":"public-address","dfnText":"public address","external":false,"refSections":[{"refs":[{"id":"ref-for-public-address"}],"title":"2.2. Local Network Request"}],"url":"#public-address"},
 };
 
 document.addEventListener("DOMContentLoaded", ()=>{
@@ -1519,8 +2002,24 @@ function genLinkingSyntaxes(dfn) {
 "use strict";
 {
 let refsData = {
+"#enumdef-ipaddressspace": {"displayText":"IPAddressSpace","export":true,"for_":[],"level":"","normative":true,"shortname":"lna","spec":"lna","status":"local","text":"IPAddressSpace","type":"enum","url":"#enumdef-ipaddressspace"},
+"#ip-address-space": {"displayText":"ip address space","export":true,"for_":[],"level":"","normative":true,"shortname":"lna","spec":"lna","status":"local","text":"ip address space","type":"dfn","url":"#ip-address-space"},
+"#ip-address-space-less-public": {"displayText":"less public","export":true,"for_":["IP address space"],"level":"","normative":true,"shortname":"lna","spec":"lna","status":"local","text":"less public","type":"dfn","url":"#ip-address-space-less-public"},
+"#ip-address-space-local": {"displayText":"local","export":true,"for_":["IP address space"],"level":"","normative":true,"shortname":"lna","spec":"lna","status":"local","text":"local","type":"dfn","url":"#ip-address-space-local"},
+"#ip-address-space-public": {"displayText":"public","export":true,"for_":["IP address space"],"level":"","normative":true,"shortname":"lna","spec":"lna","status":"local","text":"public","type":"dfn","url":"#ip-address-space-public"},
+"#local-address": {"displayText":"local address","export":true,"for_":[],"level":"","normative":true,"shortname":"lna","spec":"lna","status":"local","text":"local address","type":"dfn","url":"#local-address"},
+"#local-network-request": {"displayText":"local network request","export":true,"for_":[],"level":"","normative":true,"shortname":"lna","spec":"lna","status":"local","text":"local network request","type":"dfn","url":"#local-network-request"},
+"#public-address": {"displayText":"public address","export":true,"for_":[],"level":"","normative":true,"shortname":"lna","spec":"lna","status":"local","text":"public address","type":"dfn","url":"#public-address"},
+"https://fetch.spec.whatwg.org/#concept-request": {"displayText":"request","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"request","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-request"},
+"https://fetch.spec.whatwg.org/#concept-request-current-url": {"displayText":"current URL","export":true,"for_":["request"],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"current url","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-request-current-url"},
+"https://fetch.spec.whatwg.org/#concept-request-policy-container": {"displayText":"policy container","export":true,"for_":["request"],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"policy container","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-request-policy-container"},
 "https://fetch.spec.whatwg.org/#cors-safelisted-method": {"displayText":"CORS-safelisted method","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"cors-safelisted method","type":"dfn","url":"https://fetch.spec.whatwg.org/#cors-safelisted-method"},
 "https://fetch.spec.whatwg.org/#cors-safelisted-request-header": {"displayText":"CORS-safelisted request-header","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"cors-safelisted request-header","type":"dfn","url":"https://fetch.spec.whatwg.org/#cors-safelisted-request-header"},
+"https://html.spec.whatwg.org/multipage/webappapis.html#secure-context": {"displayText":"secure context","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"secure context","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#secure-context"},
+"https://url.spec.whatwg.org/#dom-url-host": {"displayText":"host","export":true,"for_":["URL"],"level":"1","normative":true,"shortname":"url","spec":"url","status":"current","text":"host","type":"attribute","url":"https://url.spec.whatwg.org/#dom-url-host"},
+"https://w3c.github.io/permissions/#dfn-powerful-feature": {"displayText":"powerful feature","export":true,"for_":[],"level":"1","normative":true,"shortname":"permissions","spec":"permissions","status":"current","text":"powerful feature","type":"dfn","url":"https://w3c.github.io/permissions/#dfn-powerful-feature"},
+"https://wicg.github.io/private-network-access/#ip-address-space-private": {"displayText":"private","export":true,"for_":["IP address space"],"level":"1","normative":true,"shortname":"private-network-access","spec":"private-network-access","status":"current","text":"private","type":"dfn","url":"https://wicg.github.io/private-network-access/#ip-address-space-private"},
+"https://wicg.github.io/private-network-access/#policy-container-ip-address-space": {"displayText":"IP address space","export":true,"for_":["policy container"],"level":"1","normative":true,"shortname":"private-network-access","spec":"private-network-access","status":"current","text":"ip address space","type":"dfn","url":"https://wicg.github.io/private-network-access/#policy-container-ip-address-space"},
 };
 
 function mkRefHint(link, ref) {
