@@ -185,6 +185,22 @@ https://setup.betaprinters.com to connect to her local devices, which she
 accepts.
 </div>
 
+### App-based sign in ### {#example-app-based-sign-in}
+
+<div class="example">
+Alice uses their personal device for a limited set of tasks at work.
+Their employer doesn't require device management for these basic tasks,
+but they do require an authentication app to be installed, which provides
+a strong credential and a limited set of device context.
+When attempting to access a work site, Alice is redirected to their
+corporate single sign on service, login.myco.com, and is asked to sign in
+using the app. The website makes a fetch request to http://localhost:45678,
+the address used by the local app. Alice sees a prompt asking for 
+permission for https://login.myco.com to connect with a local device, which
+they accept. The app is invoked, and Alice is asked to authenticate to the app
+using her device unlock.
+</div>
+
 # Framework # {#framework}
 
 ## IP Address Space ## {#ip-address-space-section}
