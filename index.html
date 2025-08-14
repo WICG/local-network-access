@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 3f621ba99, updated Mon Jul 28 15:38:36 2025 -0700" name="generator">
   <link href="https://wicg.github.io/local-network-access/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="912b267feeae889008ebb60b2ffc30cf712f1762" name="revision">
+  <meta content="83b724a792938ddf5248510687661008176f52d5" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -859,7 +859,7 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
 </p>
    <h1 class="p-name no-ref" id="title">Local Network Access</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#UD">Unofficial Proposal Draft</a>,
-    <time class="dt-updated" datetime="2025-07-31">31 July 2025</time></p>
+    <time class="dt-updated" datetime="2025-08-14">14 August 2025</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -903,6 +903,7 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
         <li><a href="#example-user-granting-permission"><span class="secno">1.3.1</span> <span class="content">User granting permission</span></a>
         <li><a href="#example-user-denying-permission"><span class="secno">1.3.2</span> <span class="content">User denying permission</span></a>
         <li><a href="#example-new-device-configuration"><span class="secno">1.3.3</span> <span class="content">New device configuration</span></a>
+        <li><a href="#example-app-based-sign-in"><span class="secno">1.3.4</span> <span class="content">App-based sign in</span></a>
        </ol>
      </ol>
     <li>
@@ -1061,6 +1062,20 @@ button that will help her set up the printer defaults. Hitting the button, she
 gets a permission prompt asking for permission for
 https://setup.betaprinters.com to connect to her local devices, which she
 accepts.
+</div>
+   <h4 class="heading settled" data-level="1.3.4" id="example-app-based-sign-in"><span class="secno">1.3.4. </span><span class="content">App-based sign in</span><a class="self-link" href="#example-app-based-sign-in"></a></h4>
+   <div class="example" id="example-62c7a5a3"><a class="self-link" href="#example-62c7a5a3"></a>
+Alice uses their personal device for a limited set of tasks at work.
+Their employer doesn’t require device management for these basic tasks,
+but they do require an authentication app to be installed, which provides
+a strong credential and a limited set of device context.
+When attempting to access a work site, Alice is redirected to their
+corporate single sign on service, login.myco.com, and is asked to sign in
+using the app. The website makes a fetch request to http://localhost:45678,
+the address used by the local app. Alice sees a prompt asking for 
+permission for https://login.myco.com to connect with a local device, which
+they accept. The app is invoked, and Alice is asked to authenticate to the app
+using her device unlock.
 </div>
    <h2 class="heading settled" data-level="2" id="framework"><span class="secno">2. </span><span class="content">Framework</span><a class="self-link" href="#framework"></a></h2>
    <h3 class="heading settled" data-level="2.1" id="ip-address-space-section"><span class="secno">2.1. </span><span class="content">IP Address Space</span><a class="self-link" href="#ip-address-space-section"></a></h3>
