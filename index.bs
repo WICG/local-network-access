@@ -2,7 +2,7 @@
 Title: Local Network Access
 Shortname: LNA
 Level: None
-Status: w3c/UD
+Status: w3c/CG-DRAFT
 Repository: WICG/local-network-access
 URL: https://wicg.github.io/local-network-access/
 Editor: Chris Thompson, Google https://google.com, cthomp@google.com
