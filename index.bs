@@ -132,8 +132,8 @@ There should be a well-lit path to allow these requests when the user is both
 expecting and explicitly allowing the local network access requests to occur.
 For example, a user logged in to [plex.tv](https://plex.tv) may want to allow
 the site to connect to their local media server to directly load media content
-over the local network instead of routing through remote servers. See S1.2
-below for more examples.
+over the local network instead of routing through remote servers. See
+[[#examples]] below for more examples.
 
 ## Non-goals ## {#non-goals}
 
@@ -215,8 +215,8 @@ Every IP address belongs to an <dfn export local-lt="address space">IP address
 space</dfn>, which can be one of three different values:
 
   1. <dfn for="IP address space" export>loopback</dfn>: Includes loopback addresses,
-    which are only accessible on the local host (and thus differ for every device).
-    In other words, addresses whose target differs for every device.
+    which are only accessible on the local host. In other words, addresses whose
+    target differs for every device.
 
   1. <dfn for="IP address space" export>local</dfn>: contains addresses that have
     meaning only within the current network. In other words, addresses whose target
@@ -250,7 +250,7 @@ To <dfn export>determine the IP address space</dfn> of an IP address
   1.  If |address| belongs to the `::ffff:0:0/96` "IPv4-mapped Address"
       address block, then replace |address| with its embedded IPv4 address.
   1.  For each |row| in the
-      <a href="#non-public-ip-address-blocks">Non-public IP address blocks"</a>
+      <a href="#non-public-ip-address-blocks">Non-public IP address blocks</a>
       table:
       1.   If |address| belongs to |row|'s address block, return |row|'s
            address space.
@@ -330,36 +330,36 @@ To <dfn export>determine the IP address space</dfn> of an IP address
       <tr>
         <td>`fec0::/10`</td>
         <td>Site-Local Unicast</td>
-        <td>[[RFC3513]]</td>
+        <td>[[RFC3513 obsolete]]</td>
         <td>[=IP address space/local=]</td>
       </tr>
       <tr>
         <td>`0.0.0.0/32`</td>
         <td>IPv4 null IP address</td>
-        <td>[[RFC1884]]</td>
+        <td>[[RFC1884 obsolete]]</td>
         <td>[=IP address space/loopback=]</td>
       </tr>
       <tr>
         <td>`0.0.0.0/8`</td>
         <td>IPv4 null IP addresses</td>
-        <td>[[RFC1884]]</td>
+        <td>[[RFC1884 obsolete]]</td>
         <td>[=IP address space/local=]</td>
       </tr>
       <tr>
         <td>`::/128`</td>
         <td>IPv6 unspecified address</td>
-        <td>[[RFC1884]]</td>
+        <td>[[RFC1884 obsolete]]</td>
         <td>[=IP address space/loopback=]</td>
       </tr>
       <tr>
         <td>`2001:db8::/32`</td>
-        <td>IPv6 documentation address prefix</td>
+        <td>IPv6 documentation addresses</td>
         <td>[[RFC3849]]</td>
         <td>[=IP addres space/local=]</td>
       </tr>
       <tr>
         <td>`3fff::/20`</td>
-        <td>IPv6 documentation address prefix</td>
+        <td>IPv6 documentation addresses</td>
         <td>[[RFC9637]]</td>
         <td>[=IP addres space/local=]</td>
       </tr>
@@ -394,14 +394,13 @@ Note: [[PRIVATE-NETWORK-ACCESS]] used the address spaces public, private, and
 local. This specification renames the address spaces to public, local, and
 loopback, respectively.
 
-Note: [[FETCH]] plans to specify that requests to the null IP address should be
-blocked. We map both the IPv4 null IP address space and the IPv6 unspecified
-address to [=IP address space/loopback=] as some systems may still route them
-back to the local host machine (and `0.0.0.0/8` may refer to "specified hosts
-on this network", so is mapped to [=IP address space/local=]) per [[RFC5735]].
-Once the changes to Fetch have been made and adopted, we will no longer need
-to handle them in this specification.
-
+Note: [[FETCH]] plans to specify that requests to the null IP address will be
+treated as a network error. We map both the IPv4 null IP address space and the
+IPv6 unspecified address to [=IP address space/loopback=] as some systems may
+still route them back to the local host machine (and `0.0.0.0/8` may refer to
+"specified hosts on this network", so is mapped to [=IP address space/local=])
+per [[RFC5735]]. Once the changes to Fetch have been made and adopted, we will
+no longer need to handle them in this specification.
 
 ## Local Network Request ## {#local-network-request-section}
 
@@ -477,7 +476,7 @@ The capability to make local network requests is a [=powerful feature=]
 and must only be allowed from [=secure contexts=].
 
 ISSUE: To be able to apply LNA checks to all cross-origin [=IP address
-space/local=] requests (see Issue above), Chromium plans to exempt local
+space/local=] requests in the future (see Issue above), Chromium plans to exempt local
 servers that likely cannot currently get publicly trusted HTTPS certificates
 from this requirement (e.g., servers on `.local` and private IP literals). See
 [[#rollout-difficulties]] for more discussion, and also see
@@ -525,7 +524,7 @@ TODO: Decide if we want to keep the CSP directive `treat-as-public-address`
 around, see
 [https://wicg.github.io/private-network-access/#csp](https://wicg.github.io/private-network-access/#csp).
 This directive would be obviated if we implemented
-[https://github.com/wicg/private-network-access/issues/39](https://github.com/wicg/private-network-access/issues/39).\]
+[https://github.com/wicg/private-network-access/issues/39](https://github.com/wicg/private-network-access/issues/39).
 
 # Integrations # {#integrations}
 
@@ -544,12 +543,12 @@ feature/name=] <dfn export permission>`"local-network-access"`</dfn>.
 ## Integration with Permissions Policy ## {#integration-with-permissions-policy}
 
 Local Network Access defines a [=policy-controlled feature=] identified by the
-string [=local-network-access=]. Its [=policy-controlled feature/default allowlist=]
-is 'self'.
+string <dfn export permission-policy>`"local-network-access"`</dfn>. Its
+[=policy-controlled feature/default allowlist=] is 'self'.
 
 ## Integration with Fetch ## {#integration-with-fetch}
 
-This document proposes a few changes to Fetch, with the following implication:
+This document proposes a few changes to [[FETCH]], with the following implication:
 [=local network requests=] are only allowed if their
 [=request/client=] is a [=secure context=]
 **and** permission is granted by the user. If the request would have been
@@ -863,7 +862,7 @@ service worker-initiated fetches based on the worker’s script origin (since
 there may not be an active document around when the service worker is
 executing). It may be better for this to be based on the partitioned storage
 key of the worker, and it would also be good if permissions policy supported
-service workers
+service workers.
 
 ISSUE: The [Service
 Worker](https://w3c.github.io/ServiceWorker/#dfn-service-worker) [soft
