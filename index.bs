@@ -208,16 +208,19 @@ using her device unlock.
 Define {{IPAddressSpace}} as follows:
 
 <pre class=idl>
-enum IPAddressSpace { "public", "local" };
+enum IPAddressSpace { "public", "local", "loopback" };
 </pre>
 
 Every IP address belongs to an <dfn export local-lt="address space">IP address
-space</dfn>, which can be one of two different values:
+space</dfn>, which can be one of three different values:
+
+  1. <dfn for="IP address space" export>loopback</dfn>: Includes loopback addresses,
+    which are only accessible on the local host (and thus differ for every device).
+    In other words, addresses whose target differs for every device.
 
   1. <dfn for="IP address space" export>local</dfn>: contains addresses that have
     meaning only within the current network. In other words, addresses whose target
-    differs based on network position. This includes loopback addresses, which are
-    only accessible on the local host (and thus differ for every device).
+    differs based on network position.
 
   1. <dfn for="IP address space" export>public</dfn>: contains all other
     addresses. In other words, addresses whose target is the same for all devices
@@ -225,6 +228,8 @@ space</dfn>, which can be one of two different values:
 
 For convenience, we additionally define the following terms:
 
+  1. A <dfn>loopback address</dfn> is an IP address whose [=/IP address space=]
+    is [=IP address space/loopback=].
   1. A <dfn>local address</dfn> is an IP address whose [=/IP address space=] is
     [=IP address space/local=].
   1. A <dfn>public address</dfn> is an IP address whose [=/IP address space=]
@@ -234,6 +239,8 @@ An [=/IP address space=] |lhs| is
 <dfn for="IP address space" export>less public</dfn> than an
 [=/IP address space=] |rhs| if any of the following conditions holds true:
 
+  1. |lhs| is [=IP address space/loopback=] and |rhs| is either
+    [=IP address space/local=] or [=IP address space/public=].
   1. |lhs| is [=IP address space/local=] and |rhs| is
     [=IP address space/public=].
 
@@ -264,7 +271,7 @@ To <dfn export>determine the IP address space</dfn> of an IP address
         <td>`127.0.0.0/8`</td>
         <td>IPv4 Loopback</td>
         <td>[[RFC1122]]</td>
-        <td>[=IP address space/local=]</td>
+        <td>[=IP address space/loopback=]</td>
       </tr>
       <tr>
         <td>`10.0.0.0/8`</td>
@@ -294,19 +301,19 @@ To <dfn export>determine the IP address space</dfn> of an IP address
         <td>`198.18.0.0/15`</td>
         <td>Benchmarking</td>
         <td>[[RFC2544]]</td>
-        <td>[=IP address space/local=]</td>
+        <td>[=IP address space/loopback=]</td>
       </tr>
       <tr>
         <td>`169.254.0.0/16`</td>
         <td>Link Local</td>
         <td>[[RFC3927]]</td>
-        <td>[=IP address space/private=]</td>
+        <td>[=IP address space/local=]</td>
       </tr>
       <tr>
         <td>`::1/128`</td>
         <td>IPv6 Loopback</td>
         <td>[[RFC4291]]</td>
-        <td>[=IP address space/local=]</td>
+        <td>[=IP address space/loopback=]</td>
       </tr>
       <tr>
         <td>`fc00::/7`</td>
@@ -319,6 +326,42 @@ To <dfn export>determine the IP address space</dfn> of an IP address
         <td>Link-Local Unicast</td>
         <td>[[RFC4291]]</td>
         <td>[=IP address space/local=]</td>
+      </tr>
+      <tr>
+        <td>`fec0::/10`</td>
+        <td>Site-Local Unicast</td>
+        <td>[[RFC3513]]</td>
+        <td>[=IP address space/local=]</td>
+      </tr>
+      <tr>
+        <td>`0.0.0.0/32`</td>
+        <td>IPv4 null IP address</td>
+        <td>[[RFC1884]]</td>
+        <td>[=IP address space/loopback=]</td>
+      </tr>
+      <tr>
+        <td>`0.0.0.0/8`</td>
+        <td>IPv4 null IP addresses</td>
+        <td>[[RFC1884]]</td>
+        <td>[=IP address space/local=]</td>
+      </tr>
+      <tr>
+        <td>`::/128`</td>
+        <td>IPv6 unspecified address</td>
+        <td>[[RFC1884]]</td>
+        <td>[=IP address space/loopback=]</td>
+      </tr>
+      <tr>
+        <td>`2001:db8::/32`</td>
+        <td>IPv6 documentation address prefix</td>
+        <td>[[RFC3849]]</td>
+        <td>[=IP addres space/local=]</td>
+      </tr>
+      <tr>
+        <td>`3fff::/20`</td>
+        <td>IPv6 documentation address prefix</td>
+        <td>[[RFC9637]]</td>
+        <td>[=IP addres space/local=]</td>
       </tr>
       <tr>
         <td>`::ffff:0:0/96`</td>
@@ -338,7 +381,7 @@ user agents to treat the intranet as [=IP address space/local=].
 Note: Link-local IP addresses such as `169.254.0.0/16` are considered
 [=IP address space/local=], since such addresses can identify the same
 target for all devices on a network link. A previous version of this
-specification considered them to be [=IP address space/local=] instead.
+specification considered them to be [=IP address space/loopback=] instead.
 
 Note: The contents of each [=/IP address space=] were at one point determined
 in accordance with the IANA Special-Purpose Address Registries
@@ -348,9 +391,16 @@ described in
 PNA's spec issue #50](https://github.com/WICG/private-network-access/issues/50).
 
 Note: [[PRIVATE-NETWORK-ACCESS]] used the address spaces public, private, and
-local. This specification simplifies the address spaces by combining
-[[PRIVATE-NETWORK-ACCESS]]'s private and local together into [=IP address
-space/local=].
+local. This specification renames the address spaces to public, local, and
+loopback, respectively.
+
+Note: [[FETCH]] plans to specify that requests to the null IP address should be
+blocked. We map both the IPv4 null IP address space and the IPv6 unspecified
+address to [=IP address space/loopback=] as some systems may still route them
+back to the local host machine (and `0.0.0.0/8` may refer to "specified hosts
+on this network", so is mapped to [=IP address space/local=]) per [[RFC5735]].
+Once the changes to Fetch have been made and adopted, we will no longer need
+to handle them in this specification.
 
 
 ## Local Network Request ## {#local-network-request-section}
@@ -488,25 +538,14 @@ normative references.
 
 ## Integration with Permissions ## {#integration-with-permissions}
 
-This document defines a [=powerful feature=] identified by the [=powerful
-feature/name=] <dfn export permission>`"local-network-access"`</dfn>.  It
-overrides the following type:
+This document defines a [=default powerful feature=] identified by the [=powerful
+feature/name=] <dfn export permission>`"local-network-access"`</dfn>.
 
-<dl>
-  <dt>[=powerful feature/permission descriptor type=]</dt>
-  <dd>
-    The [=powerful feature/permission descriptor type=] of the
-    <a permission>`"local-network-access"`</a> feature is defined by the
-    following WebIDL interface that [=dictionary/inherits=] from the
-    default [=powerful feature/permission descriptor type=]:
-    <pre class="idl">
-      dictionary LocalNetworkAccessPermissionDescriptor
-          : PermissionDescriptor {
-        DOMString id;
-      };
-    </pre>
-  </dd>
-</dl>
+## Integration with Permissions Policy ## {#integration-with-permissions-policy}
+
+Local Network Access defines a [=policy-controlled feature=] identified by the
+string [=local-network-access=]. Its [=policy-controlled feature/default allowlist=]
+is 'self'.
 
 ## Integration with Fetch ## {#integration-with-fetch}
 
