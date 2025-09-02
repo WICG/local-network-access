@@ -187,7 +187,7 @@ accepts.
 
 ### App-based sign in ### {#example-app-based-sign-in}
 
-<div class="example">
+<div class="example" id="example-local-login">
 Alice uses their personal device for a limited set of tasks at work.
 Their employer doesn't require device management for these basic tasks,
 but they do require an authentication app to be installed, which provides
