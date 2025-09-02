@@ -520,11 +520,9 @@ specified as the targetAddressSpace option value, then the request will fail.
 If it does belong, then the permission can be checked to allow or fail the
 request.
 
-<p class="todo">TODO: Decide if we want to keep the CSP directive `treat-as-public-address`
-around, see
-[https://wicg.github.io/private-network-access/#csp](https://wicg.github.io/private-network-access/#csp).
-This directive would be obviated if we implemented
-[https://github.com/wicg/private-network-access/issues/39](https://github.com/wicg/private-network-access/issues/39).</p>
+TODO: Decide if we want to keep the CSP directive `treat-as-public-address`
+around (see https://wicg.github.io/private-network-access/#csp). This
+directive would be obviated if we implemented <wicg/private-network-access#39>.
 
 # Integrations # {#integrations}
 
@@ -777,11 +775,10 @@ upgrading in step 1:
 WebSockets connections should be subject to the same local network access
 permission requirements.
 
-<p class="todo">TODO: WebSockets “Obtain a WebSocket connection” is distinct, and a
+TODO: WebSockets “Obtain a WebSocket connection” is distinct, and a
 “WebSocket connection” is also distinct. So strictly by spec we need to
 duplicate some of our Fetch details but for WebSockets. See
-[https://websockets.spec.whatwg.org/\#concept-websocket-connection-obtain](https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain)\]
-</p>
+[https://websockets.spec.whatwg.org/\#concept-websocket-connection-obtain](https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain).
 
 ## Integration with WebTransport ## {#integration-with-webtransport}
 
@@ -832,8 +829,8 @@ If, on the other hand, `example.com` resolved to a [=local address=]
 property set to [=IP address space/local=].
 </div>
 
-<p class="todo">TODO: Also update the reference to Private Network Access in
-https://html.spec.whatwg.org/multipage/browsers.html#coep</p>
+TODO: Also update the reference to Private Network Access in
+https://html.spec.whatwg.org/multipage/browsers.html#coep.
 
 ## Integration with Workers ## {#integration-with-workers}
 
@@ -959,10 +956,9 @@ Subresources loaded from the HTTP cache are subject to the Local Network Access
 check. This is not yet reflected in the algorithms above, since that check is
 only applied in [$HTTP-network fetch$].
 
-<p class="todo">TODO: Specify and explain Chromium’s behavior here, or add an
-[$HTTP-network-or-cache fetch$] integration above. [\[Issue
-\#75\]](https://github.com/wicg/private-network-access/issues/75) We include a
-sketch below.</p>
+TODO: Specify and explain Chromium’s behavior here, or add an
+[$HTTP-network-or-cache fetch$] integration above. See <wicg/private-network-access#75>.
+We include a sketch below.
 
 As with main resources, a subresource constructed from a cached response
 remembers the IP address from which the response was initially loaded. The IP
@@ -1016,8 +1012,7 @@ http://bar.local/image.jpeg. This resource is not in the user agent’s cache, s
 goes through HTTP network fetch and triggers the permission prompt.
 </div>
 
-See [[#security-http-cache]] for a discussion of
-security implications.
+See [[#security-http-cache]] for a discussion of security implications.
 
 ## Rollout Difficulties ## {#rollout-difficulties}
 
@@ -1038,8 +1033,6 @@ of security implications.
 
 # Security and Privacy Considerations # {#security-and-privacy}
 
-<p class="todo">TODO: add a reference to https://localmess.github.io/</p>
-
 ## User Mediation ## {#user-mediation}
 
 The proposal in this document only ensures that the user consents to access
@@ -1048,9 +1041,12 @@ explicitly approve for connections from the public internet.
 
 An alternative model where devices had to explicitly approve for connections
 from the public internet was attempted in [[PRIVATE-NETWORK-ACCESS obsolete]], but ran into
-rollout difficulties.
+[rollout difficulties](https://developer.chrome.com/blog/pna-on-hold).
 
-<p class="todo">TODO: link to some rollout difficulties of PNA</p>
+Requiring user mediation, regardless of whether the target endpoint opts in to
+the connection, also helps mitigate privacy issues such as the
+["Local Mess"](https://localmess.github.io) tracking method where the local
+endpoint and the remote website are colluding to link user identities.
 
 ## DNS rebinding ## {#dns-rebinding}
 
