@@ -543,8 +543,8 @@ feature/name=] <dfn export permission>`"local-network-access"`</dfn>.
 ## Integration with Permissions Policy ## {#integration-with-permissions-policy}
 
 Local Network Access defines a [=policy-controlled feature=] identified by the
-string <dfn export permission-policy>`"local-network-access"`</dfn>. Its
-[=policy-controlled feature/default allowlist=] is 'self'.
+string "local-network-access". Its [=policy-controlled feature/default allowlist=]
+is `'self'`.
 
 ## Integration with Fetch ## {#integration-with-fetch}
 
