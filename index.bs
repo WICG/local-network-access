@@ -145,7 +145,7 @@ of scope for this specification
 
 ### User granting permission ### {#example-user-granting-permission}
 
-<div class="example">
+<div class="example" id="example-printer-support">
 Alice is at home on her laptop browsing the internet. She has a printer on her
 local network built by Acme Printing Company that is running a simple HTTP
 server. Alice is having a problem with the printer not properly functioning.
@@ -163,7 +163,7 @@ the printer and needs to be replaced.
 
 ### User denying permission ### {#example-user-denying-permission}
 
-<div class="example">
+<div class="example" id="example-printer-evil">
 Alice continues browsing online to find the best price for the replacement part
 on her printer. While looking at a general tech support forum, she suddenly
 gets a permission request in her browser for https://printersupport.evil.com to
@@ -174,7 +174,7 @@ denies the permission request.
 
 ### New device configuration ### {#example-new-device-configuration}
 
-<div class="example">
+<div class="example" id="example-printer-setup">
 Instead of replacing the part on the printer, Alice decides instead to buy a
 new printer from Beta Manufacturing. Upon plugging in the printer and
 connecting it to her local network, Alice follows the instructions and goes to
@@ -812,7 +812,7 @@ follows:
         to <var ignore>response</var>'s [=response/IP address space=].
 
 
-<div class="example">
+<div class="example" id="example-policy-container">
 Assuming that `example.com` resolves to a [=public address=] (say,
 `123.123.123.123`), then the {{Document}} created when navigating to
 `https://example.com/document.html` will have its
@@ -843,7 +843,7 @@ Given that {{WorkerGlobalScope}} already has a
 policy container from a fetch response=] algorithm, the avove integrations
 with Fetch and HTML apply just as well to worker contexts as to documents.
 
-  <div class="example">
+  <div class="example" id="example-worker-policy">
     Assuming that `example.com` resolves to a [=public address=] (say,
     `123.123.123.123`), then a {{WorkerGlobalScope}} created by fetching a
     script from `https://example.com/worker.js` will have its
@@ -939,7 +939,7 @@ IP address space is restored unmodified. However in the event that the user
 agent’s configuration has changed, the derived IP address space might be
 different.
 
-<div class="example">
+<div class="example" id="example-resource-cache-policy">
 The user agent navigates to http://foo.example/, loads the main resource from
 1.2.3.4, caches it, then sets the resulting [document]'s [policy container]'s
 IP address space to public.
@@ -975,7 +975,7 @@ When a subresource request is blocked by LNA checks (i.e., the permission was
 denied), there is no resource response cached. If the permission is later reset
 or granted, the subresource request will go to the network.
 
-<div class="example">
+<div class="example" id="example-subresource-previously-allowed">
 Previously allowed subresource load
 
 The user agent navigates to https://foo.example, which is loaded from 1.2.3.4
@@ -996,7 +996,7 @@ again triggers a permission prompt, which if granted will finish loading the
 resource from the user agent’s cache.
 </div>
 
-<div class="example">
+<div class="example" id="example-subresource-previously-blocked">
 Previously blocked subresource load
 
 The user agent navigates to https://foo.example, which is loaded from 1.2.3.4
