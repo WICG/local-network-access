@@ -355,13 +355,13 @@ To <dfn export>determine the IP address space</dfn> of an IP address
         <td>`2001:db8::/32`</td>
         <td>IPv6 documentation addresses</td>
         <td>[[RFC3849]]</td>
-        <td>[=IP addres space/local=]</td>
+        <td>[=IP address space/local=]</td>
       </tr>
       <tr>
         <td>`3fff::/20`</td>
         <td>IPv6 documentation addresses</td>
         <td>[[RFC9637]]</td>
-        <td>[=IP addres space/local=]</td>
+        <td>[=IP address space/local=]</td>
       </tr>
       <tr>
         <td>`::ffff:0:0/96`</td>
@@ -396,8 +396,8 @@ loopback, respectively.
 
 Note: [[FETCH]] plans to specify that requests to the null IP address will be
 treated as a network error. We map both the IPv4 null IP address space and the
-IPv6 unspecified address to [=IP address space/loopback=] as some systems may
-still route them back to the local host machine (and `0.0.0.0/8` may refer to
+IPv6 unspecified address to [=IP address space/loopback=] as some systems can
+still route them back to the local host machine (and `0.0.0.0/8` can refer to
 "specified hosts on this network", so is mapped to [=IP address space/local=])
 per [[RFC5735 obsolete]]. Once the changes to Fetch have been made and adopted, we will
 no longer need to handle them in this specification.
@@ -430,6 +430,11 @@ Even so, this specification aims to offer a pragmatic solution to a security
 issue that broadly affects most users of the Web whose network configurations
 are not so complex.
 
+Requests originating from the [=loopback address=] should not be considered
+[=local network requests=], and should not be subject to local network access
+checks, since any software running on the user’s device is already in the most
+privileged vantage point on the user’s network.
+
 ISSUE: The definition of [=local network requests=] could be expanded to
 cover all cross-origin requests for which the [=request/current url=]'s
 {{URL/host}} maps to an IP address whose [=/IP address space=] is not
@@ -446,11 +451,6 @@ the cross-origin [=IP address space/local=] case than for the [=IP address
 space/public=] to [=IP address space/local=] case, and may want to scope these
 permission grants to the specific network or to the current browsing session
 only.
-
-NOTE: Requests originating from the loopback address should not be considered
-[=local network requests=], and should not be subject to local network access
-checks, since any software running on the user’s device is already in the most
-privileged vantage point on the user’s network.
 
 NOTE: Some [=local network requests=] are more challenging to secure than others.
 See [[#rollout-difficulties]] for more details.
@@ -609,7 +609,7 @@ What follows is a sketch of a potential solution:
 
           NOTE: If |request|'s [=request/policy container=] is null, then LNA
           checks do not apply to |request|. Users of the [=fetch=] algorithm
-          should take care to either set |request|'s [=request/client=] to an
+          have to take care to either set |request|'s [=request/client=] to an
           [=environment settings object=] with a non-null [=environment settings
           object/policy container=] and let [=fetch=] initialize |request|'s
           [=request/policy container=] accordingly, or to directly set
@@ -715,7 +715,7 @@ behavior is included below in [[#http-cache]].
 
 NOTE: The requirement that local network requests be made from secure contexts
 means that any insecure request will be blocked as mixed content unless we can
-know ahead of time that the request should be considered a local network
+know ahead of time that the request can be considered a local network
 request. By setting the target IP address space property (see Step 6i and 6ii
 above), we only need to make a small change to Mixed Content -- see
 [[#integration-with-mixed-content]].
@@ -852,9 +852,9 @@ with Fetch and HTML apply just as well to worker contexts as to documents.
     [=IP address space/public=].
 
     Any fetch [=request=] initiated by this worker that [=obtains a connection=]
-    to an IP address in the [=IP address space/private=] or
-    [=IP address space/local=] [=address spaces=] would then be a
-    [=private network request=].
+    to an IP address in the [=IP address space/local=] or
+    [=IP address space/loopback=] [=address spaces=] would then be a
+    [=local network request=].
   </div>
 
 ISSUE: Chromium’s implementation currently applies the LNA permission for
@@ -945,7 +945,7 @@ The user agent navigates to http://foo.example/, loads the main resource from
 IP address space to public.
 
 The user agent then restarts, and a new configuration is applied specifying
-that 1.2.3.4 should be classified as a local address instead.
+that 1.2.3.4 <span class="allow-2119">should</span> be classified as a local address instead.
 
 The user agent navigates to http://foo.example/ once more and loads the main
 resource from the HTTP cache. The resulting [document]'s [policy container]'s
