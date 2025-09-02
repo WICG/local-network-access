@@ -520,11 +520,11 @@ specified as the targetAddressSpace option value, then the request will fail.
 If it does belong, then the permission can be checked to allow or fail the
 request.
 
-TODO: Decide if we want to keep the CSP directive `treat-as-public-address`
+<p class="todo">TODO: Decide if we want to keep the CSP directive `treat-as-public-address`
 around, see
 [https://wicg.github.io/private-network-access/#csp](https://wicg.github.io/private-network-access/#csp).
 This directive would be obviated if we implemented
-[https://github.com/wicg/private-network-access/issues/39](https://github.com/wicg/private-network-access/issues/39).
+[https://github.com/wicg/private-network-access/issues/39](https://github.com/wicg/private-network-access/issues/39).</p>
 
 # Integrations # {#integrations}
 
@@ -710,8 +710,8 @@ What follows is a sketch of a potential solution:
           NOTE: Because request’s target IP address space is set to a non-null
           value when recursing, this recursion can go at most 1 level deep.
 
-TODO: Figure out what we need to add for cache fetch. A sketch of Chromium’s
-behavior is included below in [[#http-cache]].
+<p class="todo">TODO: Figure out what we need to add for cache fetch. A sketch of Chromium’s
+behavior is included below in [[#http-cache]].</p>
 
 NOTE: The requirement that local network requests be made from secure contexts
 means that any insecure request will be blocked as mixed content unless we can
@@ -777,10 +777,11 @@ upgrading in step 1:
 WebSockets connections should be subject to the same local network access
 permission requirements.
 
-[TODO: WebSockets “Obtain a WebSocket connection” is distinct, and a
+<p class="todo">TODO: WebSockets “Obtain a WebSocket connection” is distinct, and a
 “WebSocket connection” is also distinct. So strictly by spec we need to
 duplicate some of our Fetch details but for WebSockets. See
 [https://websockets.spec.whatwg.org/\#concept-websocket-connection-obtain](https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain)\]
+</p>
 
 ## Integration with WebTransport ## {#integration-with-webtransport}
 
@@ -831,8 +832,8 @@ If, on the other hand, `example.com` resolved to a [=local address=]
 property set to [=IP address space/local=].
 </div>
 
-TODO: Also update the reference to Private Network Access in
-https://html.spec.whatwg.org/multipage/browsers.html#coep
+<p class="todo">TODO: Also update the reference to Private Network Access in
+https://html.spec.whatwg.org/multipage/browsers.html#coep</p>
 
 ## Integration with Workers ## {#integration-with-workers}
 
@@ -958,10 +959,10 @@ Subresources loaded from the HTTP cache are subject to the Local Network Access
 check. This is not yet reflected in the algorithms above, since that check is
 only applied in [$HTTP-network fetch$].
 
-TODO: Specify and explain Chromium’s behavior here, or add an
+<p class="todo">TODO: Specify and explain Chromium’s behavior here, or add an
 [$HTTP-network-or-cache fetch$] integration above. [\[Issue
 \#75\]](https://github.com/wicg/private-network-access/issues/75) We include a
-sketch below.
+sketch below.</p>
 
 As with main resources, a subresource constructed from a cached response
 remembers the IP address from which the response was initially loaded. The IP
@@ -1037,7 +1038,7 @@ of security implications.
 
 # Security and Privacy Considerations # {#security-and-privacy}
 
-TODO: add a reference to https://localmess.github.io/
+<p class="todo">TODO: add a reference to https://localmess.github.io/</p>
 
 ## User Mediation ## {#user-mediation}
 
@@ -1049,7 +1050,7 @@ An alternative model where devices had to explicitly approve for connections
 from the public internet was attempted in [[PRIVATE-NETWORK-ACCESS obsolete]], but ran into
 rollout difficulties.
 
-TODO: link to some rollout difficulties of PNA
+<p class="todo">TODO: link to some rollout difficulties of PNA</p>
 
 ## DNS rebinding ## {#dns-rebinding}
 
