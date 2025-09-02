@@ -108,7 +108,7 @@ grants permission to the initiating website to make connections to their local
 network.
 
 Note: This proposal builds on top of Chrome's previously paused
-[[PRIVATE-NETWORK-ACCESS]] work but differs by gating access on a permission
+[[PRIVATE-NETWORK-ACCESS obsolete]] work but differs by gating access on a permission
 rather than via preflight requests.
 
 ## Goals ## {#goals}
@@ -390,7 +390,7 @@ defined therein. This turned out to be an inaccurate signal for our uses, as
 described in
 PNA's spec issue #50](https://github.com/WICG/private-network-access/issues/50).
 
-Note: [[PRIVATE-NETWORK-ACCESS]] used the address spaces public, private, and
+Note: [[PRIVATE-NETWORK-ACCESS obsolete]] used the address spaces public, private, and
 local. This specification renames the address spaces to public, local, and
 loopback, respectively.
 
@@ -399,7 +399,7 @@ treated as a network error. We map both the IPv4 null IP address space and the
 IPv6 unspecified address to [=IP address space/loopback=] as some systems may
 still route them back to the local host machine (and `0.0.0.0/8` may refer to
 "specified hosts on this network", so is mapped to [=IP address space/local=])
-per [[RFC5735]]. Once the changes to Fetch have been made and adopted, we will
+per [[RFC5735 obsolete]]. Once the changes to Fetch have been made and adopted, we will
 no longer need to handle them in this specification.
 
 ## Local Network Request ## {#local-network-request-section}
@@ -1023,7 +1023,7 @@ security implications.
 Local Network Access essentially deprecates direct access to the local network
 in favor of more secure user-agent-mediated alternatives. Web deprecations are
 hard. Chromium previously encountered many stumbling blocks on the way to
-shipping parts of [[PRIVATE-NETWORK-ACCESS]] (the predecessor to this
+shipping parts of [[PRIVATE-NETWORK-ACCESS obsolete]] (the predecessor to this
 specification).
 
 In particular, shipping restrictions on fetches from [=non-secure contexts=] in
@@ -1046,7 +1046,7 @@ from the public internet. This proposal does not allow for devices to
 explicitly approve for connections from the public internet.
 
 An alternative model where devices had to explicitly approve for connections
-from the public internet was attempted in [[PRIVATE-NETWORK-ACCESS]], but ran into
+from the public internet was attempted in [[PRIVATE-NETWORK-ACCESS obsolete]], but ran into
 rollout difficulties.
 
 TODO: link to some rollout difficulties of PNA
