@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 3f621ba99, updated Mon Jul 28 15:38:36 2025 -0700" name="generator">
   <link href="https://wicg.github.io/local-network-access/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="3af2dfdc62409a4b6ffdffc3bbee5c060abbc086" name="revision">
+  <meta content="b9b30ab6d17b2b20ffcbdb8186c30dca74c7bccc" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -1248,8 +1248,7 @@ specification considered them to be <a data-link-type="dfn" href="#ip-address-sp
 in accordance with the IANA Special-Purpose Address Registries
 (<a data-link-type="biblio" href="#biblio-ipv4-registry" title="IANA IPv4 Special-Purpose Address Registry">[IPV4-REGISTRY]</a> and <a data-link-type="biblio" href="#biblio-ipv6-registry" title="IANA IPv6 Special-Purpose Address Registry">[IPV6-REGISTRY]</a>) and the <code>Globally Reachable</code> bit
 defined therein. This turned out to be an inaccurate signal for our uses, as
-described in
-PNA’s spec issue #50](https://github.com/WICG/private-network-access/issues/50).</p>
+described in <a href="https://github.com/WICG/private-network-access/issues/50">WICG/private-network-access issue #50</a>.</p>
    <p class="note" role="note"><span class="marker">Note:</span> <a data-biblio-obsolete data-link-type="biblio" href="#biblio-private-network-access" title="Private Network Access">[PRIVATE-NETWORK-ACCESS]</a> used the address spaces public, private, and
 local. This specification renames the address spaces to public, local, and
 loopback, respectively.</p>
@@ -1290,21 +1289,16 @@ are not so complex.</p>
 <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request">local network requests</a>, and should not be subject to local network access
 checks, since any software running on the user’s device is already in the most
 privileged vantage point on the user’s network.</p>
-   <p class="issue" id="issue-cd6e97c8"><a class="self-link" href="#issue-cd6e97c8"></a> The definition of <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request①">local network requests</a> could be expanded to
-cover all cross-origin requests for which the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url" id="ref-for-concept-request-current-url①">current url</a>’s
-<code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host" id="ref-for-dom-url-host①">host</a></code> maps to an IP address whose <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space⑨">IP address space</a> is not
-<a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑤">public</a>. This would prevent a malicious server on the
-local network from attacking other servers, including servers on <code>localhost</code>.
-Currently, Chromium only implements Local Network Access restrictions for
-<a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑥">public</a> to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑧">local</a> requests, and does
-not enforce the permission for cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑨">local</a>
-requests. This can be shipped as an incremental improvement later on. <a href="https://github.com/wicg/private-network-access/issues/39">PNA
-Issue #39</a> We note
-that, because local names and addresses are not meaningful outside the bounds
-of the network, implementers may want to use a different permission prompt for
-the cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②⓪">local</a> case than for the <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑦">public</a> to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②①">local</a> case, and may want to scope these
-permission grants to the specific network or to the current browsing session
-only.</p>
+   <p class="issue" id="issue-d9cfbbe3"><a class="self-link" href="#issue-d9cfbbe3"></a> The definition of <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request①">local network requests</a> could be expanded to cover
+all cross-origin requests for which the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url" id="ref-for-concept-request-current-url①">current url</a>’s <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host" id="ref-for-dom-url-host①">host</a></code>
+maps to an IP address whose <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space⑨">IP address space</a> is not <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑤">public</a>. This would prevent a malicious server on the local network from
+attacking other servers, including servers on <code>localhost</code>. Currently, Chromium
+only implements Local Network Access restrictions for <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑥">public</a> to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑧">local</a> or <a data-link-type="dfn" href="#ip-address-space-loopback" id="ref-for-ip-address-space-loopback⑨">loopback</a>
+requests, and does not enforce the permission for cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑨">local</a> requests. This can be shipped as an incremental improvement later
+on. See <a href="https://github.com/WICG/private-network-access/issues/39">WICG/private-network-access issue #39</a>. We note that, because local names and
+addresses are not meaningful outside the bounds of the network, implementers
+may want to use a different permission prompt for the cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②⓪">local</a> case than for the <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑦">public</a> to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②①">local</a> case, and may want to scope these permission grants to the
+specific network or to the current browsing session only.</p>
    <p class="note" role="note"><span class="marker">NOTE:</span> Some <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request②">local network requests</a> are more challenging to secure than others.
 See <a href="#rollout-difficulties">§ 4.4 Rollout Difficulties</a> for more details.</p>
    <h3 class="heading settled" data-level="2.3" id="permission-prompt"><span class="secno">2.3. </span><span class="content">Local Network Request Permission Prompt</span><a class="self-link" href="#permission-prompt"></a></h3>
@@ -1320,11 +1314,11 @@ network. A user agent may persist this decision to reduce permission fatigue.</p
    <h3 class="heading settled" data-level="2.4" id="secure-context-restriction"><span class="secno">2.4. </span><span class="content">Secure Context Restriction</span><a class="self-link" href="#secure-context-restriction"></a></h3>
    <p>The capability to make local network requests is a <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-powerful-feature" id="ref-for-dfn-powerful-feature">powerful feature</a>
 and must only be allowed from <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#secure-context" id="ref-for-secure-context">secure contexts</a>.</p>
-   <p class="issue" id="issue-ac53557b"><a class="self-link" href="#issue-ac53557b"></a> To be able to apply LNA checks to all cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②②">local</a> requests in the future (see Issue above), Chromium plans to exempt local
-servers that likely cannot currently get publicly trusted HTTPS certificates
-from this requirement (e.g., servers on <code>.local</code> and private IP literals). See
-<a href="#rollout-difficulties">§ 4.4 Rollout Difficulties</a> for more discussion, and also see
-<a href="https://github.com/WICG/private-network-access/issues/96">https://github.com/WICG/private-network-access/issues/96</a>.</p>
+   <p class="issue" id="issue-cc743ffe"><a class="self-link" href="#issue-cc743ffe"></a> To be able to apply LNA checks to all cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②②">local</a> requests in the future (see Issue above), Chromium plans to
+exempt local servers that likely cannot currently get publicly trusted HTTPS
+certificates from this requirement (e.g., servers on <code>.local</code> and private IP
+literals). See <a href="#rollout-difficulties">§ 4.4 Rollout Difficulties</a> for more discussion, and also see
+<a href="https://github.com/WICG/private-network-access/issues/96">WICG/private-network-access issue #96</a>.</p>
    <h3 class="heading settled" data-level="2.5" id="mixed-content-lna"><span class="secno">2.5. </span><span class="content">Mixed Content</span><a class="self-link" href="#mixed-content-lna"></a></h3>
    <p>Many local network servers do not run HTTPS, as it has proven difficult (and
 sometimes even impossible) to migrate local network servers away from HTTP.
@@ -1357,8 +1351,10 @@ specified as the targetAddressSpace option value, then the request will fail.
 If it does belong, then the permission can be checked to allow or fail the
 request.</p>
    <p>TODO: Decide if we want to keep the CSP directive <code>treat-as-public-address</code>
-around (see <a href="https://wicg.github.io/private-network-access/#csp">private-network-access#csp</a>). This
-directive would be obviated if we implemented <a href="https://github.com/wicg/private-network-access/issues/39">wicg/private-network-access issue #39</a>.</p>
+around (see
+<a href="https://wicg.github.io/private-network-access/#csp">private-network-access#csp</a>).
+This directive would be obviated if we implemented
+<a href="https://github.com/WICG/private-network-access/issues/39">WICG/private-network-access issue #39</a>.ß</p>
    <h2 class="heading settled" data-level="3" id="integrations"><span class="secno">3. </span><span class="content">Integrations</span><a class="self-link" href="#integrations"></a></h2>
    <p><em>This section is non-normative.</em></p>
    <p>This document proposes a number of modifications to other specifications in
@@ -1377,7 +1373,7 @@ is <code>'self'</code>.</p>
 <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-client" id="ref-for-concept-request-client">client</a> is a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#secure-context" id="ref-for-secure-context②">secure context</a>
 <strong>and</strong> permission is granted by the user. If the request would have been
 blocked as mixed content, it can be allowed as long as the website states its
-intention to access the private network, and users give permission.</p>
+intention to access the local network, and users give permission.</p>
    <p class="note" role="note"><span class="marker">Note:</span> This includes navigations. These can indeed be used to trigger CSRF
 attacks, albeit with less subtlety than with subresource requests.</p>
    <p class="issue" id="issue-0daaba5a"><a class="self-link" href="#issue-0daaba5a"></a> Chromium only applies LNA restrictions to iframe navigations currently.
@@ -1497,12 +1493,12 @@ address space boundaries.</p>
  <var>request</var>’s target IP address space property to <code>"local"</code>.</p>
          <p class="note" role="note"><span class="marker">NOTE:</span> We could also set the target IP address space to <code>local</code> if
  the request’s URL’s host is “localhost” or “127.0.0.1” (because of
- [let-localhost-be-localhost\]), but we do not need special
+ <a data-link-type="biblio" href="#biblio-let-localhost-be-localhost" title="Let &apos;localhost&apos; be localhost.">[LET-LOCALHOST-BE-LOCALHOST]</a>), but we do not need special
  handling for the loopback case as it is already considered to be
  potentially trustworthy and won’t trigger mixed content checks.</p>
          <p class="note" role="note"><span class="marker">NOTE:</span> We also explicitly do <em>not</em> set the target address space
  property in the public case, because that breaks the next step
- here... (but maybe we could just skip that??)</p>
+ here... (but maybe we could just skip that?)</p>
          <p class="note" role="note"><span class="marker">NOTE:</span> We don’t set the target IP address space here if it was
  already non-null in order to prefer the explicit
  targetAddressSpace if set by the fetch() API.</p>
@@ -1619,19 +1615,16 @@ upgrading in step 1:</p>
    <h3 class="heading settled" data-level="3.5" id="integration-with-websockets"><span class="secno">3.5. </span><span class="content">Integration with WebSockets</span><a class="self-link" href="#integration-with-websockets"></a></h3>
    <p>WebSockets connections should be subject to the same local network access
 permission requirements.</p>
-   <p>TODO: WebSockets “Obtain a WebSocket connection” is distinct, and a
-“WebSocket connection” is also distinct. So strictly by spec we need to
-duplicate some of our Fetch details but for WebSockets. See
-<a href="https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain">https://websockets.spec.whatwg.org/\#concept-websocket-connection-obtain</a>.</p>
+   <p>TODO: WebSockets <a data-link-type="dfn" href="https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain" id="ref-for-concept-websocket-connection-obtain">obtain a WebSocket connection</a> is distinct, and a “WebSocket
+connection” is also distinct. So strictly by spec we need to duplicate some of
+our Fetch details but for WebSockets.</p>
    <h3 class="heading settled" data-level="3.6" id="integration-with-webtransport"><span class="secno">3.6. </span><span class="content">Integration with WebTransport</span><a class="self-link" href="#integration-with-webtransport"></a></h3>
    <p>WebTransport connections should be subject to the same local network access
 permission requirements.</p>
    <h3 class="heading settled" data-level="3.7" id="integration-with-html"><span class="secno">3.7. </span><span class="content">Integration with HTML</span><a class="self-link" href="#integration-with-html"></a></h3>
-   <p>To support the checks in <a data-link-type="biblio" href="#biblio-fetch" title="Fetch Standard">[FETCH]</a>, user
-agents must remember the source IP address space of contexts in which network
-requests are made. To this effect, the
-<a data-link-type="biblio" href="#biblio-html" title="HTML Standard">[HTML]</a> specification is patched as
-follows:</p>
+   <p>To support the checks in <a data-link-type="biblio" href="#biblio-fetch" title="Fetch Standard">[FETCH]</a>, user agents must remember the source IP
+address space of contexts in which network requests are made. To this effect,
+the <a data-link-type="biblio" href="#biblio-html" title="HTML Standard">[HTML]</a> specification is patched as follows:</p>
    <ol>
     <li data-md>
      <p>A new <dfn class="dfn-paneled" data-dfn-for="policy container" data-dfn-type="dfn" data-export data-lt="IP address space" id="policy-container-ip-address-space">IP address space </dfn> property
@@ -1675,8 +1668,7 @@ frame’s <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatw
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#concept-document-policy-container" id="ref-for-concept-document-policy-container②">policy container</a>’s <a data-link-type="dfn" href="#policy-container-ip-address-space" id="ref-for-policy-container-ip-address-space⑦">IP address space</a>
 property set to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②⑦">local</a>.</p>
    </div>
-   <p>TODO: Also update the reference to Private Network Access in
-https://html.spec.whatwg.org/multipage/browsers.html#coep.</p>
+   <p>TODO: Also update the reference to Private Network Access in <a href="https://html.spec.whatwg.org/multipage/browsers.html#coep"><cite>HTML</cite> § 7.1.4 Cross-origin embedder policies</a>.</p>
    <h3 class="heading settled" data-level="3.8" id="integration-with-workers"><span class="secno">3.8. </span><span class="content">Integration with Workers</span><a class="self-link" href="#integration-with-workers"></a></h3>
    <p><em>This section is non-normative.</em></p>
    <p>Given that <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/workers.html#workerglobalscope" id="ref-for-workerglobalscope">WorkerGlobalScope</a></code> already has a
@@ -1694,7 +1686,7 @@ with Fetch and HTML apply just as well to worker contexts as to documents.</p>
 
     <p>Any fetch <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request" id="ref-for-concept-request⑥">request</a> initiated by this worker that <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-connection-obtain" id="ref-for-concept-connection-obtain②">obtains a connection</a>
     to an IP address in the <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②⑧">local</a> or
-    <a data-link-type="dfn" href="#ip-address-space-loopback" id="ref-for-ip-address-space-loopback⑨">loopback</a> <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space①①">address spaces</a> would then be a
+    <a data-link-type="dfn" href="#ip-address-space-loopback" id="ref-for-ip-address-space-loopback①⓪">loopback</a> <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space①①">address spaces</a> would then be a
     <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request①⓪">local network request</a>.</p>
    </div>
    <p class="issue" id="issue-5e5ce7ba"><a class="self-link" href="#issue-5e5ce7ba"></a> Chromium’s implementation currently applies the LNA permission for
@@ -1703,7 +1695,7 @@ there may not be an active document around when the service worker is
 executing). It may be better for this to be based on the partitioned storage
 key of the worker, and it would also be good if permissions policy supported
 service workers.</p>
-   <p class="issue" id="issue-dfd72665"><a class="self-link" href="#issue-dfd72665"></a> The <a href="https://w3c.github.io/ServiceWorker/#dfn-service-worker">Service
+   <p class="issue" id="issue-0418a4e6"><a class="self-link" href="#issue-0418a4e6"></a> The <a href="https://w3c.github.io/ServiceWorker/#dfn-service-worker">Service
 Worker</a> <a href="https://w3c.github.io/ServiceWorker/#soft-update">soft
 update</a> algorithm
 unfortunately sets a <a href="https://fetch.spec.whatwg.org/#concept-request-client" id="902c4d570">request
@@ -1714,8 +1706,8 @@ check algorithm laid out above. Indeed, there is no <a href="https://fetch.spec.
 client</a> from which to
 copy the <a href="https://fetch.spec.whatwg.org/#concept-request-policy-container" id="d4c464d40">policy
 container</a>
-during <a href="https://fetch.spec.whatwg.org/#concept-fetch" id="cbac8ed81">fetch</a>. [[Issue
-\#83\]](https://github.com/wicg/private-network-access/issues/83)</p>
+during <a href="https://fetch.spec.whatwg.org/#concept-fetch" id="cbac8ed81">fetch</a>. See
+<a href="https://github.com/WICG/private-network-access/issues/83">WICG/private-network-access issue #83</a>.</p>
    <h2 class="heading settled" data-level="4" id="implementation-considerations"><span class="secno">4. </span><span class="content">Implementation considerations</span><a class="self-link" href="#implementation-considerations"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="file-urls"><span class="secno">4.1. </span><span class="content">File URLs</span><a class="self-link" href="#file-urls"></a></h3>
    <p>It isn’t entirely clear how file URLs fit into the public/local scheme outlined
@@ -1760,14 +1752,14 @@ different.</p>
    <div class="example" id="example-resource-cache-policy">
     <a class="self-link" href="#example-resource-cache-policy"></a>
 The user agent navigates to http://foo.example/, loads the main resource from
-1.2.3.4, caches it, then sets the resulting [document]'s [policy container]'s
+1.2.3.4, caches it, then sets the resulting <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑥">document</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#policy-container" id="ref-for-policy-container③">policy container</a>’s
 IP address space to public.
 
 
     <p>The user agent then restarts, and a new configuration is applied specifying
 that 1.2.3.4 <span class="allow-2119">should</span> be classified as a local address instead.</p>
     <p>The user agent navigates to http://foo.example/ once more and loads the main
-resource from the HTTP cache. The resulting [document]'s [policy container]'s
+resource from the HTTP cache. The resulting <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document⑦">document</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#policy-container" id="ref-for-policy-container④">policy container</a>’s
 IP address space is now set to local.</p>
    </div>
    <h4 class="heading settled" data-level="4.3.2" id="http-cache-subresources"><span class="secno">4.3.2. </span><span class="content">Subresources</span><a class="self-link" href="#http-cache-subresources"></a></h4>
@@ -1775,8 +1767,8 @@ IP address space is now set to local.</p>
 check. This is not yet reflected in the algorithms above, since that check is
 only applied in <a data-link-type="abstract-op" href="https://fetch.spec.whatwg.org/#concept-http-network-fetch" id="ref-for-concept-http-network-fetch①">HTTP-network fetch</a>.</p>
    <p>TODO: Specify and explain Chromium’s behavior here, or add an
-<a data-link-type="abstract-op" href="https://fetch.spec.whatwg.org/#concept-http-network-or-cache-fetch" id="ref-for-concept-http-network-or-cache-fetch">HTTP-network-or-cache fetch</a> integration above. See <a href="https://github.com/wicg/private-network-access/issues/75">wicg/private-network-access issue #75</a>.
-We include a sketch below.</p>
+<a data-link-type="abstract-op" href="https://fetch.spec.whatwg.org/#concept-http-network-or-cache-fetch" id="ref-for-concept-http-network-or-cache-fetch">HTTP-network-or-cache fetch</a> integration above. See
+<a href="https://github.com/WICG/private-network-access/issues/75">WICG/private-network-access issue #75</a>. We include a sketch below.</p>
    <p>As with main resources, a subresource constructed from a cached response
 remembers the IP address from which the response was initially loaded. The IP
 address space of the response is derived anew from the IP address.</p>
@@ -1799,9 +1791,9 @@ created has an IP address of 10.0.1.1 (which has an IP address space of
 permission to https://foo.example, and then the subresource is loaded and added
 to the user agent’s cache.</p>
     <p>The user agent resets the permission for https://foo.example.</p>
-    <p>The user agent navigates to <a href="https://foo.example">https://foo.example</a> once
+    <p>The user agent navigates to https://foo.example once
 more, which once again triggers a subresource request for
-<a href="http://bar.local/image.jpeg">http://bar.local/image.jpeg</a>. This resource is in
+http://bar.local/image.jpeg. This resource is in
 the user agent’s cache, with a cached response IP address of 10.0.1.1. This
 again triggers a permission prompt, which if granted will finish loading the
 resource from the user agent’s cache.</p>
@@ -1819,7 +1811,7 @@ created has an IP address of 10.0.1.1 (which has an IP address space of
 permission to https://foo.example. The subresource request is blocked and no
 resource is added to the user agent’s cache.</p>
     <p>The user agent resets the permission for https://foo.example.</p>
-    <p>The user agent navigates to <a href="https://foo.example">https://foo.example</a> once
+    <p>The user agent navigates to https://foo.example once
 more, which once again triggers a subresource request for
 http://bar.local/image.jpeg. This resource is not in the user agent’s cache, so
 goes through HTTP network fetch and triggers the permission prompt.</p>
@@ -1904,11 +1896,10 @@ interface’s first-party context.</p>
    </ul>
    <p>None of these attacks are novel - they are just examples of the limitations of
 this specification.</p>
-   <p class="issue" id="issue-e87386bd"><a class="self-link" href="#issue-e87386bd"></a> Potential mitigations would require noticing network changes and
+   <p class="issue" id="issue-ab66f12e"><a class="self-link" href="#issue-ab66f12e"></a> Potential mitigations would require noticing network changes and
 clearing state specific to the previous network. Doing so in a fully general
 manner is likely to be impossible short of clearing all state. Maybe a
-practical compromise can be reached. <a href="https://github.com/wicg/private-network-access/issues/28">PNA Issue
-#28</a></p>
+practical compromise can be reached. See <a href="https://github.com/WICG/private-network-access/issues/28">WICG/private-network-access issue #28</a>.</p>
    <p>An alternative approach might be to scope the permission grant to an identifier
 that distinguishes different networks.</p>
    <h3 class="heading settled" data-level="5.5" id="local-network-attackers"><span class="secno">5.5. </span><span class="content">Local network attackers</span><a class="self-link" href="#local-network-attackers"></a></h3>
@@ -1919,8 +1910,7 @@ services running on <code>localhost</code> on a user’s machine. (1) is already
 without needing to abuse the user’s browser, but (2) remains a concern. For
 example, a captive portal might be able to redirect the user to a malicious
 page that tries to probe and attack vulnerable <code>localhost</code> services running on
-the user’s machine. (See also <a href="https://github.com/wicg/private-network-access/issues/39">PNA Issue
-#39</a>.)</p>
+the user’s machine. (See also <a href="https://github.com/WICG/private-network-accesss/issues/39">WICG/private-network-accesss issue #39</a>.)</p>
    <p>We see public websites on the drive-by web as a more urgent security (and
 privacy) risk and see an incremental rollout of these protections as valuable
 progress, despite the lingering risk from local network attackers.</p>
@@ -2047,6 +2037,11 @@ paths forward.</p>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
+   <li>
+    <a data-link-type="biblio">[]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="eef3cd47">obtain a Websocket connection</span>
+    </ul>
    <li>
     <a data-link-type="biblio">[DOM]</a> defines the following terms:
     <ul>
@@ -2175,6 +2170,8 @@ paths forward.</p>
    <dd><a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml"><cite>IANA IPv4 Special-Purpose Address Registry</cite></a>. URL: <a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml">https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml</a>
    <dt id="biblio-ipv6-registry">[IPV6-REGISTRY]
    <dd><a href="https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml"><cite>IANA IPv6 Special-Purpose Address Registry</cite></a>. URL: <a href="https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml">https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml</a>
+   <dt id="biblio-let-localhost-be-localhost">[LET-LOCALHOST-BE-LOCALHOST]
+   <dd><a href="https://datatracker.ietf.org/doc/html/draft-ietf-dnsop-let-localhost-be-localhost"><cite>Let 'localhost' be localhost.</cite></a>. URL: <a href="https://datatracker.ietf.org/doc/html/draft-ietf-dnsop-let-localhost-be-localhost">https://datatracker.ietf.org/doc/html/draft-ietf-dnsop-let-localhost-be-localhost</a>
    <dt id="biblio-private-network-access">[PRIVATE-NETWORK-ACCESS]
    <dd><a href="https://wicg.github.io/private-network-access/"><cite>Private Network Access</cite></a>. Draft Community Group Report. URL: <a href="https://wicg.github.io/private-network-access/">https://wicg.github.io/private-network-access/</a>
    <dt id="biblio-rfc1122">[RFC1122]
@@ -2224,26 +2221,21 @@ paths forward.</p>
 </pre>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
-   <div class="issue"> The definition of <a data-link-type="dfn" href="#local-network-request">local network requests</a> could be expanded to
-cover all cross-origin requests for which the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url">current url</a>’s
-<code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host">host</a></code> maps to an IP address whose <a data-link-type="dfn" href="#ip-address-space">IP address space</a> is not
-<a data-link-type="dfn" href="#ip-address-space-public">public</a>. This would prevent a malicious server on the
-local network from attacking other servers, including servers on <code>localhost</code>.
-Currently, Chromium only implements Local Network Access restrictions for
-<a data-link-type="dfn" href="#ip-address-space-public">public</a> to <a data-link-type="dfn" href="#ip-address-space-local">local</a> requests, and does
-not enforce the permission for cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a>
-requests. This can be shipped as an incremental improvement later on. <a href="https://github.com/wicg/private-network-access/issues/39">PNA
-Issue #39</a> We note
-that, because local names and addresses are not meaningful outside the bounds
-of the network, implementers may want to use a different permission prompt for
-the cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a> case than for the <a data-link-type="dfn" href="#ip-address-space-public">public</a> to <a data-link-type="dfn" href="#ip-address-space-local">local</a> case, and may want to scope these
-permission grants to the specific network or to the current browsing session
-only. <a class="issue-return" href="#issue-cd6e97c8" title="Jump to section">↵</a></div>
-   <div class="issue"> To be able to apply LNA checks to all cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a> requests in the future (see Issue above), Chromium plans to exempt local
-servers that likely cannot currently get publicly trusted HTTPS certificates
-from this requirement (e.g., servers on <code>.local</code> and private IP literals). See
-<a href="#rollout-difficulties">§ 4.4 Rollout Difficulties</a> for more discussion, and also see
-<a href="https://github.com/WICG/private-network-access/issues/96">https://github.com/WICG/private-network-access/issues/96</a>. <a class="issue-return" href="#issue-ac53557b" title="Jump to section">↵</a></div>
+   <div class="issue"> The definition of <a data-link-type="dfn" href="#local-network-request">local network requests</a> could be expanded to cover
+all cross-origin requests for which the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url">current url</a>’s <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host">host</a></code>
+maps to an IP address whose <a data-link-type="dfn" href="#ip-address-space">IP address space</a> is not <a data-link-type="dfn" href="#ip-address-space-public">public</a>. This would prevent a malicious server on the local network from
+attacking other servers, including servers on <code>localhost</code>. Currently, Chromium
+only implements Local Network Access restrictions for <a data-link-type="dfn" href="#ip-address-space-public">public</a> to <a data-link-type="dfn" href="#ip-address-space-local">local</a> or <a data-link-type="dfn" href="#ip-address-space-loopback">loopback</a>
+requests, and does not enforce the permission for cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a> requests. This can be shipped as an incremental improvement later
+on. See <a href="https://github.com/WICG/private-network-access/issues/39">WICG/private-network-access issue #39</a>. We note that, because local names and
+addresses are not meaningful outside the bounds of the network, implementers
+may want to use a different permission prompt for the cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a> case than for the <a data-link-type="dfn" href="#ip-address-space-public">public</a> to <a data-link-type="dfn" href="#ip-address-space-local">local</a> case, and may want to scope these permission grants to the
+specific network or to the current browsing session only. <a class="issue-return" href="#issue-d9cfbbe3" title="Jump to section">↵</a></div>
+   <div class="issue"> To be able to apply LNA checks to all cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a> requests in the future (see Issue above), Chromium plans to
+exempt local servers that likely cannot currently get publicly trusted HTTPS
+certificates from this requirement (e.g., servers on <code>.local</code> and private IP
+literals). See <a href="#rollout-difficulties">§ 4.4 Rollout Difficulties</a> for more discussion, and also see
+<a href="https://github.com/WICG/private-network-access/issues/96">WICG/private-network-access issue #96</a>. <a class="issue-return" href="#issue-cc743ffe" title="Jump to section">↵</a></div>
    <div class="issue"> Chromium only applies LNA restrictions to iframe navigations currently.
 It may be worth expanding this to include main-frame navigations (especially
 popup windows which can be controlled by their opener). <a class="issue-return" href="#issue-0daaba5a" title="Jump to section">↵</a></div>
@@ -2266,14 +2258,13 @@ check algorithm laid out above. Indeed, there is no <a href="https://fetch.spec.
 client</a> from which to
 copy the <a href="https://fetch.spec.whatwg.org/#concept-request-policy-container">policy
 container</a>
-during <a href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a>. [[Issue
-\#83\]](https://github.com/wicg/private-network-access/issues/83) <a class="issue-return" href="#issue-dfd72665" title="Jump to section">↵</a></div>
+during <a href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a>. See
+<a href="https://github.com/WICG/private-network-access/issues/83">WICG/private-network-access issue #83</a>. <a class="issue-return" href="#issue-0418a4e6" title="Jump to section">↵</a></div>
    <div class="issue"> Re-evaluate this after implementation experience. <a class="issue-return" href="#issue-339df313" title="Jump to section">↵</a></div>
    <div class="issue"> Potential mitigations would require noticing network changes and
 clearing state specific to the previous network. Doing so in a fully general
 manner is likely to be impossible short of clearing all state. Maybe a
-practical compromise can be reached. <a href="https://github.com/wicg/private-network-access/issues/28">PNA Issue
-#28</a> <a class="issue-return" href="#issue-e87386bd" title="Jump to section">↵</a></div>
+practical compromise can be reached. See <a href="https://github.com/WICG/private-network-access/issues/28">WICG/private-network-access issue #28</a>. <a class="issue-return" href="#issue-ab66f12e" title="Jump to section">↵</a></div>
   </div>
 <script>/* Boilerplate: script-dom-helper */
 "use strict";
@@ -2509,8 +2500,8 @@ let dfnPanelData = {
 "99f492fd": {"dfnID":"99f492fd","dfnText":"CORS-safelisted request-header","external":true,"refSections":[{"refs":[{"id":"ref-for-cors-safelisted-request-header"}],"title":"1.1. Goals"}],"url":"https://fetch.spec.whatwg.org/#cors-safelisted-request-header"},
 "9a5575e3": {"dfnID":"9a5575e3","dfnText":"Request(input, init)","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-request"}],"title":"3.3.2. Fetch API"}],"url":"https://fetch.spec.whatwg.org/#dom-request"},
 "a33db89a": {"dfnID":"a33db89a","dfnText":"fetch","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-fetch"}],"title":"3.3. Integration with Fetch"},{"refs":[{"id":"ref-for-concept-fetch\u2460"},{"id":"ref-for-concept-fetch\u2461"},{"id":"ref-for-concept-fetch\u2462"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"cbac8ed80"},{"id":"cbac8ed81"}],"title":"3.8. Integration with Workers"}],"url":"https://fetch.spec.whatwg.org/#concept-fetch"},
-"a973e0fe": {"dfnID":"a973e0fe","dfnText":"document","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-document"},{"id":"ref-for-concept-document\u2460"},{"id":"ref-for-concept-document\u2461"}],"title":"4.2. Proxies"},{"refs":[{"id":"ref-for-concept-document\u2462"},{"id":"ref-for-concept-document\u2463"},{"id":"ref-for-concept-document\u2464"}],"title":"4.3.1. Main resources"}],"url":"https://dom.spec.whatwg.org/#concept-document"},
-"b33787b2": {"dfnID":"b33787b2","dfnText":"policy container","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-container"}],"title":"3.7. Integration with HTML"},{"refs":[{"id":"ref-for-policy-container\u2460"}],"title":"4.2. Proxies"},{"refs":[{"id":"ref-for-policy-container\u2461"}],"title":"4.3.1. Main resources"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#policy-container"},
+"a973e0fe": {"dfnID":"a973e0fe","dfnText":"document","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-document"},{"id":"ref-for-concept-document\u2460"},{"id":"ref-for-concept-document\u2461"}],"title":"4.2. Proxies"},{"refs":[{"id":"ref-for-concept-document\u2462"},{"id":"ref-for-concept-document\u2463"},{"id":"ref-for-concept-document\u2464"},{"id":"ref-for-concept-document\u2465"},{"id":"ref-for-concept-document\u2466"}],"title":"4.3.1. Main resources"}],"url":"https://dom.spec.whatwg.org/#concept-document"},
+"b33787b2": {"dfnID":"b33787b2","dfnText":"policy container","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-container"}],"title":"3.7. Integration with HTML"},{"refs":[{"id":"ref-for-policy-container\u2460"}],"title":"4.2. Proxies"},{"refs":[{"id":"ref-for-policy-container\u2461"},{"id":"ref-for-policy-container\u2462"},{"id":"ref-for-policy-container\u2463"}],"title":"4.3.1. Main resources"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#policy-container"},
 "ba1bd741": {"dfnID":"ba1bd741","dfnText":"default powerful feature","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-default-powerful-feature"}],"title":"3.1. Integration with Permissions"}],"url":"https://w3c.github.io/permissions/#dfn-default-powerful-feature"},
 "bd1db03d": {"dfnID":"bd1db03d","dfnText":"policy container (for environment settings object)","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-settings-object-policy-container"}],"title":"3.3.1. Fetching"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container"},
 "cc890cc1": {"dfnID":"cc890cc1","dfnText":"policy-controlled feature","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-controlled-feature"}],"title":"3.2. Integration with Permissions Policy"}],"url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature"},
@@ -2527,6 +2518,7 @@ let dfnPanelData = {
 "e740d7e5": {"dfnID":"e740d7e5","dfnText":"name","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-name"}],"title":"3.1. Integration with Permissions"}],"url":"https://w3c.github.io/permissions/#dfn-name"},
 "eb1b1af3": {"dfnID":"eb1b1af3","dfnText":"network error","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-network-error"},{"id":"ref-for-concept-network-error\u2460"},{"id":"ref-for-concept-network-error\u2461"},{"id":"ref-for-concept-network-error\u2462"}],"title":"3.3.1. Fetching"}],"url":"https://fetch.spec.whatwg.org/#concept-network-error"},
 "ee7bba09": {"dfnID":"ee7bba09","dfnText":"response","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-response"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-concept-response\u2460"},{"id":"ref-for-concept-response\u2461"}],"title":"4.3.1. Main resources"}],"url":"https://fetch.spec.whatwg.org/#concept-response"},
+"eef3cd47": {"dfnID":"eef3cd47","dfnText":"obtain a Websocket connection","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-websocket-connection-obtain"}],"title":"3.5. Integration with WebSockets"}],"url":"https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain"},
 "enumdef-ipaddressspace": {"dfnID":"enumdef-ipaddressspace","dfnText":"IPAddressSpace","external":false,"refSections":[{"refs":[{"id":"ref-for-enumdef-ipaddressspace"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-enumdef-ipaddressspace\u2460"},{"id":"ref-for-enumdef-ipaddressspace\u2461"},{"id":"ref-for-enumdef-ipaddressspace\u2462"}],"title":"3.3.2. Fetch API"}],"url":"#enumdef-ipaddressspace"},
 "f4cb4c20": {"dfnID":"f4cb4c20","dfnText":"HTTP-network-or-cache fetch","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-http-network-or-cache-fetch"}],"title":"4.3.2. Subresources"},{"refs":[{"id":"ref-for-concept-http-network-or-cache-fetch\u2460"}],"title":"5.6.1. Applying checks to subresources"}],"url":"https://fetch.spec.whatwg.org/#concept-http-network-or-cache-fetch"},
 "f78d5b5c": {"dfnID":"f78d5b5c","dfnText":"origin","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-request-origin"},{"id":"ref-for-concept-request-origin\u2460"},{"id":"ref-for-concept-request-origin\u2461"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-concept-request-origin\u2462"}],"title":"3.4. Integration with Mixed Content"}],"url":"https://fetch.spec.whatwg.org/#concept-request-origin"},
@@ -2536,7 +2528,7 @@ let dfnPanelData = {
 "ip-address-space": {"dfnID":"ip-address-space","dfnText":"IP address\nspace","external":false,"refSections":[{"refs":[{"id":"ref-for-ip-address-space"},{"id":"ref-for-ip-address-space\u2460"},{"id":"ref-for-ip-address-space\u2461"},{"id":"ref-for-ip-address-space\u2462"},{"id":"ref-for-ip-address-space\u2463"},{"id":"ref-for-ip-address-space\u2464"},{"id":"ref-for-ip-address-space\u2465"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-ip-address-space\u2466"},{"id":"ref-for-ip-address-space\u2467"},{"id":"ref-for-ip-address-space\u2468"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-ip-address-space\u2460\u24ea"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-ip-address-space\u2460\u2460"}],"title":"3.8. Integration with Workers"},{"refs":[{"id":"ref-for-ip-address-space\u2460\u2461"}],"title":"4.2. Proxies"},{"refs":[{"id":"ref-for-ip-address-space\u2460\u2462"}],"title":"5.6.2. HTTP cache poisoning"}],"url":"#ip-address-space"},
 "ip-address-space-less-public": {"dfnID":"ip-address-space-less-public","dfnText":"less public","external":false,"refSections":[{"refs":[{"id":"ref-for-ip-address-space-less-public"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-ip-address-space-less-public\u2460"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-ip-address-space-less-public\u2461"}],"title":"5.6.2. HTTP cache poisoning"}],"url":"#ip-address-space-less-public"},
 "ip-address-space-local": {"dfnID":"ip-address-space-local","dfnText":"local","external":false,"refSections":[{"refs":[{"id":"ref-for-ip-address-space-local"},{"id":"ref-for-ip-address-space-local\u2460"},{"id":"ref-for-ip-address-space-local\u2461"},{"id":"ref-for-ip-address-space-local\u2462"},{"id":"ref-for-ip-address-space-local\u2463"},{"id":"ref-for-ip-address-space-local\u2464"},{"id":"ref-for-ip-address-space-local\u2465"},{"id":"ref-for-ip-address-space-local\u2466"},{"id":"ref-for-ip-address-space-local\u2467"},{"id":"ref-for-ip-address-space-local\u2468"},{"id":"ref-for-ip-address-space-local\u2460\u24ea"},{"id":"ref-for-ip-address-space-local\u2460\u2460"},{"id":"ref-for-ip-address-space-local\u2460\u2461"},{"id":"ref-for-ip-address-space-local\u2460\u2462"},{"id":"ref-for-ip-address-space-local\u2460\u2463"},{"id":"ref-for-ip-address-space-local\u2460\u2464"},{"id":"ref-for-ip-address-space-local\u2460\u2465"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-ip-address-space-local\u2460\u2466"},{"id":"ref-for-ip-address-space-local\u2460\u2467"},{"id":"ref-for-ip-address-space-local\u2460\u2468"},{"id":"ref-for-ip-address-space-local\u2461\u24ea"},{"id":"ref-for-ip-address-space-local\u2461\u2460"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-ip-address-space-local\u2461\u2461"}],"title":"2.4. Secure Context Restriction"},{"refs":[{"id":"ref-for-ip-address-space-local\u2461\u2462"}],"title":"2.5. Mixed Content"},{"refs":[{"id":"ref-for-ip-address-space-local\u2461\u2463"}],"title":"3.3.2. Fetch API"},{"refs":[{"id":"ref-for-ip-address-space-local\u2461\u2464"},{"id":"ref-for-ip-address-space-local\u2461\u2465"}],"title":"3.4. Integration with Mixed Content"},{"refs":[{"id":"ref-for-ip-address-space-local\u2461\u2466"}],"title":"3.7. Integration with HTML"},{"refs":[{"id":"ref-for-ip-address-space-local\u2461\u2467"}],"title":"3.8. Integration with Workers"}],"url":"#ip-address-space-local"},
-"ip-address-space-loopback": {"dfnID":"ip-address-space-loopback","dfnText":"loopback","external":false,"refSections":[{"refs":[{"id":"ref-for-ip-address-space-loopback"},{"id":"ref-for-ip-address-space-loopback\u2460"},{"id":"ref-for-ip-address-space-loopback\u2461"},{"id":"ref-for-ip-address-space-loopback\u2462"},{"id":"ref-for-ip-address-space-loopback\u2463"},{"id":"ref-for-ip-address-space-loopback\u2464"},{"id":"ref-for-ip-address-space-loopback\u2465"},{"id":"ref-for-ip-address-space-loopback\u2466"},{"id":"ref-for-ip-address-space-loopback\u2467"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-ip-address-space-loopback\u2468"}],"title":"3.8. Integration with Workers"}],"url":"#ip-address-space-loopback"},
+"ip-address-space-loopback": {"dfnID":"ip-address-space-loopback","dfnText":"loopback","external":false,"refSections":[{"refs":[{"id":"ref-for-ip-address-space-loopback"},{"id":"ref-for-ip-address-space-loopback\u2460"},{"id":"ref-for-ip-address-space-loopback\u2461"},{"id":"ref-for-ip-address-space-loopback\u2462"},{"id":"ref-for-ip-address-space-loopback\u2463"},{"id":"ref-for-ip-address-space-loopback\u2464"},{"id":"ref-for-ip-address-space-loopback\u2465"},{"id":"ref-for-ip-address-space-loopback\u2466"},{"id":"ref-for-ip-address-space-loopback\u2467"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-ip-address-space-loopback\u2468"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-ip-address-space-loopback\u2460\u24ea"}],"title":"3.8. Integration with Workers"}],"url":"#ip-address-space-loopback"},
 "ip-address-space-public": {"dfnID":"ip-address-space-public","dfnText":"public","external":false,"refSections":[{"refs":[{"id":"ref-for-ip-address-space-public"},{"id":"ref-for-ip-address-space-public\u2460"},{"id":"ref-for-ip-address-space-public\u2461"},{"id":"ref-for-ip-address-space-public\u2462"},{"id":"ref-for-ip-address-space-public\u2463"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-ip-address-space-public\u2464"},{"id":"ref-for-ip-address-space-public\u2465"},{"id":"ref-for-ip-address-space-public\u2466"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-ip-address-space-public\u2467"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-ip-address-space-public\u2468"},{"id":"ref-for-ip-address-space-public\u2460\u24ea"}],"title":"3.7. Integration with HTML"},{"refs":[{"id":"ref-for-ip-address-space-public\u2460\u2460"}],"title":"3.8. Integration with Workers"}],"url":"#ip-address-space-public"},
 "local-address": {"dfnID":"local-address","dfnText":"local address","external":false,"refSections":[{"refs":[{"id":"ref-for-local-address"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-local-address\u2460"}],"title":"3.7. Integration with HTML"}],"url":"#local-address"},
 "local-network-access-check": {"dfnID":"local-network-access-check","dfnText":"Local Network Access check","external":false,"refSections":[{"refs":[{"id":"ref-for-local-network-access-check"}],"title":"3.3.1. Fetching"}],"url":"#local-network-access-check"},
@@ -3004,6 +2996,7 @@ let refsData = {
 "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist": {"displayText":"default allowlist","export":true,"for_":["policy-controlled feature"],"level":"1","normative":true,"shortname":"permissions-policy","spec":"permissions-policy-1","status":"current","text":"default allowlist","type":"dfn","url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist"},
 "https://w3c.github.io/webappsec-secure-contexts/#potentially-trustworthy-origin": {"displayText":"potentially trustworthy origin","export":true,"for_":[],"level":"1","normative":true,"shortname":"secure-contexts","spec":"secure-contexts","status":"current","text":"potentially trustworthy origin","type":"dfn","url":"https://w3c.github.io/webappsec-secure-contexts/#potentially-trustworthy-origin"},
 "https://webidl.spec.whatwg.org/#this": {"displayText":"this","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"this","type":"dfn","url":"https://webidl.spec.whatwg.org/#this"},
+"https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain": {"displayText":"obtain a Websocket connection","export":true,"for_":[],"level":"","normative":true,"shortname":"lna","spec":"","status":"anchor-block","text":"obtain a websocket connection","type":"dfn","url":"https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain"},
 };
 
 function mkRefHint(link, ref) {
