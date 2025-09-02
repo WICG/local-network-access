@@ -521,7 +521,7 @@ If it does belong, then the permission can be checked to allow or fail the
 request.
 
 TODO: Decide if we want to keep the CSP directive `treat-as-public-address`
-around (see https://wicg.github.io/private-network-access/#csp). This
+around (see [private-network-access#csp](https://wicg.github.io/private-network-access/#csp)). This
 directive would be obviated if we implemented <wicg/private-network-access#39>.
 
 # Integrations # {#integrations}
