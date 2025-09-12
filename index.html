@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 3f621ba99, updated Mon Jul 28 15:38:36 2025 -0700" name="generator">
   <link href="https://wicg.github.io/local-network-access/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="b9b30ab6d17b2b20ffcbdb8186c30dca74c7bccc" name="revision">
+  <meta content="528cc85e2b41a2e5d89291a670f8570dda863287" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -859,7 +859,7 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
 </p>
    <h1 class="p-name no-ref" id="title">Local Network Access</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#CG-DRAFT">Draft Community Group Report</a>,
-    <time class="dt-updated" datetime="2025-09-02">2 September 2025</time></p>
+    <time class="dt-updated" datetime="2025-09-12">12 September 2025</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1614,10 +1614,13 @@ upgrading in step 1:</p>
    </ol>
    <h3 class="heading settled" data-level="3.5" id="integration-with-websockets"><span class="secno">3.5. </span><span class="content">Integration with WebSockets</span><a class="self-link" href="#integration-with-websockets"></a></h3>
    <p>WebSockets connections should be subject to the same local network access
-permission requirements.</p>
-   <p>TODO: WebSockets <a data-link-type="dfn" href="https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain" id="ref-for-concept-websocket-connection-obtain">obtain a WebSocket connection</a> is distinct, and a “WebSocket
-connection” is also distinct. So strictly by spec we need to duplicate some of
-our Fetch details but for WebSockets.</p>
+permission requirements.  <a data-link-type="abstract-op" href="https://websockets.spec.whatwg.org/#websocket-opening-handshake" id="ref-for-websocket-opening-handshake">WebSocket opening handshake</a> directly applies
+<a data-link-type="abstract-op" data-refhint-key="0bae0f8d" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch④">fetch</a> in step 11, and so no modification to the WebSocket specification is
+required beyond the fetch change proposed above.</p>
+   <p>One minor difference between the Fetch API and the WebSockets API is that
+WebSockets does not have an equivalent to fetch’s <code>RequestInit</code>, and so there
+is no place to put in a <code>targetAddressSpace</code> option to bypass mixed content
+checks for ws:// urls.</p>
    <h3 class="heading settled" data-level="3.6" id="integration-with-webtransport"><span class="secno">3.6. </span><span class="content">Integration with WebTransport</span><a class="self-link" href="#integration-with-webtransport"></a></h3>
    <p>WebTransport connections should be subject to the same local network access
 permission requirements.</p>
@@ -2038,11 +2041,6 @@ paths forward.</p>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
-    <a data-link-type="biblio">[]</a> defines the following terms:
-    <ul>
-     <li><span class="dfn-paneled" id="eef3cd47">obtain a Websocket connection</span>
-    </ul>
-   <li>
     <a data-link-type="biblio">[DOM]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="85394472">Document</span>
@@ -2130,6 +2128,11 @@ paths forward.</p>
     <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="4013a022">this</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[WEBSOCKET]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="dbeebf9f">WebSocket opening handshake</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -2499,7 +2502,7 @@ let dfnPanelData = {
 "98f9d698": {"dfnID":"98f9d698","dfnText":"CORS-safelisted method","external":true,"refSections":[{"refs":[{"id":"ref-for-cors-safelisted-method"}],"title":"1.1. Goals"}],"url":"https://fetch.spec.whatwg.org/#cors-safelisted-method"},
 "99f492fd": {"dfnID":"99f492fd","dfnText":"CORS-safelisted request-header","external":true,"refSections":[{"refs":[{"id":"ref-for-cors-safelisted-request-header"}],"title":"1.1. Goals"}],"url":"https://fetch.spec.whatwg.org/#cors-safelisted-request-header"},
 "9a5575e3": {"dfnID":"9a5575e3","dfnText":"Request(input, init)","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-request"}],"title":"3.3.2. Fetch API"}],"url":"https://fetch.spec.whatwg.org/#dom-request"},
-"a33db89a": {"dfnID":"a33db89a","dfnText":"fetch","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-fetch"}],"title":"3.3. Integration with Fetch"},{"refs":[{"id":"ref-for-concept-fetch\u2460"},{"id":"ref-for-concept-fetch\u2461"},{"id":"ref-for-concept-fetch\u2462"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"cbac8ed80"},{"id":"cbac8ed81"}],"title":"3.8. Integration with Workers"}],"url":"https://fetch.spec.whatwg.org/#concept-fetch"},
+"a33db89a": {"dfnID":"a33db89a","dfnText":"fetch","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-fetch"}],"title":"3.3. Integration with Fetch"},{"refs":[{"id":"ref-for-concept-fetch\u2460"},{"id":"ref-for-concept-fetch\u2461"},{"id":"ref-for-concept-fetch\u2462"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-concept-fetch\u2463"}],"title":"3.5. Integration with WebSockets"},{"refs":[{"id":"cbac8ed80"},{"id":"cbac8ed81"}],"title":"3.8. Integration with Workers"}],"url":"https://fetch.spec.whatwg.org/#concept-fetch"},
 "a973e0fe": {"dfnID":"a973e0fe","dfnText":"document","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-document"},{"id":"ref-for-concept-document\u2460"},{"id":"ref-for-concept-document\u2461"}],"title":"4.2. Proxies"},{"refs":[{"id":"ref-for-concept-document\u2462"},{"id":"ref-for-concept-document\u2463"},{"id":"ref-for-concept-document\u2464"},{"id":"ref-for-concept-document\u2465"},{"id":"ref-for-concept-document\u2466"}],"title":"4.3.1. Main resources"}],"url":"https://dom.spec.whatwg.org/#concept-document"},
 "b33787b2": {"dfnID":"b33787b2","dfnText":"policy container","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-container"}],"title":"3.7. Integration with HTML"},{"refs":[{"id":"ref-for-policy-container\u2460"}],"title":"4.2. Proxies"},{"refs":[{"id":"ref-for-policy-container\u2461"},{"id":"ref-for-policy-container\u2462"},{"id":"ref-for-policy-container\u2463"}],"title":"4.3.1. Main resources"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#policy-container"},
 "ba1bd741": {"dfnID":"ba1bd741","dfnText":"default powerful feature","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-default-powerful-feature"}],"title":"3.1. Integration with Permissions"}],"url":"https://w3c.github.io/permissions/#dfn-default-powerful-feature"},
@@ -2508,6 +2511,7 @@ let dfnPanelData = {
 "cfb6031b": {"dfnID":"cfb6031b","dfnText":"creating a policy container from a fetch response","external":true,"refSections":[{"refs":[{"id":"ref-for-creating-a-policy-container-from-a-fetch-response"}],"title":"3.7. Integration with HTML"},{"refs":[{"id":"ref-for-creating-a-policy-container-from-a-fetch-response\u2460"}],"title":"3.8. Integration with Workers"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#creating-a-policy-container-from-a-fetch-response"},
 "connection-ip-address-space": {"dfnID":"connection-ip-address-space","dfnText":"IP\n  address space","external":false,"refSections":[{"refs":[{"id":"ref-for-connection-ip-address-space"},{"id":"ref-for-connection-ip-address-space\u2460"},{"id":"ref-for-connection-ip-address-space\u2461"},{"id":"ref-for-connection-ip-address-space\u2462"},{"id":"ref-for-connection-ip-address-space\u2463"}],"title":"3.3.1. Fetching"}],"url":"#connection-ip-address-space"},
 "d14a6f26": {"dfnID":"d14a6f26","dfnText":"key","external":true,"refSections":[{"refs":[{"id":"ref-for-map-key"}],"title":"3.3.2. Fetch API"}],"url":"https://infra.spec.whatwg.org/#map-key"},
+"dbeebf9f": {"dfnID":"dbeebf9f","dfnText":"WebSocket opening handshake","external":true,"refSections":[{"refs":[{"id":"ref-for-websocket-opening-handshake"}],"title":"3.5. Integration with WebSockets"}],"url":"https://websockets.spec.whatwg.org/#websocket-opening-handshake"},
 "determine-the-ip-address-space": {"dfnID":"determine-the-ip-address-space","dfnText":"determine the IP address space","external":false,"refSections":[{"refs":[{"id":"ref-for-determine-the-ip-address-space"}],"title":"3.3.1. Fetching"}],"url":"#determine-the-ip-address-space"},
 "dom-ipaddressspace-local": {"dfnID":"dom-ipaddressspace-local","dfnText":"\"local\"","external":false,"refSections":[],"url":"#dom-ipaddressspace-local"},
 "dom-ipaddressspace-loopback": {"dfnID":"dom-ipaddressspace-loopback","dfnText":"\"loopback\"","external":false,"refSections":[],"url":"#dom-ipaddressspace-loopback"},
@@ -2518,7 +2522,6 @@ let dfnPanelData = {
 "e740d7e5": {"dfnID":"e740d7e5","dfnText":"name","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-name"}],"title":"3.1. Integration with Permissions"}],"url":"https://w3c.github.io/permissions/#dfn-name"},
 "eb1b1af3": {"dfnID":"eb1b1af3","dfnText":"network error","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-network-error"},{"id":"ref-for-concept-network-error\u2460"},{"id":"ref-for-concept-network-error\u2461"},{"id":"ref-for-concept-network-error\u2462"}],"title":"3.3.1. Fetching"}],"url":"https://fetch.spec.whatwg.org/#concept-network-error"},
 "ee7bba09": {"dfnID":"ee7bba09","dfnText":"response","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-response"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-concept-response\u2460"},{"id":"ref-for-concept-response\u2461"}],"title":"4.3.1. Main resources"}],"url":"https://fetch.spec.whatwg.org/#concept-response"},
-"eef3cd47": {"dfnID":"eef3cd47","dfnText":"obtain a Websocket connection","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-websocket-connection-obtain"}],"title":"3.5. Integration with WebSockets"}],"url":"https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain"},
 "enumdef-ipaddressspace": {"dfnID":"enumdef-ipaddressspace","dfnText":"IPAddressSpace","external":false,"refSections":[{"refs":[{"id":"ref-for-enumdef-ipaddressspace"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-enumdef-ipaddressspace\u2460"},{"id":"ref-for-enumdef-ipaddressspace\u2461"},{"id":"ref-for-enumdef-ipaddressspace\u2462"}],"title":"3.3.2. Fetch API"}],"url":"#enumdef-ipaddressspace"},
 "f4cb4c20": {"dfnID":"f4cb4c20","dfnText":"HTTP-network-or-cache fetch","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-http-network-or-cache-fetch"}],"title":"4.3.2. Subresources"},{"refs":[{"id":"ref-for-concept-http-network-or-cache-fetch\u2460"}],"title":"5.6.1. Applying checks to subresources"}],"url":"https://fetch.spec.whatwg.org/#concept-http-network-or-cache-fetch"},
 "f78d5b5c": {"dfnID":"f78d5b5c","dfnText":"origin","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-request-origin"},{"id":"ref-for-concept-request-origin\u2460"},{"id":"ref-for-concept-request-origin\u2461"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-concept-request-origin\u2462"}],"title":"3.4. Integration with Mixed Content"}],"url":"https://fetch.spec.whatwg.org/#concept-request-origin"},
@@ -2996,7 +2999,7 @@ let refsData = {
 "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist": {"displayText":"default allowlist","export":true,"for_":["policy-controlled feature"],"level":"1","normative":true,"shortname":"permissions-policy","spec":"permissions-policy-1","status":"current","text":"default allowlist","type":"dfn","url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist"},
 "https://w3c.github.io/webappsec-secure-contexts/#potentially-trustworthy-origin": {"displayText":"potentially trustworthy origin","export":true,"for_":[],"level":"1","normative":true,"shortname":"secure-contexts","spec":"secure-contexts","status":"current","text":"potentially trustworthy origin","type":"dfn","url":"https://w3c.github.io/webappsec-secure-contexts/#potentially-trustworthy-origin"},
 "https://webidl.spec.whatwg.org/#this": {"displayText":"this","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"this","type":"dfn","url":"https://webidl.spec.whatwg.org/#this"},
-"https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain": {"displayText":"obtain a Websocket connection","export":true,"for_":[],"level":"","normative":true,"shortname":"lna","spec":"","status":"anchor-block","text":"obtain a websocket connection","type":"dfn","url":"https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain"},
+"https://websockets.spec.whatwg.org/#websocket-opening-handshake": {"displayText":"WebSocket opening handshake","export":true,"for_":[],"level":"","normative":true,"shortname":"websocket","spec":"websocket","status":"anchor-block","text":"WebSocket opening handshake","type":"abstract-op","url":"https://websockets.spec.whatwg.org/#websocket-opening-handshake"},
 };
 
 function mkRefHint(link, ref) {
