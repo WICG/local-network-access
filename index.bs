@@ -448,17 +448,21 @@ ISSUE: The definition of [=local network requests=] could be expanded to cover
 all cross-origin requests for which the [=request/current url=]'s {{URL/host}}
 maps to an IP address whose [=/IP address space=] is not [=IP address
 space/public=]. This would prevent a malicious server on the local network from
-attacking other servers, including servers on `localhost`. Currently, Chromium
-only implements Local Network Access restrictions for [=IP address
-space/public=] to [=IP address space/local=] or [=IP address space/loopback=]
-requests, and does not enforce the permission for cross-origin [=IP address
-space/local=] requests. This can be shipped as an incremental improvement later
-on. See <WICG/private-network-access#39>. We note that, because local names and
-addresses are not meaningful outside the bounds of the network, implementers
-may want to use a different permission prompt for the cross-origin [=IP address
-space/local=] case than for the [=IP address space/public=] to [=IP address
-space/local=] case, and may want to scope these permission grants to the
-specific network or to the current browsing session only.
+attacking other servers, including servers on `localhost`. See
+<WICG/private-network-access#39>.
+
+NOTE: Currently, Chromium only implements Local Network Access restrictions for
+[=IP address space/public=] to [=IP address space/local=] or [=IP address
+space/loopback=] requests, and does not enforce the permission for cross-origin
+[=IP address space/local=] requests. This restriction can be shipped as an
+incremental improvement in future implementations.
+
+NOTE: Because local names and addresses are not meaningful outside the bounds of
+the network, implementers might want to use a different permission prompt for the
+cross-origin [=IP address space/local=] case than for the [=IP address
+space/public=] to [=IP address space/local=] case. Additionally, implementers
+might want to scope these permission grants to the specific network or to the
+current browsing session only.
 
 NOTE: Some [=local network requests=] are more challenging to secure than others.
 See [[#rollout-difficulties]] for more details.
