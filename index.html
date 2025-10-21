@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 3f621ba99, updated Mon Jul 28 15:38:36 2025 -0700" name="generator">
   <link href="https://wicg.github.io/local-network-access/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="67254f58bc08fa44ae145c63ba55c95fc862d3c3" name="revision">
+  <meta content="3def5d29fd6d5426c8207748c635de32adf091bd" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -859,7 +859,7 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
 </p>
    <h1 class="p-name no-ref" id="title">Local Network Access</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#CG-DRAFT">Draft Community Group Report</a>,
-    <time class="dt-updated" datetime="2025-10-14">14 October 2025</time></p>
+    <time class="dt-updated" datetime="2025-10-21">21 October 2025</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1289,16 +1289,20 @@ are not so complex.</p>
 <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request">local network requests</a>, and should not be subject to local network access
 checks, since any software running on the user’s device is already in the most
 privileged vantage point on the user’s network.</p>
-   <p class="issue" id="issue-d9cfbbe3"><a class="self-link" href="#issue-d9cfbbe3"></a> The definition of <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request①">local network requests</a> could be expanded to cover
+   <p class="issue" id="issue-dea5f098"><a class="self-link" href="#issue-dea5f098"></a> The definition of <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request①">local network requests</a> could be expanded to cover
 all cross-origin requests for which the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url" id="ref-for-concept-request-current-url①">current url</a>’s <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host" id="ref-for-dom-url-host①">host</a></code>
 maps to an IP address whose <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space⑨">IP address space</a> is not <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑤">public</a>. This would prevent a malicious server on the local network from
-attacking other servers, including servers on <code>localhost</code>. Currently, Chromium
-only implements Local Network Access restrictions for <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑥">public</a> to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑧">local</a> or <a data-link-type="dfn" href="#ip-address-space-loopback" id="ref-for-ip-address-space-loopback⑨">loopback</a>
-requests, and does not enforce the permission for cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑨">local</a> requests. This can be shipped as an incremental improvement later
-on. See <a href="https://github.com/WICG/private-network-access/issues/39">WICG/private-network-access issue #39</a>. We note that, because local names and
-addresses are not meaningful outside the bounds of the network, implementers
-may want to use a different permission prompt for the cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②⓪">local</a> case than for the <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑦">public</a> to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②①">local</a> case, and may want to scope these permission grants to the
-specific network or to the current browsing session only.</p>
+attacking other servers, including servers on <code>localhost</code>. See
+<a href="https://github.com/WICG/private-network-access/issues/39">WICG/private-network-access issue #39</a>.</p>
+   <p class="note" role="note"><span class="marker">NOTE:</span> Currently, Chromium only implements Local Network Access restrictions for
+<a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑥">public</a> to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑧">local</a> or <a data-link-type="dfn" href="#ip-address-space-loopback" id="ref-for-ip-address-space-loopback⑨">loopback</a> requests, and does not enforce the permission for cross-origin
+<a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑨">local</a> requests. This restriction can be shipped as an
+incremental improvement in future implementations.</p>
+   <p class="note" role="note"><span class="marker">NOTE:</span> Because local names and addresses are not meaningful outside the bounds of
+the network, implementers might want to use a different permission prompt for the
+cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②⓪">local</a> case than for the <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑦">public</a> to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②①">local</a> case. Additionally, implementers
+might want to scope these permission grants to the specific network or to the
+current browsing session only.</p>
    <p class="note" role="note"><span class="marker">NOTE:</span> Some <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request②">local network requests</a> are more challenging to secure than others.
 See <a href="#rollout-difficulties">§ 4.4 Rollout Difficulties</a> for more details.</p>
    <h3 class="heading settled" data-level="2.3" id="permission-prompt"><span class="secno">2.3. </span><span class="content">Local Network Request Permission Prompt</span><a class="self-link" href="#permission-prompt"></a></h3>
@@ -2227,13 +2231,8 @@ paths forward.</p>
    <div class="issue"> The definition of <a data-link-type="dfn" href="#local-network-request">local network requests</a> could be expanded to cover
 all cross-origin requests for which the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url">current url</a>’s <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host">host</a></code>
 maps to an IP address whose <a data-link-type="dfn" href="#ip-address-space">IP address space</a> is not <a data-link-type="dfn" href="#ip-address-space-public">public</a>. This would prevent a malicious server on the local network from
-attacking other servers, including servers on <code>localhost</code>. Currently, Chromium
-only implements Local Network Access restrictions for <a data-link-type="dfn" href="#ip-address-space-public">public</a> to <a data-link-type="dfn" href="#ip-address-space-local">local</a> or <a data-link-type="dfn" href="#ip-address-space-loopback">loopback</a>
-requests, and does not enforce the permission for cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a> requests. This can be shipped as an incremental improvement later
-on. See <a href="https://github.com/WICG/private-network-access/issues/39">WICG/private-network-access issue #39</a>. We note that, because local names and
-addresses are not meaningful outside the bounds of the network, implementers
-may want to use a different permission prompt for the cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a> case than for the <a data-link-type="dfn" href="#ip-address-space-public">public</a> to <a data-link-type="dfn" href="#ip-address-space-local">local</a> case, and may want to scope these permission grants to the
-specific network or to the current browsing session only. <a class="issue-return" href="#issue-d9cfbbe3" title="Jump to section">↵</a></div>
+attacking other servers, including servers on <code>localhost</code>. See
+<a href="https://github.com/WICG/private-network-access/issues/39">WICG/private-network-access issue #39</a>. <a class="issue-return" href="#issue-dea5f098" title="Jump to section">↵</a></div>
    <div class="issue"> To be able to apply LNA checks to all cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a> requests in the future (see Issue above), Chromium plans to
 exempt local servers that likely cannot currently get publicly trusted HTTPS
 certificates from this requirement (e.g., servers on <code>.local</code> and private IP
