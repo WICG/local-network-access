@@ -36,6 +36,9 @@ url: https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain; ty
 spec: WEBSOCKET; urlPrefix: https://websockets.spec.whatwg.org/
   type: abstract-op;
     text: WebSocket opening handshake; url: #websocket-opening-handshake
+spec: HTML; urlPrefix: https://html.spec.whatwg.org/multipage/webappapis.html
+  type: dfn; for: global object
+    text: associated Document; url: #concept-document-window
 </pre>
 
 <pre class="biblio">
@@ -650,14 +653,43 @@ What follows is a sketch of a potential solution:
               3.  Set |error|'s [=response/IP address space=] property to
                   |connection|'s [=connection/IP address space=].
 
-              4.  TODO: Permission check is sketched out below, wording is still vague
-                  1. If the initiating origin has been granted the local
-                     network access permission, return null.
-                  2. If the initiating origin has been denied the local network
-                     access permission, return |error|.
-                  3. Otherwise, prompt the user:
-                     1. If the user grants permission, return null.
-                     2. If the user denies the permission, return |error|.
+              4.  Let |settingsObject| be |request|'s [=request/client=].
+
+              5.  Let |global| be |settingsObject|'s [=environment settings
+                  object/global object=].
+
+              6.  Let |document| be |global|'s [=global object/associated
+                  Document=].
+
+              7.  If |document| is null, then return |error|.
+
+                  NOTE: This step will cause local network requests from Service
+                  Workers to fail, as Service Workers do not always have an
+                  associated Document. Future versions of this specification need
+                  to define how to handle Workers, particularly since Permissions
+                  Policy is not yet supported in Workers. See
+                  [w3c/webappsec-permissions-policy#207](https://github.com/w3c/webappsec-permissions-policy/issues/207).
+
+                  ISSUE: Define local network access behavior for Service Workers.
+
+              8.  If |document| is not [=allowed to use=]
+                  "local-network-access", then return |error|.
+
+              9.  Let |permissionState| be the result of [=getting the current
+                  permission state=] given "local-network-access" and |global|.
+
+              10. If |permissionState| is [=permission/denied=], then return
+                  |error|.
+
+              11. If |permissionState| is [=permission/granted=], then return
+                  null.
+
+              12. [=Prompt the user to choose=] whether to grant
+                  "local-network-access" for |global|:
+
+                  1.  If the user grants permission, then return null.
+
+                  2.  If the user denies permission, then return |error|.
       1.  Return null.
 
   1.  The [$fetch$] algorithm is amended to add 2 new steps right after request’s
