@@ -549,14 +549,21 @@ normative references.
 
 ## Integration with Permissions ## {#integration-with-permissions}
 
-This document defines a [=default powerful feature=] identified by the [=powerful
-feature/name=] <dfn export permission>`"local-network-access"`</dfn>.
+This document defines two new [=default powerful feature=]s identified by the [=powerful
+feature/name=]s <dfn export permission>`"local-network"`</dfn> and
+<dfn export permission>`"loopback-network"`</dfn>.
+
+NOTE: Previously, the permission was specified as a single feature that covered
+both local and loopback cases.
 
 ## Integration with Permissions Policy ## {#integration-with-permissions-policy}
 
-Local Network Access defines a [=policy-controlled feature=] identified by the
-string "local-network-access". Its [=policy-controlled feature/default allowlist=]
-is `'self'`.
+Local Network Access defines two [=policy-controlled feature=]s identified by the
+strings "local-network" and "loopback-network". The
+[=policy-controlled feature/default allowlist=] for each is `'self'`.
+
+NOTE: Previously, the policy controlled feature was specified as a single feature
+that covered both local and loopback cases.
 
 ## Integration with Fetch ## {#integration-with-fetch}
 
