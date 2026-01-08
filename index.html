@@ -5,10 +5,10 @@
   <title>Local Network Access</title>
   <meta content="CG-DRAFT" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
-  <meta content="Bikeshed version 3f621ba99, updated Mon Jul 28 15:38:36 2025 -0700" name="generator">
+  <meta content="Bikeshed version 3c53a5b02, updated Thu Nov 27 17:03:30 2025 +0000" name="generator">
   <link href="https://wicg.github.io/local-network-access/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="3def5d29fd6d5426c8207748c635de32adf091bd" name="revision">
+  <meta content="b77ff4e04a6fc2449aed37e9c34abf10faacb549" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -343,7 +343,7 @@ body {
 }
 .invalid.example:not(.no-marker)::before,
 .illegal.example:not(.no-marker)::before {
-    content: "Invalid Example" counter(example);
+    content: "Invalid Example " counter(example);
 }
 
 figcaption {
@@ -857,9 +857,9 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
     <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
 </a>
 </p>
-   <h1 class="p-name no-ref" id="title">Local Network Access</h1>
+   <h1 class="no-ref p-name" id="title">Local Network Access</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#CG-DRAFT">Draft Community Group Report</a>,
-    <time class="dt-updated" datetime="2025-10-21">21 October 2025</time></p>
+    <time class="dt-updated" datetime="2026-01-08">8 January 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -870,28 +870,28 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
       <dd><a href="https://github.com/WICG/local-network-access/issues/">GitHub</a>
       <dd><a href="#issues-index">Inline In Spec</a>
       <dt class="editor">Editors:
-      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:cthomp@google.com">Chris Thompson</a> (<a class="p-org org" href="https://google.com">Google</a>)
-      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:hchao@google.com">Hubert Chao</a> (<a class="p-org org" href="https://google.com">Google</a>)
+      <dd class="editor h-card p-author vcard"><a class="email fn p-name u-email" href="mailto:cthomp@google.com">Chris Thompson</a> (<a class="org p-org" href="https://google.com">Google</a>)
+      <dd class="editor h-card p-author vcard"><a class="email fn p-name u-email" href="mailto:hchao@google.com">Hubert Chao</a> (<a class="org p-org" href="https://google.com">Google</a>)
      </dl>
     </div>
    </details>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2025 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply.
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2026 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply.
 </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
-   <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
+   <h2 class="heading no-num no-ref no-toc settled" id="abstract"><span class="content">Abstract</span></h2>
    <p>Restrict access to the users' local network with a new permission</p>
   </div>
-  <h2 class="no-num no-toc no-ref heading settled" id="sotd"><span class="content">Status of this document</span></h2>
+  <h2 class="heading no-num no-ref no-toc settled" id="sotd"><span class="content">Status of this document</span></h2>
   <div data-fill-with="status">
    <p></p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
-   <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
-   <ol class="toc" role="directory">
+   <h2 class="no-num no-ref no-toc" id="contents">Table of Contents</h2>
+   <ol class="toc">
     <li>
      <a href="#intro"><span class="secno">1</span> <span class="content">Introduction</span></a>
      <ol class="toc">
@@ -1081,7 +1081,7 @@ using her device unlock.
    <h2 class="heading settled" data-level="2" id="framework"><span class="secno">2. </span><span class="content">Framework</span><a class="self-link" href="#framework"></a></h2>
    <h3 class="heading settled" data-level="2.1" id="ip-address-space-section"><span class="secno">2.1. </span><span class="content">IP Address Space</span><a class="self-link" href="#ip-address-space-section"></a></h3>
    <p>Define <code class="idl"><a data-link-type="idl" href="#enumdef-ipaddressspace" id="ref-for-enumdef-ipaddressspace">IPAddressSpace</a></code> as follows:</p>
-<pre class="idl highlight def"><c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-ipaddressspace"><code><c- g>IPAddressSpace</c-></code></dfn> { <dfn class="dfn-paneled idl-code" data-dfn-for="IPAddressSpace" data-dfn-type="enum-value" data-export id="dom-ipaddressspace-public"><code><c- s>"public"</c-></code></dfn>, <dfn class="dfn-paneled idl-code" data-dfn-for="IPAddressSpace" data-dfn-type="enum-value" data-export id="dom-ipaddressspace-local"><code><c- s>"local"</c-></code></dfn>, <dfn class="dfn-paneled idl-code" data-dfn-for="IPAddressSpace" data-dfn-type="enum-value" data-export id="dom-ipaddressspace-loopback"><code><c- s>"loopback"</c-></code></dfn> };
+<pre class="def highlight idl"><c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-ipaddressspace"><code><c- g>IPAddressSpace</c-></code></dfn> { <dfn class="dfn-paneled idl-code" data-dfn-for="IPAddressSpace" data-dfn-type="enum-value" data-export id="dom-ipaddressspace-public"><code><c- s>"public"</c-></code></dfn>, <dfn class="dfn-paneled idl-code" data-dfn-for="IPAddressSpace" data-dfn-type="enum-value" data-export id="dom-ipaddressspace-local"><code><c- s>"local"</c-></code></dfn>, <dfn class="dfn-paneled idl-code" data-dfn-for="IPAddressSpace" data-dfn-type="enum-value" data-export id="dom-ipaddressspace-loopback"><code><c- s>"loopback"</c-></code></dfn> };
 </pre>
    <p>Every IP address belongs to an <dfn class="dfn-paneled" data-dfn-type="dfn" data-export data-local-lt="address space" data-lt="IP address space" id="ip-address-space">IP address
 space</dfn>, which can be one of three different values:</p>
@@ -1366,11 +1366,16 @@ order to implement the mitigations sketched out in the examples above. These
 integrations are outlined here for clarity, but the external documents are the
 normative references.</p>
    <h3 class="heading settled" data-level="3.1" id="integration-with-permissions"><span class="secno">3.1. </span><span class="content">Integration with Permissions</span><a class="self-link" href="#integration-with-permissions"></a></h3>
-   <p>This document defines a <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-default-powerful-feature" id="ref-for-dfn-default-powerful-feature">default powerful feature</a> identified by the <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-name" id="ref-for-dfn-name">name</a> <dfn class="dfn-paneled idl-code" data-dfn-type="permission" data-export id="permissiondef-local-network-access"><code>"local-network-access"</code></dfn>.</p>
+   <p>This document defines two new <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-default-powerful-feature" id="ref-for-dfn-default-powerful-feature">default powerful feature</a>s identified by the <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-name" id="ref-for-dfn-name">name</a>s <dfn class="dfn-paneled idl-code" data-dfn-type="permission" data-export id="permissiondef-local-network"><code>"local-network"</code></dfn> and
+<dfn class="dfn-paneled idl-code" data-dfn-type="permission" data-export id="permissiondef-loopback-network"><code>"loopback-network"</code></dfn>.</p>
+   <p class="note" role="note"><span class="marker">NOTE:</span> Previously, the permission was specified as a single feature that covered
+both local and loopback cases.</p>
    <h3 class="heading settled" data-level="3.2" id="integration-with-permissions-policy"><span class="secno">3.2. </span><span class="content">Integration with Permissions Policy</span><a class="self-link" href="#integration-with-permissions-policy"></a></h3>
-   <p>Local Network Access defines a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature" id="ref-for-policy-controlled-feature">policy-controlled feature</a> identified by the
-string "local-network-access". Its <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist" id="ref-for-policy-controlled-feature-default-allowlist">default allowlist</a>
-is <code>'self'</code>.</p>
+   <p>Local Network Access defines two <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature" id="ref-for-policy-controlled-feature">policy-controlled feature</a>s identified by the
+strings "local-network" and "loopback-network". The
+<a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist" id="ref-for-policy-controlled-feature-default-allowlist">default allowlist</a> for each is <code>'self'</code>.</p>
+   <p class="note" role="note"><span class="marker">NOTE:</span> Previously, the policy controlled feature was specified as a single feature
+that covered both local and loopback cases.</p>
    <h3 class="heading settled" data-level="3.3" id="integration-with-fetch"><span class="secno">3.3. </span><span class="content">Integration with Fetch</span><a class="self-link" href="#integration-with-fetch"></a></h3>
    <p>This document proposes a few changes to <a data-link-type="biblio" href="#biblio-fetch" title="Fetch Standard">[FETCH]</a>, with the following implication:
 <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request⑨">local network requests</a> are only allowed if their
@@ -1567,14 +1572,14 @@ above), we only need to make a small change to Mixed Content -- see
      <p>Append an optional <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry">entry</a> to <code class="idl"><a data-link-type="idl" href="https://fetch.spec.whatwg.org/#requestinfo" id="ref-for-requestinfo">RequestInfo</a></code>, whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key" id="ref-for-map-key">key</a> is
 <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="targetaddressspace">targetAddressSpace</dfn>, and <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value" id="ref-for-map-value">value</a> is a
 <code class="idl"><a data-link-type="idl" href="#enumdef-ipaddressspace" id="ref-for-enumdef-ipaddressspace①">IPAddressSpace</a></code>.</p>
-<pre class="idl highlight def"><c- b>partial</c-> <c- b>dictionary</c-> <a class="idl-code" data-link-type="dictionary" href="https://fetch.spec.whatwg.org/#requestinit" id="ref-for-requestinit"><c- g>RequestInit</c-></a> {
+<pre class="def highlight idl"><c- b>partial</c-> <c- b>dictionary</c-> <a class="idl-code" data-link-type="dictionary" href="https://fetch.spec.whatwg.org/#requestinit" id="ref-for-requestinit"><c- g>RequestInit</c-></a> {
   <a data-link-type="idl-name" href="#enumdef-ipaddressspace" id="ref-for-enumdef-ipaddressspace②"><c- n>IPAddressSpace</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="RequestInit" data-dfn-type="dict-member" data-export data-type="IPAddressSpace" id="dom-requestinit-targetaddressspace"><code><c- g>targetAddressSpace</c-></code></dfn>;
 };
 </pre>
     <li data-md>
      <p>Define a new targetAddressSpace representing the
 above in <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request" id="ref-for-concept-request④">request</a>.</p>
-<pre class="idl highlight def"><c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://fetch.spec.whatwg.org/#request" id="ref-for-request"><c- g>Request</c-></a> {
+<pre class="def highlight idl"><c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://fetch.spec.whatwg.org/#request" id="ref-for-request"><c- g>Request</c-></a> {
   <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="#enumdef-ipaddressspace" id="ref-for-enumdef-ipaddressspace③"><c- n>IPAddressSpace</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Request" data-dfn-type="attribute" data-export data-readonly data-type="IPAddressSpace" id="dom-request-targetaddressspace"><code><c- g>targetAddressSpace</c-></code></dfn>;
 };
 </pre>
@@ -1960,8 +1965,8 @@ and specification, and generously discussed their work and helped brainstorm
 paths forward.</p>
   </main>
   <div data-fill-with="conformance">
-   <h2 class="no-ref no-num heading settled" id="w3c-conformance"><span class="content">Conformance</span><a class="self-link" href="#w3c-conformance"></a></h2>
-   <h3 class="no-ref no-num heading settled" id="w3c-conventions"><span class="content">Document conventions</span><a class="self-link" href="#w3c-conventions"></a></h3>
+   <h2 class="heading no-num no-ref settled" id="w3c-conformance"><span class="content">Conformance</span><a class="self-link" href="#w3c-conformance"></a></h2>
+   <h3 class="heading no-num no-ref settled" id="w3c-conventions"><span class="content">Document conventions</span><a class="self-link" href="#w3c-conventions"></a></h3>
    <p>Conformance requirements are expressed
     with a combination of descriptive assertions
     and RFC 2119 terminology.
@@ -2005,8 +2010,8 @@ paths forward.</p>
    </details>
   </div>
   <script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script>
-  <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
-  <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
+  <h2 class="heading no-num no-ref settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
+  <h3 class="heading no-num no-ref settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
    <li><a href="#ip-address-space">address space</a><span>, in § 2.1</span>
    <li><a href="#determine-the-ip-address-space">determine the IP address space</a><span>, in § 2.1</span>
@@ -2024,12 +2029,13 @@ paths forward.</p>
    <li><a href="#dom-ipaddressspace-local">"local"</a><span>, in § 2.1</span>
    <li><a href="#ip-address-space-local">local</a><span>, in § 2.1</span>
    <li><a href="#local-address">local address</a><span>, in § 2.1</span>
-   <li><a href="#permissiondef-local-network-access">"local-network-access"</a><span>, in § 3.1</span>
+   <li><a href="#permissiondef-local-network">"local-network"</a><span>, in § 3.1</span>
    <li><a href="#local-network-access-check">Local Network Access check</a><span>, in § 3.3.1</span>
    <li><a href="#local-network-request">local network request</a><span>, in § 2.2</span>
    <li><a href="#dom-ipaddressspace-loopback">"loopback"</a><span>, in § 2.1</span>
    <li><a href="#ip-address-space-loopback">loopback</a><span>, in § 2.1</span>
    <li><a href="#loopback-address">loopback address</a><span>, in § 2.1</span>
+   <li><a href="#permissiondef-loopback-network">"loopback-network"</a><span>, in § 3.1</span>
    <li><a href="#dom-ipaddressspace-public">"public"</a><span>, in § 2.1</span>
    <li><a href="#ip-address-space-public">public</a><span>, in § 2.1</span>
    <li><a href="#public-address">public address</a><span>, in § 2.1</span>
@@ -2042,7 +2048,7 @@ paths forward.</p>
     </ul>
    <li><a href="#request-target-ip-address-space">target IP address space</a><span>, in § 3.3.1</span>
   </ul>
-  <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
+  <h3 class="heading no-num no-ref settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
     <a data-link-type="biblio">[DOM]</a> defines the following terms:
@@ -2139,8 +2145,8 @@ paths forward.</p>
      <li><span class="dfn-paneled" id="dbeebf9f">WebSocket opening handshake</span>
     </ul>
   </ul>
-  <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
-  <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
+  <h2 class="heading no-num no-ref settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
+  <h3 class="heading no-num no-ref settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-dom">[DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/"><cite>DOM Standard</cite></a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
@@ -2165,7 +2171,7 @@ paths forward.</p>
    <dt id="biblio-webidl">[WEBIDL]
    <dd>Edgar Chen; Timothy Gu. <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
   </dl>
-  <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
+  <h3 class="heading no-num no-ref settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
    <dt id="biblio-avastium">[AVASTIUM]
    <dd><a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=679"><cite>Avast: A web-accessible RPC endpoint can launch 'SafeZone' (also called Avastium), a Chromium fork with critical security checks removed.</cite></a>. URL: <a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=679">https://bugs.chromium.org/p/project-zero/issues/detail?id=679</a>
@@ -2214,8 +2220,8 @@ paths forward.</p>
    <dt id="biblio-trend-micro">[TREND-MICRO]
    <dd><a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=693"><cite>TrendMicro node.js HTTP server listening on localhost can execute commands</cite></a>. URL: <a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=693">https://bugs.chromium.org/p/project-zero/issues/detail?id=693</a>
   </dl>
-  <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-<pre class="idl highlight def"><c- b>enum</c-> <a href="#enumdef-ipaddressspace"><code><c- g>IPAddressSpace</c-></code></a> { <a href="#dom-ipaddressspace-public"><code><c- s>"public"</c-></code></a>, <a href="#dom-ipaddressspace-local"><code><c- s>"local"</c-></code></a>, <a href="#dom-ipaddressspace-loopback"><code><c- s>"loopback"</c-></code></a> };
+  <h2 class="heading no-num no-ref settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
+<pre class="def highlight idl"><c- b>enum</c-> <a href="#enumdef-ipaddressspace"><code><c- g>IPAddressSpace</c-></code></a> { <a href="#dom-ipaddressspace-public"><code><c- s>"public"</c-></code></a>, <a href="#dom-ipaddressspace-local"><code><c- s>"local"</c-></code></a>, <a href="#dom-ipaddressspace-loopback"><code><c- s>"loopback"</c-></code></a> };
 
 <c- b>partial</c-> <c- b>dictionary</c-> <a class="idl-code" data-link-type="dictionary" href="https://fetch.spec.whatwg.org/#requestinit"><c- g>RequestInit</c-></a> {
   <a data-link-type="idl-name" href="#enumdef-ipaddressspace"><c- n>IPAddressSpace</c-></a> <a data-type="IPAddressSpace" href="#dom-requestinit-targetaddressspace"><code><c- g>targetAddressSpace</c-></code></a>;
@@ -2226,7 +2232,7 @@ paths forward.</p>
 };
 
 </pre>
-  <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
+  <h2 class="heading no-num no-ref settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
    <div class="issue"> The definition of <a data-link-type="dfn" href="#local-network-request">local network requests</a> could be expanded to cover
 all cross-origin requests for which the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url">current url</a>’s <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host">host</a></code>
@@ -2536,7 +2542,8 @@ let dfnPanelData = {
 "local-network-access-check": {"dfnID":"local-network-access-check","dfnText":"Local Network Access check","external":false,"refSections":[{"refs":[{"id":"ref-for-local-network-access-check"}],"title":"3.3.1. Fetching"}],"url":"#local-network-access-check"},
 "local-network-request": {"dfnID":"local-network-request","dfnText":"local network request","external":false,"refSections":[{"refs":[{"id":"ref-for-local-network-request"},{"id":"ref-for-local-network-request\u2460"},{"id":"ref-for-local-network-request\u2461"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-local-network-request\u2462"},{"id":"ref-for-local-network-request\u2463"},{"id":"ref-for-local-network-request\u2464"}],"title":"2.3. Local Network Request Permission Prompt"},{"refs":[{"id":"ref-for-local-network-request\u2465"},{"id":"ref-for-local-network-request\u2466"},{"id":"ref-for-local-network-request\u2467"}],"title":"2.5. Mixed Content"},{"refs":[{"id":"ref-for-local-network-request\u2468"}],"title":"3.3. Integration with Fetch"},{"refs":[{"id":"ref-for-local-network-request\u2460\u24ea"}],"title":"3.8. Integration with Workers"}],"url":"#local-network-request"},
 "loopback-address": {"dfnID":"loopback-address","dfnText":"loopback address","external":false,"refSections":[{"refs":[{"id":"ref-for-loopback-address"}],"title":"2.2. Local Network Request"}],"url":"#loopback-address"},
-"permissiondef-local-network-access": {"dfnID":"permissiondef-local-network-access","dfnText":"\"local-network-access\"","external":false,"refSections":[],"url":"#permissiondef-local-network-access"},
+"permissiondef-local-network": {"dfnID":"permissiondef-local-network","dfnText":"\"local-network\"","external":false,"refSections":[],"url":"#permissiondef-local-network"},
+"permissiondef-loopback-network": {"dfnID":"permissiondef-loopback-network","dfnText":"\"loopback-network\"","external":false,"refSections":[],"url":"#permissiondef-loopback-network"},
 "policy-container-ip-address-space": {"dfnID":"policy-container-ip-address-space","dfnText":"IP address space ","external":false,"refSections":[{"refs":[{"id":"ref-for-policy-container-ip-address-space"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-policy-container-ip-address-space\u2460"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-policy-container-ip-address-space\u2461"},{"id":"ref-for-policy-container-ip-address-space\u2462"},{"id":"ref-for-policy-container-ip-address-space\u2463"},{"id":"ref-for-policy-container-ip-address-space\u2464"},{"id":"ref-for-policy-container-ip-address-space\u2465"},{"id":"ref-for-policy-container-ip-address-space\u2466"}],"title":"3.7. Integration with HTML"},{"refs":[{"id":"ref-for-policy-container-ip-address-space\u2467"}],"title":"3.8. Integration with Workers"}],"url":"#policy-container-ip-address-space"},
 "public-address": {"dfnID":"public-address","dfnText":"public address","external":false,"refSections":[{"refs":[{"id":"ref-for-public-address"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-public-address\u2460"}],"title":"3.7. Integration with HTML"},{"refs":[{"id":"ref-for-public-address\u2461"}],"title":"3.8. Integration with Workers"}],"url":"#public-address"},
 "request-target-ip-address-space": {"dfnID":"request-target-ip-address-space","dfnText":"target IP\n  address space","external":false,"refSections":[{"refs":[{"id":"ref-for-request-target-ip-address-space"},{"id":"ref-for-request-target-ip-address-space\u2460"},{"id":"ref-for-request-target-ip-address-space\u2461"},{"id":"ref-for-request-target-ip-address-space\u2462"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-request-target-ip-address-space\u2463"}],"title":"3.4. Integration with Mixed Content"}],"url":"#request-target-ip-address-space"},
