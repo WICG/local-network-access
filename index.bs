@@ -896,7 +896,15 @@ container](https://fetch.spec.whatwg.org/#concept-request-policy-container)
 during [fetch](https://fetch.spec.whatwg.org/#concept-fetch). See
 <WICG/private-network-access#83>.
 
-
+ISSUE: The [Service
+Worker](https://w3c.github.io/ServiceWorker/#dfn-service-worker)
+[navigate](https://w3c.github.io/ServiceWorker/#client-navigate) algorithm is
+defined by the
+[navigate](https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigate)
+algorithm in the HTML spec; neither navigate algorithm mentions the local
+network access algorithm in it. The Service Worker navigate spec will need to
+be updated to include the local network access check based on the
+WindowClient's policy container, not the Service Worker's policy container.
 
 # Implementation considerations # {#implementation-considerations}
 
