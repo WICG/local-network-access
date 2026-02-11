@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 3c53a5b02, updated Thu Nov 27 17:03:30 2025 +0000" name="generator">
   <link href="https://wicg.github.io/local-network-access/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="b77ff4e04a6fc2449aed37e9c34abf10faacb549" name="revision">
+  <meta content="a53c2824478359c8f2f77c3cfdc90d92a9f96161" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -859,7 +859,7 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
 </p>
    <h1 class="no-ref p-name" id="title">Local Network Access</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#CG-DRAFT">Draft Community Group Report</a>,
-    <time class="dt-updated" datetime="2026-01-08">8 January 2026</time></p>
+    <time class="dt-updated" datetime="2026-02-11">11 February 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1720,6 +1720,15 @@ copy the <a href="https://fetch.spec.whatwg.org/#concept-request-policy-containe
 container</a>
 during <a href="https://fetch.spec.whatwg.org/#concept-fetch" id="cbac8ed81">fetch</a>. See
 <a href="https://github.com/WICG/private-network-access/issues/83">WICG/private-network-access issue #83</a>.</p>
+   <p class="issue" id="issue-f5cf3665"><a class="self-link" href="#issue-f5cf3665"></a> The <a href="https://w3c.github.io/ServiceWorker/#dfn-service-worker">Service
+Worker</a>
+<a href="https://w3c.github.io/ServiceWorker/#client-navigate">navigate</a> algorithm is
+defined by the
+<a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigate">navigate</a>
+algorithm in the HTML spec; neither navigate algorithm mentions the local
+network access algorithm in it. The Service Worker navigate spec will need to
+be updated to include the local network access check based on the
+WindowClient’s policy container, not the Service Worker’s policy container.</p>
    <h2 class="heading settled" data-level="4" id="implementation-considerations"><span class="secno">4. </span><span class="content">Implementation considerations</span><a class="self-link" href="#implementation-considerations"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="file-urls"><span class="secno">4.1. </span><span class="content">File URLs</span><a class="self-link" href="#file-urls"></a></h3>
    <p>It isn’t entirely clear how file URLs fit into the public/local scheme outlined
@@ -2268,6 +2277,15 @@ copy the <a href="https://fetch.spec.whatwg.org/#concept-request-policy-containe
 container</a>
 during <a href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a>. See
 <a href="https://github.com/WICG/private-network-access/issues/83">WICG/private-network-access issue #83</a>. <a class="issue-return" href="#issue-0418a4e6" title="Jump to section">↵</a></div>
+   <div class="issue"> The <a href="https://w3c.github.io/ServiceWorker/#dfn-service-worker">Service
+Worker</a>
+<a href="https://w3c.github.io/ServiceWorker/#client-navigate">navigate</a> algorithm is
+defined by the
+<a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigate">navigate</a>
+algorithm in the HTML spec; neither navigate algorithm mentions the local
+network access algorithm in it. The Service Worker navigate spec will need to
+be updated to include the local network access check based on the
+WindowClient’s policy container, not the Service Worker’s policy container. <a class="issue-return" href="#issue-f5cf3665" title="Jump to section">↵</a></div>
    <div class="issue"> Re-evaluate this after implementation experience. <a class="issue-return" href="#issue-339df313" title="Jump to section">↵</a></div>
    <div class="issue"> Potential mitigations would require noticing network changes and
 clearing state specific to the previous network. Doing so in a fully general
