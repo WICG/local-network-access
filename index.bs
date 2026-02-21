@@ -554,7 +554,8 @@ feature/name=]s <dfn export permission>`"local-network"`</dfn> and
 <dfn export permission>`"loopback-network"`</dfn>.
 
 NOTE: Previously, the permission was specified as a single feature that covered
-both local and loopback cases.
+both local and loopback cases, <dfn export permission>`"local-network-access"`</dfn>.
+Chromium still supports this as an alias for the new fine-grained permission names.
 
 ## Integration with Permissions Policy ## {#integration-with-permissions-policy}
 
@@ -563,7 +564,8 @@ strings "local-network" and "loopback-network". The
 [=policy-controlled feature/default allowlist=] for each is `'self'`.
 
 NOTE: Previously, the policy controlled feature was specified as a single feature
-that covered both local and loopback cases.
+that covered both local and loopback cases, "local-network-access". Chromium still
+supports this as an alias for the new fine-grained permissions policy features.
 
 ## Integration with Fetch ## {#integration-with-fetch}
 
