@@ -803,12 +803,18 @@ required beyond the fetch change proposed above.
 One minor difference between the Fetch API and the WebSockets API is that
 WebSockets does not have an equivalent to fetch's `RequestInit`, and so there
 is no place to put in a `targetAddressSpace` option to bypass mixed content
-checks for ws:// urls. 
+checks for ws:// urls.
 
 ## Integration with WebTransport ## {#integration-with-webtransport}
 
 WebTransport connections should be subject to the same local network access
 permission requirements.
+
+No modification to the WebTransport spec will be required. In the WebTransport
+spec, [obtaining a WebTransport
+connection](https://www.w3.org/TR/webtransport/#obtain-a-webtransport-connection)
+references the Fetch spec for obtaining a connection in step 6, which is being
+modified in [[#fetching]]
 
 ## Integration with HTML ## {#integration-with-html}
 
