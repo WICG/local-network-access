@@ -6,7 +6,7 @@ on:
 jobs:
   main:
     name: Build, Validate and Deploy
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
