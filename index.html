@@ -5,10 +5,10 @@
   <title>Local Network Access</title>
   <meta content="CG-DRAFT" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
-  <meta content="Bikeshed version 3c53a5b02, updated Thu Nov 27 17:03:30 2025 +0000" name="generator">
+  <meta content="Bikeshed version 0ef803fdf, updated Tue Jan 6 11:59:39 2026 -0800" name="generator">
   <link href="https://wicg.github.io/local-network-access/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="b7cb1414ecf1f9a6d1c207ff17328d5869f3910e" name="revision">
+  <meta content="a2786f258565baf4cdc131b2a8c110c383a201c2" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -859,7 +859,7 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
 </p>
    <h1 class="no-ref p-name" id="title">Local Network Access</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#CG-DRAFT">Draft Community Group Report</a>,
-    <time class="dt-updated" datetime="2026-02-25">25 February 2026</time></p>
+    <time class="dt-updated" datetime="2026-03-06">6 March 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1248,7 +1248,7 @@ specification considered them to be <a data-link-type="dfn" href="#ip-address-sp
 in accordance with the IANA Special-Purpose Address Registries
 (<a data-link-type="biblio" href="#biblio-ipv4-registry" title="IANA IPv4 Special-Purpose Address Registry">[IPV4-REGISTRY]</a> and <a data-link-type="biblio" href="#biblio-ipv6-registry" title="IANA IPv6 Special-Purpose Address Registry">[IPV6-REGISTRY]</a>) and the <code>Globally Reachable</code> bit
 defined therein. This turned out to be an inaccurate signal for our uses, as
-described in <a href="https://github.com/WICG/private-network-access/issues/50">WICG/private-network-access issue #50</a>.</p>
+described in <a href="https://github.com/wicg/private-network-access/issues/50">wicg/private-network-access issue #50</a>.</p>
    <p class="note" role="note"><span class="marker">Note:</span> <a data-biblio-obsolete data-link-type="biblio" href="#biblio-private-network-access" title="Private Network Access">[PRIVATE-NETWORK-ACCESS]</a> used the address spaces public, private, and
 local. This specification renames the address spaces to public, local, and
 loopback, respectively.</p>
@@ -1289,11 +1289,11 @@ are not so complex.</p>
 <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request">local network requests</a>, and should not be subject to local network access
 checks, since any software running on the user’s device is already in the most
 privileged vantage point on the user’s network.</p>
-   <p class="issue" id="issue-dea5f098"><a class="self-link" href="#issue-dea5f098"></a> The definition of <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request①">local network requests</a> could be expanded to cover
+   <p class="issue" id="issue-57b72255"><a class="self-link" href="#issue-57b72255"></a> The definition of <a data-link-type="dfn" href="#local-network-request" id="ref-for-local-network-request①">local network requests</a> could be expanded to cover
 all cross-origin requests for which the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url" id="ref-for-concept-request-current-url①">current url</a>’s <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host" id="ref-for-dom-url-host①">host</a></code>
 maps to an IP address whose <a data-link-type="dfn" href="#ip-address-space" id="ref-for-ip-address-space⑨">IP address space</a> is not <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑤">public</a>. This would prevent a malicious server on the local network from
 attacking other servers, including servers on <code>localhost</code>. See
-<a href="https://github.com/WICG/private-network-access/issues/39">WICG/private-network-access issue #39</a>.</p>
+<a href="https://github.com/wicg/private-network-access/issues/39">wicg/private-network-access issue #39</a>.</p>
    <p class="note" role="note"><span class="marker">NOTE:</span> Currently, Chromium only implements Local Network Access restrictions for
 <a data-link-type="dfn" href="#ip-address-space-public" id="ref-for-ip-address-space-public⑥">public</a> to <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑧">local</a> or <a data-link-type="dfn" href="#ip-address-space-loopback" id="ref-for-ip-address-space-loopback⑨">loopback</a> requests, and does not enforce the permission for cross-origin
 <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local①⑨">local</a> requests. This restriction can be shipped as an
@@ -1318,11 +1318,11 @@ network. A user agent may persist this decision to reduce permission fatigue.</p
    <h3 class="heading settled" data-level="2.4" id="secure-context-restriction"><span class="secno">2.4. </span><span class="content">Secure Context Restriction</span><a class="self-link" href="#secure-context-restriction"></a></h3>
    <p>The capability to make local network requests is a <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-powerful-feature" id="ref-for-dfn-powerful-feature">powerful feature</a>
 and must only be allowed from <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#secure-context" id="ref-for-secure-context">secure contexts</a>.</p>
-   <p class="issue" id="issue-cc743ffe"><a class="self-link" href="#issue-cc743ffe"></a> To be able to apply LNA checks to all cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②②">local</a> requests in the future (see Issue above), Chromium plans to
+   <p class="issue" id="issue-ad33f503"><a class="self-link" href="#issue-ad33f503"></a> To be able to apply LNA checks to all cross-origin <a data-link-type="dfn" href="#ip-address-space-local" id="ref-for-ip-address-space-local②②">local</a> requests in the future (see Issue above), Chromium plans to
 exempt local servers that likely cannot currently get publicly trusted HTTPS
 certificates from this requirement (e.g., servers on <code>.local</code> and private IP
 literals). See <a href="#rollout-difficulties">§ 4.4 Rollout Difficulties</a> for more discussion, and also see
-<a href="https://github.com/WICG/private-network-access/issues/96">WICG/private-network-access issue #96</a>.</p>
+<a href="https://github.com/wicg/private-network-access/issues/96">wicg/private-network-access issue #96</a>.</p>
    <h3 class="heading settled" data-level="2.5" id="mixed-content-lna"><span class="secno">2.5. </span><span class="content">Mixed Content</span><a class="self-link" href="#mixed-content-lna"></a></h3>
    <p>Many local network servers do not run HTTPS, as it has proven difficult (and
 sometimes even impossible) to migrate local network servers away from HTTP.
@@ -1358,7 +1358,7 @@ request.</p>
 around (see
 <a href="https://wicg.github.io/private-network-access/#csp">private-network-access#csp</a>).
 This directive would be obviated if we implemented
-<a href="https://github.com/WICG/private-network-access/issues/39">WICG/private-network-access issue #39</a>.ß</p>
+<a href="https://github.com/wicg/private-network-access/issues/39">wicg/private-network-access issue #39</a>.ß</p>
    <h2 class="heading settled" data-level="3" id="integrations"><span class="secno">3. </span><span class="content">Integrations</span><a class="self-link" href="#integrations"></a></h2>
    <p><em>This section is non-normative.</em></p>
    <p>This document proposes a number of modifications to other specifications in
@@ -1714,7 +1714,7 @@ there may not be an active document around when the service worker is
 executing). It may be better for this to be based on the partitioned storage
 key of the worker, and it would also be good if permissions policy supported
 service workers.</p>
-   <p class="issue" id="issue-0418a4e6"><a class="self-link" href="#issue-0418a4e6"></a> The <a href="https://w3c.github.io/ServiceWorker/#dfn-service-worker">Service
+   <p class="issue" id="issue-f8588a8c"><a class="self-link" href="#issue-f8588a8c"></a> The <a href="https://w3c.github.io/ServiceWorker/#dfn-service-worker">Service
 Worker</a> <a href="https://w3c.github.io/ServiceWorker/#soft-update">soft
 update</a> algorithm
 unfortunately sets a <a href="https://fetch.spec.whatwg.org/#concept-request-client" id="902c4d570">request
@@ -1726,16 +1726,7 @@ client</a> from which to
 copy the <a href="https://fetch.spec.whatwg.org/#concept-request-policy-container" id="d4c464d40">policy
 container</a>
 during <a href="https://fetch.spec.whatwg.org/#concept-fetch" id="cbac8ed81">fetch</a>. See
-<a href="https://github.com/WICG/private-network-access/issues/83">WICG/private-network-access issue #83</a>.</p>
-   <p class="issue" id="issue-f5cf3665"><a class="self-link" href="#issue-f5cf3665"></a> The <a href="https://w3c.github.io/ServiceWorker/#dfn-service-worker">Service
-Worker</a>
-<a href="https://w3c.github.io/ServiceWorker/#client-navigate">navigate</a> algorithm is
-defined by the
-<a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigate">navigate</a>
-algorithm in the HTML spec; neither navigate algorithm mentions the local
-network access algorithm in it. The Service Worker navigate spec will need to
-be updated to include the local network access check based on the
-WindowClient’s policy container, not the Service Worker’s policy container.</p>
+<a href="https://github.com/wicg/private-network-access/issues/83">wicg/private-network-access issue #83</a>.</p>
    <h2 class="heading settled" data-level="4" id="implementation-considerations"><span class="secno">4. </span><span class="content">Implementation considerations</span><a class="self-link" href="#implementation-considerations"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="file-urls"><span class="secno">4.1. </span><span class="content">File URLs</span><a class="self-link" href="#file-urls"></a></h3>
    <p>It isn’t entirely clear how file URLs fit into the public/local scheme outlined
@@ -1796,7 +1787,7 @@ check. This is not yet reflected in the algorithms above, since that check is
 only applied in <a data-link-type="abstract-op" href="https://fetch.spec.whatwg.org/#concept-http-network-fetch" id="ref-for-concept-http-network-fetch①">HTTP-network fetch</a>.</p>
    <p>TODO: Specify and explain Chromium’s behavior here, or add an
 <a data-link-type="abstract-op" href="https://fetch.spec.whatwg.org/#concept-http-network-or-cache-fetch" id="ref-for-concept-http-network-or-cache-fetch">HTTP-network-or-cache fetch</a> integration above. See
-<a href="https://github.com/WICG/private-network-access/issues/75">WICG/private-network-access issue #75</a>. We include a sketch below.</p>
+<a href="https://github.com/wicg/private-network-access/issues/75">wicg/private-network-access issue #75</a>. We include a sketch below.</p>
    <p>As with main resources, a subresource constructed from a cached response
 remembers the IP address from which the response was initially loaded. The IP
 address space of the response is derived anew from the IP address.</p>
@@ -1924,10 +1915,10 @@ interface’s first-party context.</p>
    </ul>
    <p>None of these attacks are novel - they are just examples of the limitations of
 this specification.</p>
-   <p class="issue" id="issue-ab66f12e"><a class="self-link" href="#issue-ab66f12e"></a> Potential mitigations would require noticing network changes and
+   <p class="issue" id="issue-07dc866e"><a class="self-link" href="#issue-07dc866e"></a> Potential mitigations would require noticing network changes and
 clearing state specific to the previous network. Doing so in a fully general
 manner is likely to be impossible short of clearing all state. Maybe a
-practical compromise can be reached. See <a href="https://github.com/WICG/private-network-access/issues/28">WICG/private-network-access issue #28</a>.</p>
+practical compromise can be reached. See <a href="https://github.com/wicg/private-network-access/issues/28">wicg/private-network-access issue #28</a>.</p>
    <p>An alternative approach might be to scope the permission grant to an identifier
 that distinguishes different networks.</p>
    <h3 class="heading settled" data-level="5.5" id="local-network-attackers"><span class="secno">5.5. </span><span class="content">Local network attackers</span><a class="self-link" href="#local-network-attackers"></a></h3>
@@ -1938,7 +1929,7 @@ services running on <code>localhost</code> on a user’s machine. (1) is already
 without needing to abuse the user’s browser, but (2) remains a concern. For
 example, a captive portal might be able to redirect the user to a malicious
 page that tries to probe and attack vulnerable <code>localhost</code> services running on
-the user’s machine. (See also <a href="https://github.com/WICG/private-network-accesss/issues/39">WICG/private-network-accesss issue #39</a>.)</p>
+the user’s machine. (See also <a href="https://github.com/wicg/private-network-accesss/issues/39">wicg/private-network-accesss issue #39</a>.)</p>
    <p>We see public websites on the drive-by web as a more urgent security (and
 privacy) risk and see an incremental rollout of these protections as valuable
 progress, despite the lingering risk from local network attackers.</p>
@@ -2255,12 +2246,12 @@ paths forward.</p>
 all cross-origin requests for which the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-current-url">current url</a>’s <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#dom-url-host">host</a></code>
 maps to an IP address whose <a data-link-type="dfn" href="#ip-address-space">IP address space</a> is not <a data-link-type="dfn" href="#ip-address-space-public">public</a>. This would prevent a malicious server on the local network from
 attacking other servers, including servers on <code>localhost</code>. See
-<a href="https://github.com/WICG/private-network-access/issues/39">WICG/private-network-access issue #39</a>. <a class="issue-return" href="#issue-dea5f098" title="Jump to section">↵</a></div>
+<a href="https://github.com/wicg/private-network-access/issues/39">wicg/private-network-access issue #39</a>. <a class="issue-return" href="#issue-57b72255" title="Jump to section">↵</a></div>
    <div class="issue"> To be able to apply LNA checks to all cross-origin <a data-link-type="dfn" href="#ip-address-space-local">local</a> requests in the future (see Issue above), Chromium plans to
 exempt local servers that likely cannot currently get publicly trusted HTTPS
 certificates from this requirement (e.g., servers on <code>.local</code> and private IP
 literals). See <a href="#rollout-difficulties">§ 4.4 Rollout Difficulties</a> for more discussion, and also see
-<a href="https://github.com/WICG/private-network-access/issues/96">WICG/private-network-access issue #96</a>. <a class="issue-return" href="#issue-cc743ffe" title="Jump to section">↵</a></div>
+<a href="https://github.com/wicg/private-network-access/issues/96">wicg/private-network-access issue #96</a>. <a class="issue-return" href="#issue-ad33f503" title="Jump to section">↵</a></div>
    <div class="issue"> Chromium only applies LNA restrictions to iframe navigations currently.
 It may be worth expanding this to include main-frame navigations (especially
 popup windows which can be controlled by their opener). <a class="issue-return" href="#issue-0daaba5a" title="Jump to section">↵</a></div>
@@ -2284,21 +2275,12 @@ client</a> from which to
 copy the <a href="https://fetch.spec.whatwg.org/#concept-request-policy-container">policy
 container</a>
 during <a href="https://fetch.spec.whatwg.org/#concept-fetch">fetch</a>. See
-<a href="https://github.com/WICG/private-network-access/issues/83">WICG/private-network-access issue #83</a>. <a class="issue-return" href="#issue-0418a4e6" title="Jump to section">↵</a></div>
-   <div class="issue"> The <a href="https://w3c.github.io/ServiceWorker/#dfn-service-worker">Service
-Worker</a>
-<a href="https://w3c.github.io/ServiceWorker/#client-navigate">navigate</a> algorithm is
-defined by the
-<a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigate">navigate</a>
-algorithm in the HTML spec; neither navigate algorithm mentions the local
-network access algorithm in it. The Service Worker navigate spec will need to
-be updated to include the local network access check based on the
-WindowClient’s policy container, not the Service Worker’s policy container. <a class="issue-return" href="#issue-f5cf3665" title="Jump to section">↵</a></div>
+<a href="https://github.com/wicg/private-network-access/issues/83">wicg/private-network-access issue #83</a>. <a class="issue-return" href="#issue-f8588a8c" title="Jump to section">↵</a></div>
    <div class="issue"> Re-evaluate this after implementation experience. <a class="issue-return" href="#issue-339df313" title="Jump to section">↵</a></div>
    <div class="issue"> Potential mitigations would require noticing network changes and
 clearing state specific to the previous network. Doing so in a fully general
 manner is likely to be impossible short of clearing all state. Maybe a
-practical compromise can be reached. See <a href="https://github.com/WICG/private-network-access/issues/28">WICG/private-network-access issue #28</a>. <a class="issue-return" href="#issue-ab66f12e" title="Jump to section">↵</a></div>
+practical compromise can be reached. See <a href="https://github.com/wicg/private-network-access/issues/28">wicg/private-network-access issue #28</a>. <a class="issue-return" href="#issue-07dc866e" title="Jump to section">↵</a></div>
   </div>
 <script>/* Boilerplate: script-dom-helper */
 "use strict";
