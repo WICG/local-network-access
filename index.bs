@@ -29,6 +29,9 @@ spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/
 spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/
   type: abstract-op
     text: HTTP-network fetch; url: #concept-http-network-fetch
+spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/
+  type: abstract-op
+    text: create a connection; url: #create-a-connection
 spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/;
   type: abstract-op;
     text: HTTP-network-or-cache fetch; url: #concept-http-network-or-cache-fetch
