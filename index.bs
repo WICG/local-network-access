@@ -29,9 +29,6 @@ spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/
 spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/
   type: abstract-op
     text: HTTP-network fetch; url: #concept-http-network-fetch
-spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/
-  type: abstract-op
-    text: create a connection; url: #create-a-connection
 spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/;
   type: abstract-op;
     text: HTTP-network-or-cache fetch; url: #concept-http-network-or-cache-fetch
@@ -608,7 +605,7 @@ Update [[FETCH]] as follows:
   1.  [=Connection=] objects are given a new <dfn export for="connection">IP
       address space</dfn> property, initially null.
   
-  1.  Add a new step to the [=create a connection=] algorithm immediately after establishing the new connection (between Steps 2 and 3).
+  1.  Add a new step to the [FETCH#create-a-connection] algorithm immediately after establishing the new connection (between Steps 2 and 3).
 
       1. If |host| is an IP address, set |connection|'s [=connection/IP address space=] to
           the result of running the [=determine the IP address space=] algorithm on |host|.
