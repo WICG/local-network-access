@@ -25,13 +25,16 @@ spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/
     text: fetch; url: #concept-fetch
 spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/
   type: abstract-op
-    text: fetch; url: #concept-fetch
-spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/
-  type: abstract-op
     text: HTTP-network fetch; url: #concept-http-network-fetch
 spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/;
   type: abstract-op;
     text: HTTP-network-or-cache fetch; url: #concept-http-network-or-cache-fetch
+spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/;
+  type: dfn;
+    text: create a connection; url: #create-a-connection
+spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/;
+  type: dfn;
+    text: obtain a connection; url: #concept-connection-obtain
 url: https://websockets.spec.whatwg.org/#concept-websocket-connection-obtain; type: dfn; text: obtain a Websocket connection
 spec: WEBSOCKET; urlPrefix: https://websockets.spec.whatwg.org/
   type: abstract-op;
@@ -596,16 +599,19 @@ address space boundaries.
 ### Fetching ### {#fetching}
 
 NOTE: Connection management in [[FETCH]] is intentionally a bit vague, so some of
-the below is explained via notes to implementers. This section lays out that implementers should perform local network access checks after obtaining the connection but before continuing to perform the fetch using that connection.
+the below is explained via notes to implementers. This section lays out that
+implementers perform local network access checks after obtaining the connection
+but before continuing to perform the fetch using that connection.
 
-ISSUE: To address <WICG/local-network-access#103> we will need to instead integrate into Step 4.6 of [=obtain a connection=] to perform checks after resolving the origin but before the actual connection is created.
+ISSUE: To address <WICG/local-network-access#103> we will need to instead integrate
+into Step 4.6 of [=obtain a connection=] to perform checks after resolving the origin but before the actual connection is created.
 
 Update [[FETCH]] as follows:
 
   1.  [=Connection=] objects are given a new <dfn export for="connection">IP
       address space</dfn> property, initially null.
   
-  1.  Add a new step to the [[FETCH#create-a-connection]] algorithm immediately after establishing the new connection (between Steps 2 and 3).
+  1.  Add a new step to the [=create a connection=] algorithm immediately after establishing the new connection (between Steps 2 and 3).
 
       1. If |host| is an IP address, set |connection|'s [=connection/IP address space=] to
           the result of running the [=determine the IP address space=] algorithm on |host|.
