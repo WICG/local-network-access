@@ -536,7 +536,7 @@ TODO: Decide if we want to keep the CSP directive `treat-as-public-address`
 around (see
 [private-network-access#csp](https://wicg.github.io/private-network-access/#csp)).
 This directive would be obviated if we implemented
-<WICG/private-network-access#39>.ß
+<WICG/private-network-access#39>.
 
 # Integrations # {#integrations}
 
@@ -595,21 +595,20 @@ address space boundaries.
 
 ### Fetching ### {#fetching}
 
-What follows is a sketch of a potential solution:
+NOTE: Connection management in [[FETCH]] is intentionally a bit vague, so some of
+the below is explained via notes to implementers. This section lays out that implementers should perform local network access checks after obtaining the connection but before continuing to perform the fetch using that connection.
+
+ISSUE: To address <WICG/local-network-access#103> we will need to instead integrate into Step 4.6 of [=obtain a connection=] to perform checks after resolving the origin but before the actual connection is created.
+
+Update [[FETCH]] as follows:
 
   1.  [=Connection=] objects are given a new <dfn export for="connection">IP
-      address space</dfn> property, initially null. This applies to WebSocket
-      connections too.
+      address space</dfn> property, initially null.
+  
+  1.  Add a new step to the [=create a connection=] algorithm immediately after establishing the new connection (between Steps 2 and 3).
 
-  1.  A new step is added to the [=obtain a connection=] algorithm immediately
-      before appending |connection| to the user agent's [=connection pool=]:
-
-      1.  Set |connection|'s [=connection/IP address space=] to
-          the result of running the [=determine the IP address space=] algorithm
-          on the IP address of |connection|'s remote endpoint.
-
-          ISSUE: The remote endpoint concept is not specified in [[FETCH]]
-          yet, hence this is still handwaving to some extent.
+      1. If |host| is an IP address, set |connection|'s [=connection/IP address space=] to
+          the result of running the [=determine the IP address space=] algorithm on |host|.
 
   1.  [=Request=] objects are given a new <dfn for="request" export>target IP
       address space</dfn> property, initially null.
@@ -687,17 +686,9 @@ What follows is a sketch of a potential solution:
              handling for the loopback case as it is already considered to be
              potentially trustworthy and won’t trigger mixed content checks.
 
-             NOTE: We also explicitly do *not* set the target address space
-             property in the public case, because that breaks the next step
-             here... (but maybe we could just skip that?)
-
              NOTE: We don’t set the target IP address space here if it was
              already non-null in order to prefer the explicit
              targetAddressSpace if set by the fetch() API.
-
-      2.  If |request|’s target IP address space is public, then return a network error.
-
-          OPEN QUESTION: Do we need this? Under what conditions can this get set to "public"?
 
   1.  The [$HTTP-network fetch$] algorithm is amended to add 3 new steps right
       after checking that the newly-obtained <var ignore>connection</var> is not
