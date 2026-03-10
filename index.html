@@ -8,7 +8,7 @@
   <meta content="Bikeshed version 0ef803fdf, updated Tue Jan 6 11:59:39 2026 -0800" name="generator">
   <link href="https://wicg.github.io/local-network-access/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="a2786f258565baf4cdc131b2a8c110c383a201c2" name="revision">
+  <meta content="79aacc4e1626c92fd028f51e85417ea814f85326" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -859,7 +859,7 @@ dd:not(:last-child) > .wpt-tests-block:not([open]):last-child {
 </p>
    <h1 class="no-ref p-name" id="title">Local Network Access</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#CG-DRAFT">Draft Community Group Report</a>,
-    <time class="dt-updated" datetime="2026-03-06">6 March 2026</time></p>
+    <time class="dt-updated" datetime="2026-03-10">10 March 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1358,7 +1358,7 @@ request.</p>
 around (see
 <a href="https://wicg.github.io/private-network-access/#csp">private-network-access#csp</a>).
 This directive would be obviated if we implemented
-<a href="https://github.com/wicg/private-network-access/issues/39">wicg/private-network-access issue #39</a>.ß</p>
+<a href="https://github.com/wicg/private-network-access/issues/39">wicg/private-network-access issue #39</a>.</p>
    <h2 class="heading settled" data-level="3" id="integrations"><span class="secno">3. </span><span class="content">Integrations</span><a class="self-link" href="#integrations"></a></h2>
    <p><em>This section is non-normative.</em></p>
    <p>This document proposes a number of modifications to other specifications in
@@ -1400,22 +1400,23 @@ to the newly-obtained connection. Given complexities such as Happy Eyeballs
 non-deterministically for hosts with multiple IP addresses that straddle IP
 address space boundaries.</p>
    <h4 class="heading settled" data-level="3.3.1" id="fetching"><span class="secno">3.3.1. </span><span class="content">Fetching</span><a class="self-link" href="#fetching"></a></h4>
-   <p>What follows is a sketch of a potential solution:</p>
+   <p class="note" role="note"><span class="marker">NOTE:</span> Connection management in <a data-link-type="biblio" href="#biblio-fetch" title="Fetch Standard">[FETCH]</a> is intentionally a bit vague, so some of
+the below is explained via notes to implementers. This section lays out that
+implementers perform local network access checks after obtaining the connection
+but before continuing to perform the fetch using that connection.</p>
+   <p class="issue" id="issue-879e23d2"><a class="self-link" href="#issue-879e23d2"></a> To address <a href="https://github.com/wicg/local-network-access/issues/103">wicg/local-network-access issue #103</a> we will need to instead integrate
+into Step 4.6 of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-connection-obtain" id="ref-for-concept-connection-obtain①">obtain a connection</a> to perform checks after resolving the origin but before the actual connection is created.</p>
+   <p>Update <a data-link-type="biblio" href="#biblio-fetch" title="Fetch Standard">[FETCH]</a> as follows:</p>
    <ol>
     <li data-md>
      <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-connection" id="ref-for-concept-connection">Connection</a> objects are given a new <dfn class="dfn-paneled" data-dfn-for="connection" data-dfn-type="dfn" data-export data-lt="IP address space" id="connection-ip-address-space">IP
-  address space</dfn> property, initially null. This applies to WebSocket
-  connections too.</p>
+  address space</dfn> property, initially null.</p>
     <li data-md>
-     <p>A new step is added to the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-connection-obtain" id="ref-for-concept-connection-obtain①">obtain a connection</a> algorithm immediately
-  before appending <var>connection</var> to the user agent’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-connection-pool" id="ref-for-concept-connection-pool">connection pool</a>:</p>
+     <p>Add a new step to the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#create-a-connection" id="ref-for-create-a-connection">create a connection</a> algorithm immediately after establishing the new connection (between Steps 2 and 3).</p>
      <ol>
       <li data-md>
-       <p>Set <var>connection</var>’s <a data-link-type="dfn" href="#connection-ip-address-space" id="ref-for-connection-ip-address-space">IP address space</a> to
-  the result of running the <a data-link-type="dfn" href="#determine-the-ip-address-space" id="ref-for-determine-the-ip-address-space">determine the IP address space</a> algorithm
-  on the IP address of <var>connection</var>’s remote endpoint.</p>
-       <p class="issue" id="issue-f99ba27e"><a class="self-link" href="#issue-f99ba27e"></a> The remote endpoint concept is not specified in <a data-link-type="biblio" href="#biblio-fetch" title="Fetch Standard">[FETCH]</a>
-  yet, hence this is still handwaving to some extent.</p>
+       <p>If <var>host</var> is an IP address, set <var>connection</var>’s <a data-link-type="dfn" href="#connection-ip-address-space" id="ref-for-connection-ip-address-space">IP address space</a> to
+  the result of running the <a data-link-type="dfn" href="#determine-the-ip-address-space" id="ref-for-determine-the-ip-address-space">determine the IP address space</a> algorithm on <var>host</var>.</p>
      </ol>
     <li data-md>
      <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request" id="ref-for-concept-request①">Request</a> objects are given a new <dfn class="dfn-paneled" data-dfn-for="request" data-dfn-type="dfn" data-export data-lt="target IP address space" id="request-target-ip-address-space">target IP
@@ -1507,16 +1508,10 @@ address space boundaries.</p>
  <a data-link-type="biblio" href="#biblio-let-localhost-be-localhost" title="Let &apos;localhost&apos; be localhost.">[LET-LOCALHOST-BE-LOCALHOST]</a>), but we do not need special
  handling for the loopback case as it is already considered to be
  potentially trustworthy and won’t trigger mixed content checks.</p>
-         <p class="note" role="note"><span class="marker">NOTE:</span> We also explicitly do <em>not</em> set the target address space
- property in the public case, because that breaks the next step
- here... (but maybe we could just skip that?)</p>
          <p class="note" role="note"><span class="marker">NOTE:</span> We don’t set the target IP address space here if it was
  already non-null in order to prefer the explicit
  targetAddressSpace if set by the fetch() API.</p>
        </ol>
-      <li data-md>
-       <p>If <var>request</var>’s target IP address space is public, then return a network error.</p>
-       <p>OPEN QUESTION: Do we need this? Under what conditions can this get set to "public"?</p>
      </ol>
     <li data-md>
      <p>The <a data-link-type="abstract-op" href="https://fetch.spec.whatwg.org/#concept-http-network-fetch" id="ref-for-concept-http-network-fetch">HTTP-network fetch</a> algorithm is amended to add 3 new steps right
@@ -2075,9 +2070,9 @@ paths forward.</p>
      <li><span class="dfn-paneled" id="0dcd4ad9">RequestInit</span>
      <li><span class="dfn-paneled" id="857d5516">client</span>
      <li><span class="dfn-paneled" id="697965b2">connection</span>
-     <li><span class="dfn-paneled" id="f9649676">connection pool</span>
      <li><span class="dfn-paneled" id="98f9d698">CORS-safelisted method</span>
      <li><span class="dfn-paneled" id="99f492fd">CORS-safelisted request-header</span>
+     <li><span class="dfn-paneled" id="16781dbd">create a connection</span>
      <li><span class="dfn-paneled" id="3f2ca4de">current URL</span>
      <li><span class="dfn-paneled" id="a33db89a">fetch</span>
      <li><span class="dfn-paneled" id="2aaa2f42">HTTP fetch</span>
@@ -2255,8 +2250,8 @@ literals). See <a href="#rollout-difficulties">§ 4.4 Rollout Difficulties</a>
    <div class="issue"> Chromium only applies LNA restrictions to iframe navigations currently.
 It may be worth expanding this to include main-frame navigations (especially
 popup windows which can be controlled by their opener). <a class="issue-return" href="#issue-0daaba5a" title="Jump to section">↵</a></div>
-   <div class="issue"> The remote endpoint concept is not specified in <a data-link-type="biblio" href="#biblio-fetch" title="Fetch Standard">[FETCH]</a>
-  yet, hence this is still handwaving to some extent. <a class="issue-return" href="#issue-f99ba27e" title="Jump to section">↵</a></div>
+   <div class="issue"> To address <a href="https://github.com/wicg/local-network-access/issues/103">wicg/local-network-access issue #103</a> we will need to instead integrate
+into Step 4.6 of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-connection-obtain">obtain a connection</a> to perform checks after resolving the origin but before the actual connection is created. <a class="issue-return" href="#issue-879e23d2" title="Jump to section">↵</a></div>
    <div class="issue"> Chromium’s implementation currently applies the LNA permission for
 service worker-initiated fetches based on the worker’s script origin (since
 there may not be an active document around when the service worker is
@@ -2487,6 +2482,7 @@ let dfnPanelData = {
 "0dcd4ad9": {"dfnID":"0dcd4ad9","dfnText":"RequestInit","external":true,"refSections":[{"refs":[{"id":"ref-for-requestinit"}],"title":"3.3.2. Fetch API"}],"url":"https://fetch.spec.whatwg.org/#requestinit"},
 "1243a891": {"dfnID":"1243a891","dfnText":"exist","external":true,"refSections":[{"refs":[{"id":"ref-for-map-exists"}],"title":"3.3.2. Fetch API"}],"url":"https://infra.spec.whatwg.org/#map-exists"},
 "1570624a": {"dfnID":"1570624a","dfnText":"default allowlist","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-controlled-feature-default-allowlist"}],"title":"3.2. Integration with Permissions Policy"}],"url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist"},
+"16781dbd": {"dfnID":"16781dbd","dfnText":"create a connection","external":true,"refSections":[{"refs":[{"id":"ref-for-create-a-connection"}],"title":"3.3.1. Fetching"}],"url":"https://fetch.spec.whatwg.org/#create-a-connection"},
 "2aaa2f42": {"dfnID":"2aaa2f42","dfnText":"HTTP fetch","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-http-fetch"}],"title":"3.3.1. Fetching"}],"url":"https://fetch.spec.whatwg.org/#concept-http-fetch"},
 "3d877348": {"dfnID":"3d877348","dfnText":"Should fetching request be blocked as mixed content?","external":true,"refSections":[{"refs":[{"id":"ref-for-should-block-fetch"}],"title":"3.4. Integration with Mixed Content"}],"url":"https://w3c.github.io/webappsec-mixed-content/#should-block-fetch"},
 "3e12e042": {"dfnID":"3e12e042","dfnText":"environment settings object","external":true,"refSections":[{"refs":[{"id":"ref-for-environment-settings-object"}],"title":"3.3.1. Fetching"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object"},
@@ -2538,7 +2534,6 @@ let dfnPanelData = {
 "enumdef-ipaddressspace": {"dfnID":"enumdef-ipaddressspace","dfnText":"IPAddressSpace","external":false,"refSections":[{"refs":[{"id":"ref-for-enumdef-ipaddressspace"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-enumdef-ipaddressspace\u2460"},{"id":"ref-for-enumdef-ipaddressspace\u2461"},{"id":"ref-for-enumdef-ipaddressspace\u2462"}],"title":"3.3.2. Fetch API"}],"url":"#enumdef-ipaddressspace"},
 "f4cb4c20": {"dfnID":"f4cb4c20","dfnText":"HTTP-network-or-cache fetch","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-http-network-or-cache-fetch"}],"title":"4.3.2. Subresources"},{"refs":[{"id":"ref-for-concept-http-network-or-cache-fetch\u2460"}],"title":"5.6.1. Applying checks to subresources"}],"url":"https://fetch.spec.whatwg.org/#concept-http-network-or-cache-fetch"},
 "f78d5b5c": {"dfnID":"f78d5b5c","dfnText":"origin","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-request-origin"},{"id":"ref-for-concept-request-origin\u2460"},{"id":"ref-for-concept-request-origin\u2461"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-concept-request-origin\u2462"}],"title":"3.4. Integration with Mixed Content"}],"url":"https://fetch.spec.whatwg.org/#concept-request-origin"},
-"f9649676": {"dfnID":"f9649676","dfnText":"connection pool","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-connection-pool"}],"title":"3.3.1. Fetching"}],"url":"https://fetch.spec.whatwg.org/#concept-connection-pool"},
 "f9da6f1f": {"dfnID":"f9da6f1f","dfnText":"Request","external":true,"refSections":[{"refs":[{"id":"ref-for-request"}],"title":"3.3.2. Fetch API"}],"url":"https://fetch.spec.whatwg.org/#request"},
 "http-no-service-worker-fetch": {"dfnID":"http-no-service-worker-fetch","dfnText":"HTTP-no-service-worker fetch","external":false,"refSections":[{"refs":[{"id":"ref-for-http-no-service-worker-fetch"}],"title":"3.3.1. Fetching"}],"url":"#http-no-service-worker-fetch"},
 "ip-address-space": {"dfnID":"ip-address-space","dfnText":"IP address\nspace","external":false,"refSections":[{"refs":[{"id":"ref-for-ip-address-space"},{"id":"ref-for-ip-address-space\u2460"},{"id":"ref-for-ip-address-space\u2461"},{"id":"ref-for-ip-address-space\u2462"},{"id":"ref-for-ip-address-space\u2463"},{"id":"ref-for-ip-address-space\u2464"},{"id":"ref-for-ip-address-space\u2465"}],"title":"2.1. IP Address Space"},{"refs":[{"id":"ref-for-ip-address-space\u2466"},{"id":"ref-for-ip-address-space\u2467"},{"id":"ref-for-ip-address-space\u2468"}],"title":"2.2. Local Network Request"},{"refs":[{"id":"ref-for-ip-address-space\u2460\u24ea"}],"title":"3.3.1. Fetching"},{"refs":[{"id":"ref-for-ip-address-space\u2460\u2460"}],"title":"3.8. Integration with Workers"},{"refs":[{"id":"ref-for-ip-address-space\u2460\u2461"}],"title":"4.2. Proxies"},{"refs":[{"id":"ref-for-ip-address-space\u2460\u2462"}],"title":"5.6.2. HTTP cache poisoning"}],"url":"#ip-address-space"},
@@ -2968,8 +2963,7 @@ let refsData = {
 "https://dom.spec.whatwg.org/#concept-document": {"displayText":"document","export":true,"for_":[],"level":"1","normative":true,"shortname":"dom","spec":"dom","status":"current","text":"document","type":"dfn","url":"https://dom.spec.whatwg.org/#concept-document"},
 "https://dom.spec.whatwg.org/#document": {"displayText":"Document","export":true,"for_":[],"level":"1","normative":true,"shortname":"dom","spec":"dom","status":"current","text":"Document","type":"interface","url":"https://dom.spec.whatwg.org/#document"},
 "https://fetch.spec.whatwg.org/#concept-connection": {"displayText":"connection","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"connection","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-connection"},
-"https://fetch.spec.whatwg.org/#concept-connection-obtain": {"displayText":"obtain a connection","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"obtain a connection","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-connection-obtain"},
-"https://fetch.spec.whatwg.org/#concept-connection-pool": {"displayText":"connection pool","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"connection pool","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-connection-pool"},
+"https://fetch.spec.whatwg.org/#concept-connection-obtain": {"displayText":"obtain a connection","export":true,"for_":[],"level":"","normative":true,"shortname":"fetch","spec":"fetch","status":"anchor-block","text":"obtain a connection","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-connection-obtain"},
 "https://fetch.spec.whatwg.org/#concept-fetch": {"displayText":"fetch","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"fetch","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-fetch"},
 "https://fetch.spec.whatwg.org/#concept-http-fetch": {"displayText":"HTTP fetch","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"http fetch","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-http-fetch"},
 "https://fetch.spec.whatwg.org/#concept-http-network-fetch": {"displayText":"HTTP-network fetch","export":true,"for_":[],"level":"","normative":true,"shortname":"fetch","spec":"fetch","status":"anchor-block","text":"HTTP-network fetch","type":"abstract-op","url":"https://fetch.spec.whatwg.org/#concept-http-network-fetch"},
@@ -2983,6 +2977,7 @@ let refsData = {
 "https://fetch.spec.whatwg.org/#concept-response": {"displayText":"response","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"response","type":"dfn","url":"https://fetch.spec.whatwg.org/#concept-response"},
 "https://fetch.spec.whatwg.org/#cors-safelisted-method": {"displayText":"CORS-safelisted method","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"cors-safelisted method","type":"dfn","url":"https://fetch.spec.whatwg.org/#cors-safelisted-method"},
 "https://fetch.spec.whatwg.org/#cors-safelisted-request-header": {"displayText":"CORS-safelisted request-header","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"cors-safelisted request-header","type":"dfn","url":"https://fetch.spec.whatwg.org/#cors-safelisted-request-header"},
+"https://fetch.spec.whatwg.org/#create-a-connection": {"displayText":"create a connection","export":true,"for_":[],"level":"","normative":true,"shortname":"fetch","spec":"fetch","status":"anchor-block","text":"create a connection","type":"dfn","url":"https://fetch.spec.whatwg.org/#create-a-connection"},
 "https://fetch.spec.whatwg.org/#dom-request": {"displayText":"Request(input, init)","export":true,"for_":["Request"],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"Request(input, init)","type":"constructor","url":"https://fetch.spec.whatwg.org/#dom-request"},
 "https://fetch.spec.whatwg.org/#network-partition-key": {"displayText":"network partition key","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"network partition key","type":"dfn","url":"https://fetch.spec.whatwg.org/#network-partition-key"},
 "https://fetch.spec.whatwg.org/#request": {"displayText":"Request","export":true,"for_":[],"level":"1","normative":true,"shortname":"fetch","spec":"fetch","status":"current","text":"Request","type":"interface","url":"https://fetch.spec.whatwg.org/#request"},
