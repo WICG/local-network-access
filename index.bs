@@ -535,40 +535,33 @@ specified as the targetAddressSpace option value, then the request will fail.
 If it does belong, then the permission can be checked to allow or fail the
 request.
 
-TODO: Decide if we want to keep the CSP directive `treat-as-public-address`
-around (see
-[private-network-access#csp](https://wicg.github.io/private-network-access/#csp)).
-This directive would be obviated if we implemented
-<WICG/private-network-access#39>.
+ISSUE: Chromium currently supports a non-standard CSP directive `treat-as-public-address`
+(see [private-network-access#csp](https://wicg.github.io/private-network-access/#csp)).
+This directive would be obviated if <WICG/private-network-access#39> were implemented.
+
+## Permissions ## {#permissions}
+
+This document defines the following [=default powerful features=] which are
+[=policy-controlled features=] with a [=policy-controlled feature/default allowlist=]
+of [=default allowlist/'self'=]:
+
+ - <dfn export permission>"local-network"</dfn>, which controls the ability to make
+   [=local network requests=] to a [=local address=].
+ - <dfn export permission>"loopback-network"</dfn>, which controls the ability make
+   [=local network requests=] to a [=loopback address=].
+
+NOTE: Previously, this was specified as a single [=default powerful feature=] that covered
+both local and loopback cases, <dfn export permission>"local-network-access"</dfn>.
+Chromium still supports this as an alias for the new fine-grained permission names, and for
+use as a [=policy-controlled feature=] name.
 
 # Integrations # {#integrations}
 
 *This section is non-normative.*
 
-This document proposes a number of modifications to other specifications in
-order to implement the mitigations sketched out in the examples above. These
-integrations are outlined here for clarity, but the external documents are the
-normative references.
-
-## Integration with Permissions ## {#integration-with-permissions}
-
-This document defines two new [=default powerful feature=]s identified by the [=powerful
-feature/name=]s <dfn export permission>`"local-network"`</dfn> and
-<dfn export permission>`"loopback-network"`</dfn>.
-
-NOTE: Previously, the permission was specified as a single feature that covered
-both local and loopback cases, <dfn export permission>`"local-network-access"`</dfn>.
-Chromium still supports this as an alias for the new fine-grained permission names.
-
-## Integration with Permissions Policy ## {#integration-with-permissions-policy}
-
-Local Network Access defines two [=policy-controlled feature=]s identified by the
-strings "local-network" and "loopback-network". The
-[=policy-controlled feature/default allowlist=] for each is `'self'`.
-
-NOTE: Previously, the policy controlled feature was specified as a single feature
-that covered both local and loopback cases, "local-network-access". Chromium still
-supports this as an alias for the new fine-grained permissions policy features.
+This document proposes a number of modifications to other specifications in order
+to implement the protections outlined above. These integrations are outlined here
+for clarity, but the external documents are the normative references.
 
 ## Integration with Fetch ## {#integration-with-fetch}
 
