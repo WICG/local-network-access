@@ -24,10 +24,10 @@ spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/
   type: abstract-op
     text: fetch; url: #concept-fetch
 spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/
-  type: abstract-op
+  type: dfn
     text: HTTP-network fetch; url: #concept-http-network-fetch
 spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/;
-  type: abstract-op;
+  type: dfn;
     text: HTTP-network-or-cache fetch; url: #concept-http-network-or-cache-fetch
 spec: FETCH; urlPrefix: https://fetch.spec.whatwg.org/;
   type: dfn;
@@ -602,22 +602,27 @@ into Step 4.6 of [=obtain a connection=] to perform checks after resolving the o
 Update [[FETCH]] as follows:
 
   1.  [=Connection=] objects are given a new <dfn export for="connection">IP
-      address space</dfn> property, initially null.
+      address</dfn> property, initially null.
   
   1.  Add a new step to the [=create a connection=] algorithm immediately after establishing the new connection (between Steps 2 and 3).
 
-      1. If |host| is an IP address, set |connection|'s [=connection/IP address space=] to
-          the result of running the [=determine the IP address space=] algorithm on |host|.
+      1. If |host| is an IP address, set |connection|'s [=connection/IP address=] to |host|.
 
   1.  [=Request=] objects are given a new <dfn for="request" export>target IP
       address space</dfn> property, initially null.
 
   1.  [=Response=] objects are given a new
-      <dfn export for="response">IP address space</dfn> property, whose value is
-      an [=/IP address space=], initially null.
+      <dfn export for="response">IP address</dfn> property, whose value is
+      an [=/IP address=], initially null.
 
   1.  Define a new <dfn export>Local Network Access check</dfn> algorithm.
-      Given a [=request=] |request| and a [=connection=] |connection|:
+      Given a [=request=] |request| and [=IP address=] |address|:
+
+      NOTE: This algorithm takes an [=IP address=] so that it can be called from either [=HTTP-network fetch=]
+      (where we have a [=connection=]) or [=HTTP-network-or-cache fetch=] (where we have a stored [=response=] with a saved [=IP address=]).
+      This intentionally re-computes the IP address space each time as the mapping can be dynamically updated by the user agent.
+
+      1. Let |address space| be the result of running the [=determine the IP address space=] algorithm on |address|.
 
       1.  If |request|'s [=request/origin=] is a [=potentially trustworthy
           origin=] and |request|’s [=request/current URL=]’s [=request/origin=]
@@ -639,13 +644,13 @@ Update [[FETCH]] as follows:
           1.  [=Assert=]: |request|'s [=request/target IP address space=] is not
               [=IP address space/public=].
 
-          1.  If |connection|'s [=connection/IP address space=] is not equal to
+          1.  If |address space| is not equal to
               then |request|'s [=request/target IP address space=], then return
               a [=network error=].
 
           1.  Return null.
 
-      1.  If |connection|'s [=connection/IP address space=] is
+      1.  If |address space| is
           [=IP address space/less public=] than |request|'s [=request/policy
           container=]'s [=policy container/IP address space=], then:
 
@@ -654,10 +659,12 @@ Update [[FETCH]] as follows:
               2.  If |request|'s [=request/client=] is not a [=secure context=]
                   (including if it is null), then return |error|.
 
+              TODO: Error is a response, which now only has an IP address... Need to work out the consequences here.
               3.  Set |error|'s [=response/IP address space=] property to
-                  |connection|'s [=connection/IP address space=].
+                  |address space|.
 
-              4.  TODO: Permission check is sketched out below, wording is still vague
+              4.  TODO: Permission check is sketched out below, wording is still vague.
+                  See <wicg/local-network-access#59>.
                   1. If the initiating origin has been granted the local
                      network access permission, return null.
                   2. If the initiating origin has been denied the local network
@@ -673,7 +680,7 @@ Update [[FETCH]] as follows:
       1.  If |request|’s target IP address space is null:
 
           1. If |request|’s URL’s host *host* is an IP address and the result
-             of running the determine the IP address space algorithm on *host* is
+             of running the [=determine the IP address space=] algorithm on *host* is
              “local”, then set *request*’s target IP address space property to
              “local”.
           2. If |request|’s URL’s host’s public suffix is `"local"`, then set
@@ -689,16 +696,16 @@ Update [[FETCH]] as follows:
              already non-null in order to prefer the explicit
              targetAddressSpace if set by the fetch() API.
 
-  1.  The [$HTTP-network fetch$] algorithm is amended to add 3 new steps right
+  1.  The [=HTTP-network fetch=] algorithm is amended to add 3 new steps right
       after checking that the newly-obtained <var ignore>connection</var> is not
       failure:
 
-          1.  Set |response|'s [=response/IP address space=] to
-              |connection|'s [=connection/IP address space=].
+          1.  Set |response|'s [=response/IP address=] to
+              |connection|'s [=connection/IP address=].
 
           1.  Let |localNetworkAccessCheckResult| be the result of running
-              [=Local Network Access check=] for |fetchParams|' [=request=]  and
-              |connection|.
+              [=Local Network Access check=] for |fetchParams|' [=request=] and
+              |connection|'s [=connection/IP address=].
 
           1.  If |localNetworkAccessCheckResult| is a [=network error=], return
               |localNetworkAccessCheckResult|.
@@ -708,7 +715,7 @@ Update [[FETCH]] as follows:
       is still null after handling the fetch via service workers, and amend
       those slightly as follows:
 
-      1.  Immediately after running HTTP-network-or-cache fetch:
+      1.  Immediately after running [=HTTP-network-or-cache fetch=]:
           1.  If |response| is a [=network error=] and |response|'s
               [=response/IP address space=] is non-null, then:
 
@@ -720,9 +727,14 @@ Update [[FETCH]] as follows:
 
           NOTE: Because request’s target IP address space is set to a non-null
           value when recursing, this recursion can go at most 1 level deep.
+  
+  1. The [=HTTP-network-or-cache fetch=] algorithm is amended to add a new step
+     right after Step 9:
 
-<p class="todo">TODO: Figure out what we need to add for cache fetch. A sketch of Chromium’s
-behavior is included below in [[#http-cache]].</p>
+     1. If |response| is not null, then:
+        1. Let |localNetworkAccessCheckResult| be the result of running
+           [=Local Network Access check=] for |request| and |response|'s [=response/IP address=].
+        2. If |localNetworkAccessCheckResult| is a [=network error=], return |localNetworkAccessCheckResult|.
 
 NOTE: The requirement that local network requests be made from secure contexts
 means that any insecure request will be blocked as mixed content unless we can
@@ -819,14 +831,13 @@ the [[HTML]] specification is patched as follows:
 
   2. An additional step is added to the [=clone a policy container=] algorithm:
 
-     1. Set <var ignore>clone</var>'s [=policy container/IP address space=] to
+     1. Set <var ignore>clone</var>'s [=policy container/IP address space=] to the
         <var ignore>policyContainer</var>'s [=policy container/IP address space=].
 
   3. An additional step is added to the [=create a policy container from a fetch response=]
      algorithm:
 
-     1. Set <var ignore>result</var>'s [=policy container/IP address space=]
-        to <var ignore>response</var>'s [=response/IP address space=].
+     1. Set <var ignore>result</var>'s [=policy container/IP address space=] the result of running the [=determine the IP address space=] algorithm on <var ignore>response</var>'s [=response/IP address=].
 
 
 <div class="example" id="example-policy-container">
@@ -938,9 +949,10 @@ on some information about the IP address behind the proxy.
 
 ## HTTP Cache ## {#http-cache}
 
-The current implementation of this specification in Chromium interacts with the
-HTTP cache in two noteworthy ways, depending on which kind of resource is
-loaded from cache.
+Responses from the HTTP cache are subject to the Local Network Access
+check, as specified in [[#integration-with-fetch]] above.
+Below are some additional details about how to how those checks work in practice
+(with some examples) depending on which kind of resource is loaded from cache.
 
 ### Main resources ### {#http-cache-main-resources}
 
@@ -967,14 +979,6 @@ IP address space is now set to local.
 </div>
 
 ### Subresources ### {#http-cache-subresources}
-
-Subresources loaded from the HTTP cache are subject to the Local Network Access
-check. This is not yet reflected in the algorithms above, since that check is
-only applied in [$HTTP-network fetch$].
-
-TODO: Specify and explain Chromium’s behavior here, or add an
-[$HTTP-network-or-cache fetch$] integration above. See
-<WICG/private-network-access#75>. We include a sketch below.
 
 As with main resources, a subresource constructed from a cached response
 remembers the IP address from which the response was initially loaded. The IP
