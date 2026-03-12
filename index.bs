@@ -604,9 +604,11 @@ Update [[FETCH]] as follows:
   1.  [=Connection=] objects are given a new <dfn export for="connection">IP
       address</dfn> property, initially null.
   
-  1.  Add a new step to the [=create a connection=] algorithm immediately after establishing the new connection (between Steps 2 and 3).
+  1.  Add a new step to the [=create a connection=] algorithm immediately after
+      establishing the new connection (between Steps 2 and 3).
 
-      1. If |host| is an IP address, set |connection|'s [=connection/IP address=] to |host|.
+      1. If |host| is an IP address, set |connection|'s [=connection/IP address=]
+         to |host|.
 
   1.  [=Request=] objects are given a new <dfn for="request" export>target IP
       address space</dfn> property, initially null.
@@ -618,11 +620,15 @@ Update [[FETCH]] as follows:
   1.  Define a new <dfn export>Local Network Access check</dfn> algorithm.
       Given a [=request=] |request| and [=IP address=] |address|:
 
-      NOTE: This algorithm takes an [=IP address=] so that it can be called from either [=HTTP-network fetch=]
-      (where we have a [=connection=]) or [=HTTP-network-or-cache fetch=] (where we have a stored [=response=] with a saved [=IP address=]).
-      This intentionally re-computes the IP address space each time as the mapping can be dynamically updated by the user agent.
+      NOTE: This algorithm takes an [=IP address=] so that it can be called from 
+      either [=HTTP-network fetch=] (where we have a [=connection=]) or
+      [=HTTP-network-or-cache fetch=] (where we have a stored [=response=] with
+      a saved [=IP address=]).
+      This intentionally re-computes the IP address space each time as the mapping
+      can be dynamically updated by the user agent.
 
-      1. Let |address space| be the result of running the [=determine the IP address space=] algorithm on |address|.
+      1. Let |address space| be the result of running the [=determine the IP
+         address space=] algorithm on |address|.
 
       1.  If |request|'s [=request/origin=] is a [=potentially trustworthy
           origin=] and |request|’s [=request/current URL=]’s [=request/origin=]
@@ -678,8 +684,8 @@ Update [[FETCH]] as follows:
       1.  If |request|’s target IP address space is null:
 
           1. If |request|’s URL’s host *host* is an IP address and the result
-             of running the [=determine the IP address space=] algorithm on *host* is
-             “local”, then set *request*’s target IP address space property to
+             of running the [=determine the IP address space=] algorithm on *host*
+             is “local”, then set *request*’s target IP address space property to
              “local”.
           2. If |request|’s URL’s host’s public suffix is `"local"`, then set
              |request|’s target IP address space property to `"local"`.
@@ -702,8 +708,8 @@ Update [[FETCH]] as follows:
               |connection|'s [=connection/IP address=].
 
           1.  Let |localNetworkAccessCheckResult| be the result of running
-              [=Local Network Access check=] for |fetchParams|' [=request=] and
-              |connection|'s [=connection/IP address=].
+              [=Local Network Access check=] for <var ignore>fetchParams</var>'
+              [=request=] and |connection|'s [=connection/IP address=].
 
           1.  If |localNetworkAccessCheckResult| is a [=network error=], return
               |localNetworkAccessCheckResult|.
@@ -713,7 +719,8 @@ Update [[FETCH]] as follows:
 
      1. If |response| is not null, then:
         1. Let |localNetworkAccessCheckResult| be the result of running
-           [=Local Network Access check=] for |request| and |response|'s [=response/IP address=].
+           [=Local Network Access check=] for |request| and |response|'s
+           [=response/IP address=].
         2. If |localNetworkAccessCheckResult| is a [=network error=], return |localNetworkAccessCheckResult|.
 
 NOTE: The requirement that local network requests be made from secure contexts
