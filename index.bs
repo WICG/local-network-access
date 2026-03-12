@@ -659,9 +659,7 @@ Update [[FETCH]] as follows:
               2.  If |request|'s [=request/client=] is not a [=secure context=]
                   (including if it is null), then return |error|.
 
-              TODO: Error is a response, which now only has an IP address... Need to work out the consequences here.
-              3.  Set |error|'s [=response/IP address space=] property to
-                  |address space|.
+              3.  Set |error|'s [=response/IP address=] property to |address|.
 
               4.  TODO: Permission check is sketched out below, wording is still vague.
                   See <wicg/local-network-access#59>.
@@ -710,24 +708,6 @@ Update [[FETCH]] as follows:
           1.  If |localNetworkAccessCheckResult| is a [=network error=], return
               |localNetworkAccessCheckResult|.
 
-  1.  Define a new algorithm called <dfn>HTTP-no-service-worker fetch</dfn>
-      based on the existing steps in [=HTTP fetch=] that are run if |response|
-      is still null after handling the fetch via service workers, and amend
-      those slightly as follows:
-
-      1.  Immediately after running [=HTTP-network-or-cache fetch=]:
-          1.  If |response| is a [=network error=] and |response|'s
-              [=response/IP address space=] is non-null, then:
-
-              1.  Set |request|'s [=request/target IP address space=] to
-                  |response|'s [=response/IP address space=].
-
-              1.  Return the result of running [=HTTP-no-service-worker fetch=]
-                  given |fetchParams|.
-
-          NOTE: Because request’s target IP address space is set to a non-null
-          value when recursing, this recursion can go at most 1 level deep.
-  
   1. The [=HTTP-network-or-cache fetch=] algorithm is amended to add a new step
      right after Step 9:
 
@@ -1156,7 +1136,7 @@ progress, despite the lingering risk from local network attackers.
 
 Cached subresources are protected by this specification, as the HTTP cache
 remembers the source IP address which can be used in the Local Network Access
-check algorithm during [$HTTP-network-or-cache fetch$].
+check algorithm during [=HTTP-network-or-cache fetch=].
 
 Without this check, a malicious public website might be able to determine
 whether a user has visited particular private websites in the past.
