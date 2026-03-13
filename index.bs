@@ -602,23 +602,23 @@ into Step 4.6 of [=obtain a connection=] to perform checks after resolving the o
 Update [[FETCH]] as follows:
 
   1.  [=Connection=] objects are given a new <dfn export for="connection">IP
-      address</dfn> property, initially null.
+      address</dfn> property, whose value is null or an [=IP address=], initially null.
   
   1.  Add a new step to the [=create a connection=] algorithm immediately after
       establishing the new connection (between Steps 2 and 3).
 
-      1. If |host| is an IP address, set |connection|'s [=connection/IP address=]
+      1. If |host| is an [=IP address=], then set |connection|'s [=connection/IP address=]
          to |host|.
 
   1.  [=Request=] objects are given a new <dfn for="request" export>target IP
       address space</dfn> property, initially null.
 
   1.  [=Response=] objects are given a new
-      <dfn export for="response">IP address</dfn> property, whose value is
-      an [=/IP address=], initially null.
+      <dfn export for="response">IP address</dfn> property, whose value is null
+      or an [=IP address=], initially null.
 
   1.  Define a new <dfn export>Local Network Access check</dfn> algorithm.
-      Given a [=request=] |request| and [=IP address=] |address|:
+      Given a [=request=] |request| and an [=IP address=] |address|:
 
       NOTE: This algorithm takes an [=IP address=] so that it can be called from 
       either [=HTTP-network fetch=] (where we have a [=connection=]) or
@@ -627,7 +627,7 @@ Update [[FETCH]] as follows:
       This intentionally re-computes the IP address space each time as the mapping
       can be dynamically updated by the user agent.
 
-      1. Let |address space| be the result of running the [=determine the IP
+      1. Let |addressSpace| be the result of running the [=determine the IP
          address space=] algorithm on |address|.
 
       1.  If |request|'s [=request/origin=] is a [=potentially trustworthy
@@ -645,20 +645,19 @@ Update [[FETCH]] as follows:
           [=request/policy container=] accordingly, or to directly set
           |request|'s [=request/policy container=] to a non-null value.
 
-      1.  If |request|'s [=request/target IP address space=] is not null, then:
+      1.  If |request|'s [=request/target IP address space=] is not null:
 
           1.  [=Assert=]: |request|'s [=request/target IP address space=] is not
               [=IP address space/public=].
 
-          1.  If |address space| is not equal to
+          1.  If |addressSpace| is not equal to
               then |request|'s [=request/target IP address space=], then return
               a [=network error=].
 
           1.  Return null.
 
-      1.  If |address space| is
-          [=IP address space/less public=] than |request|'s [=request/policy
-          container=]'s [=policy container/IP address space=], then:
+      1.  If |addressSpace| is [=IP address space/less public=] than |request|'s
+          [=request/policy container=]'s [=policy container/IP address space=]:
 
               1.  Let |error| be a [=network error=].
 
@@ -678,22 +677,23 @@ Update [[FETCH]] as follows:
                      2. If the user denies the permission, return |error|.
       1.  Return null.
 
-  1.  The [$fetch$] algorithm is amended to add 2 new steps right after request’s
-      policy container is set:
+  1.  The [$fetch$] algorithm is amended to add 2 new steps right after |request|’s
+      [=request/policy container=] is set:
 
-      1.  If |request|’s target IP address space is null:
+      1.  If |request|’s [=request/target IP address space=] is null:
 
-          1. If |request|’s URL’s host *host* is an IP address and the result
-             of running the [=determine the IP address space=] algorithm on *host*
-             is “local”, then set *request*’s target IP address space property to
-             “local”.
-          2. If |request|’s URL’s host’s public suffix is `"local"`, then set
-             |request|’s target IP address space property to `"local"`.
+          1. If |request|’s [=request/URL=]’s [=url/host=] *host* is an [=IP address=]
+             and the result of running the [=determine the IP address space=] algorithm
+             on *host* is [=IP address space/local=], then set *request*’s
+             [=request/target IP address space=] to [=IP address space/local=].
+          2. If |request|’s [=request/URL=]’s [=url/host=]’s [=host/public suffix=] is
+             `"local"`, then set |request|’s [=request/target IP address space=] to
+             [=IP address space/local=].
 
-             NOTE: We could also set the target IP address space to `local` if
-             the request’s URL’s host is “localhost” or “127.0.0.1” (because of
-             [[LET-LOCALHOST-BE-LOCALHOST]]), but we do not need special
-             handling for the loopback case as it is already considered to be
+             NOTE: We could also set the target IP address space to
+             [=IP address space/local=] if the request’s URL’s host is “localhost” or
+             “127.0.0.1” (because of [[LET-LOCALHOST-BE-LOCALHOST]]), but we do not need
+             special handling for the loopback case as it is already considered to be
              potentially trustworthy and won’t trigger mixed content checks.
 
              NOTE: We don’t set the target IP address space here if it was
@@ -711,17 +711,17 @@ Update [[FETCH]] as follows:
               [=Local Network Access check=] for <var ignore>fetchParams</var>'
               [=request=] and |connection|'s [=connection/IP address=].
 
-          1.  If |localNetworkAccessCheckResult| is a [=network error=], return
+          1.  If |localNetworkAccessCheckResult| is a [=network error=], then return
               |localNetworkAccessCheckResult|.
 
   1. The [=HTTP-network-or-cache fetch=] algorithm is amended to add a new step
      right after Step 9:
 
-     1. If |response| is not null, then:
+     1. If |response| is not null:
         1. Let |localNetworkAccessCheckResult| be the result of running
            [=Local Network Access check=] for |request| and |response|'s
            [=response/IP address=].
-        2. If |localNetworkAccessCheckResult| is a [=network error=], return |localNetworkAccessCheckResult|.
+        2. If |localNetworkAccessCheckResult| is a [=network error=], then return |localNetworkAccessCheckResult|.
 
 NOTE: The requirement that local network requests be made from secure contexts
 means that any insecure request will be blocked as mixed content unless we can
@@ -780,7 +780,7 @@ appropriate](https://w3c.github.io/webappsec-mixed-content/level2.html#upgrade-a
 algorithm is amended to add the following condition as an exception from
 upgrading in step 1:
 
-  6. |request|’s target IP address space is [=IP address space/local=]
+  6. |request|’s[=request/target IP address space=] is [=IP address space/local=]
 
 ## Integration with WebSockets ## {#integration-with-websockets}
 
