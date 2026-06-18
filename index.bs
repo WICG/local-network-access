@@ -1200,7 +1200,7 @@ services running on `localhost` on a user’s machine. (1) is already possible
 without needing to abuse the user’s browser, but (2) remains a concern. For
 example, a captive portal might be able to redirect the user to a malicious
 page that tries to probe and attack vulnerable `localhost` services running on
-the user’s machine. (See also <WICG/private-network-accesss#39>.)
+the user’s machine. (See also <WICG/private-network-access#39>.)
 
 We see public websites on the drive-by web as a more urgent security (and
 privacy) risk and see an incremental rollout of these protections as valuable
