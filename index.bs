@@ -8,7 +8,7 @@ URL: https://wicg.github.io/local-network-access/
 Editor: Chris Thompson, Google https://google.com, cthomp@google.com
 Editor: Hubert Chao, Google https://google.com, hchao@google.com
 Abstract: Restrict access to the users' local network with a new permission
-Markup Shorthands: markdown yes, css no, cddl yes
+Markup Shorthands: markdown yes, css no
 Complain About: accidental-2119 yes, missing-example-ids yes
 Assume Explicit For: yes
 Die On: warning
@@ -542,10 +542,6 @@ specified as the targetAddressSpace option value, then the request will fail.
 If it does belong, then the permission can be checked to allow or fail the
 request.
 
-ISSUE: Chromium currently supports a non-standard CSP directive `treat-as-public-address`
-(see [private-network-access#csp](https://wicg.github.io/private-network-access/#csp)).
-This directive would be obviated if <WICG/private-network-access#39> were implemented.
-
 ## Permissions ## {#permissions}
 
 This document defines the following [=default powerful features=] which are
@@ -561,36 +557,6 @@ NOTE: Previously, this was specified as a single [=default powerful feature=] th
 both local and loopback cases, <dfn export permission>"local-network-access"</dfn>.
 Chromium still supports this as an alias for the new fine-grained permission names, and for
 use as a [=policy-controlled feature=] name.
-
-## The `treat-as-public-address` Content Security Policy Directive ## {#treat-as-public-address}
-
-The `treat-as-public-address` directive instructs the user agent to
-treat a document as though it was served from a [=public address=], even if
-it was actually served from a [=local address=] or a [=loopback address=]. That
-is, it is a mechanism by which non-public documents may drop the privilege to
-contact other non-public documents without a preflight.
-
-The directive's syntax is described by the following ABNF grammar:
-
-<pre dfn-type="grammar" link-type="grammar">
-directive-name  = "treat-as-public-address"
-directive-value = ""
-</pre>
-
-This directive has no reporting requirements; it will be ignored entirely when
-delivered in a `Content-Security-Policy-Report-Only` header, or within
-a `<meta>` element.
-
-This directive's [=directive/initialization=] algorithm is as follows. Given
-an [=environment settings object=] (|context|), a `Response` (|response|), and
-a `policy`:
-
-  1. Set |context|'s [=environment settings object/policy container=]'s
-     `IP address space` to [=IP address space/public=] if
-     `policy`'s `disposition` is "`enforce`".
-
-ISSUE: https://github.com/WICG/private-network-access/issues/88 recommended
-moving this from a CSP directive to somewhere else.
 
 # Integrations # {#integrations}
 
