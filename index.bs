@@ -821,13 +821,41 @@ upgrading in step 1:
 
 WebSockets connections should be subject to the same local network access
 permission requirements.  [$WebSocket opening handshake$] directly applies
-[$fetch$] in step 11, and so no modification to the WebSocket specification is
+[$fetch$] in step 11, and so for enforcement no modification to the WebSocket specification is
 required beyond the fetch change proposed above.
 
-One minor difference between the Fetch API and the WebSockets API is that
-WebSockets does not have an equivalent to fetch's `RequestInit`, and so there
-is no place to put in a `targetAddressSpace` option to bypass mixed content
-checks for ws:// urls.
+To support the targetAddressSpace option, the WebSockets spec needs to be adjusted.
+
+  * Append an optional [=map/entry=] to {{WebSocketInit}}, whose [=map/key=] is
+    <dfn export>targetAddressSpace</dfn>, and [=map/value=] is a
+    {{IPAddressSpace}}.
+      <pre class="idl">
+        partial dictionary WebSocketInit {
+          IPAddressSpace targetAddressSpace;
+        };
+      </pre>
+
+  * Update <a algorithm="establish a WebSocket connection">establish a WebSocket connection</a>
+    to additionally take a targetAddressSpace parameter, and then when constructing the
+    [=request=] |request| in step 2, set |request|'s targetAddressSpace to targetAddressSpace.
+
+  * Add the following steps to <a constructor for=WebSocket lt="WebSocket(url, protocolsOrOptions)">
+    <code>new WebSocket(<var ignore=''>url</var>, |protocolsOrOptions|)</code></a> after the steps
+    for handling protocols:
+    1. Let |targetAddressSpace| be an [=IP address space=], initially null.
+    1.  If |protocolsOrOptions|["{{WebSocketInit/targetAddressSpace}}"] [=map/exists=], then
+        switch on |protocolsOrOptions|["{{WebSocketInit/targetAddressSpace}}"]:
+        <dl class=switch>
+          <dt>public
+            <dd>Do nothing.
+          
+          <dt>local
+          <dd>Set |targetAddressSpace| to [=IP address space/local=].
+        </dl>
+
+  * Update the last step of <a constructor for=WebSocket lt="WebSocket(url, protocolsOrOptions)">
+    <code>new WebSocket(<var ignore=''>url</var>, |protocolsOrOptions|)</code></a> to:
+    1. [=Establish a WebSocket connection=] given |urlRecord|, |protocols|, |targetAddressSpace|, and |client|.
 
 ## Integration with WebTransport ## {#integration-with-webtransport}
 
